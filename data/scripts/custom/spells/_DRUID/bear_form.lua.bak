@@ -1,0 +1,115 @@
+local condition = Condition(CONDITION_OUTFIT)
+local bear_skill = Condition(CONDITION_ATTRIBUTES)
+local bear_regen = Condition(CONDITION_REGENERATION)
+local duration = -1
+condition:setTicks(duration)
+bear_skill:setParameter(CONDITION_PARAM_TICKS, duration)
+bear_regen:setParameter(CONDITION_PARAM_TICKS, duration)
+bear_regen:setParameter(CONDITION_PARAM_BUFF_SPELL, true)
+
+
+local spell = Spell("instant")
+
+function spell.onCastSpell(creature, variant)
+    local returnValue = RETURNVALUE_NOERROR
+    local monsterType = MonsterType("werebear")
+    if not monsterType then
+        returnValue = RETURNVALUE_CREATUREDOESNOTEXIST
+    elseif not getPlayerFlagValue(creature, PlayerFlag_CanIllusionAll) and not monsterType:isIllusionable() then
+        returnValue = RETURNVALUE_NOTPOSSIBLE
+    end
+
+    if returnValue ~= RETURNVALUE_NOERROR then
+        creature:sendCancelMessage(returnValue)
+        creature:getPosition():sendMagicEffect(CONST_ME_POFF)
+        return false
+    end
+
+    creature:getPosition():sendMagicEffect(CONST_ME_MAGIC_RED)
+		
+    
+	if (creature:getStorageValue(Storage_.metamorfose) > 0) then -- se o jogador estiver transformado
+	--DESTRANSFORMAR
+	
+	--FLAG DESTRANSFORMADO--
+		creature:setStorageValue(Storage_.metamorfose, 0) -- Storage_.metamorfose geral
+		creature:setStorageValue(Storage_.bear_form, 0) -- bear
+		
+	--MAX HP MOD--
+		creature:setStorageValue(recover_life, creature:getHealth() / creature:getMaxHealth() * 100)
+		creature:setMaxHealth(creature:getMaxHealth() - creature:getStorageValue(Storage_.bear_bonus_life)) -- define HP como o atual transformado - o que ele ganhou quando transformou
+		creature:setStorageValue(Storage_.bear_bonus_life, 0)
+		creature:setHealth(creature:getStorageValue(recover_life) * creature:getMaxHealth() / 100)
+		
+	--LIFE REGEN--
+		creature:removeCondition(CONDITION_REGENERATION)
+		
+	--FIST SKILL--
+		--creature:setSkillLevel(SKILL_FIST, creature:getSkillLevel(SKILL_FIST) - creature:getStorageValue(Storage_.max_mana)) -- tira o valor acrescentado
+		creature:removeCondition(CONDITION_ATTRIBUTES)
+		
+	--OUTFIT--
+		--creature:setOutfit({lookType = creature:getStorageValue(Storage_.bear_form)})
+		creature:removeCondition(CONDITION_OUTFIT)
+		
+	--MAX MANA MOD--
+		creature:setMaxMana(creature:getMaxMana() + creature:getStorageValue(Storage_.max_mana))
+		creature:addMana(creature:getStorageValue(Storage_.recover_mana) * creature:getMaxMana() / 100)
+		
+	--FERAL MODS--
+		creature:removeCondition(CONDITION_HASTE)
+		
+	else -- TRANSFORMAR --
+	
+	--FLAG TRANSFORMADO--
+		creature:setStorageValue(Storage_.metamorfose, 1) -- Storage_.metamorfose geral
+		creature:setStorageValue(Storage_.bear_form, 1) -- bear
+		
+	--MAX HP MOD--
+		creature:setStorageValue(Storage_.bear_bonus_life, creature:getMaxHealth() * 2) --salva hp bonus na storage
+		creature:setStorageValue(recover_life, creature:getHealth() / creature:getMaxHealth() * 100)
+		creature:setMaxHealth(creature:getMaxHealth() * 3) -- add hp bonus
+		creature:setHealth(creature:getStorageValue(recover_life) * creature:getMaxHealth() / 100)
+		
+	--LIFE REGEN--
+		bear_regen:setParameter(CONDITION_PARAM_HEALTHGAIN, creature:getMaxHealth() * 0.1)
+		bear_regen:setParameter(CONDITION_PARAM_HEALTHTICKS, 5 * 1000)
+		creature:addCondition(bear_regen)
+		
+	--FIST SKILL--
+		--creature:setStorageValue(Storage_.max_mana, (creature:getSkillLevel(SKILL_FIST)*3)-creature:getSkillLevel(SKILL_FIST)) -- salva a skill atual na storage 2
+		--creature:setSkillLevel(SKILL_FIST, creature:getSkillLevel(SKILL_FIST)*3)
+		bear_skill:setParameter(CONDITION_PARAM_SKILL_FISTPERCENT, 400)
+		creature:addCondition(bear_skill)
+		
+	--OUTFIT--
+		--creature:setStorageValue(Storage_.bear_form, creature:getOutfit().lookType)
+		--creature:setOutfit({lookType = 720})
+		condition:setOutfit(monsterType:getOutfit())
+		creature:addCondition(condition)
+		
+	--MAX MANA MOD--
+		creature:setStorageValue(Storage_.max_mana, creature:getMaxMana()) --salva mana maxima na storage
+		creature:setStorageValue(Storage_.recover_mana, creature:getMana() / creature:getMaxMana() * 100)
+		creature:setMaxMana(0) -- zera a mana máxima
+		
+	end
+    return true
+end
+
+spell:name("Bear Form")
+spell:words("utevo bear")
+spell:group("support")
+spell:vocation("druid;true", "elder druid;true")
+spell:id(38)
+spell:cooldown(2 * 1000)
+spell:groupCooldown(2 * 1000)
+spell:level(20)
+spell:mana(0)
+spell:hasParams(true)
+spell:isAggressive(false)
+spell:needLearn(false)
+spell:register()
+
+-- creature:setMaxHealth(creature:getStorageValue(Storage_.bear_bonus_life)) -- seta Hp máximo com valor da storage XXX
+-- creature:addHealth(creature:getMaxHealth())

@@ -286,11 +286,10 @@ local function creatureSayCallback(npc, creature, type, message)
 		npc, creature, 10)
 		npcHandler:setTopic(playerId, 8)
 	-- Choosing dialog start
-	-- elseif MsgContains(message, "decidido") and npcHandler.topic[cid] == 0 then
-	elseif MsgContains(message, "decidido") then
-		npcHandler:say("Qual classe voce escolheu? {knight}, {sorcerer}, {paladin}, {druid}, {assassin}, {necromancer} ou {hunter}?", cid)
+	elseif MsgContains(message, "decidido") and npcHandler:getTopic(playerId) == 0 then
+		npcHandler:say("Qual classe voce escolheu? {knight}, {sorcerer}, {paladin}, {druid}, {assassin}, {necromancer} ou {hunter}?", npc, creature)
 	-- Say vocations name
-	elseif MsgContains(message, "sorcerer") and npcHandler.topic[cid] == 0 then
+	elseif MsgContains(message, "sorcerer") and npcHandler:getTopic(playerId) == 0 then
 		local message = {
 			"Sorcerers, ou feiticeiros, manipulam os elementos a fim de realizar seus objetivos.  ...",
 			"Eles nao podem tomar muito dano ou carregar muitos itens, mas sao devastadores na hora de causar dano, \z
@@ -302,13 +301,13 @@ local function creatureSayCallback(npc, creature, type, message)
 		if player:getLevel() >= 8 then
 			table.insert(message, "Diga-me: VOCE QUER INICIAR SUA JORNADA COMO UM SORCERER?"..
 									" Responda com um orgulhoso {YES} se essa eh sua escolha!")
-			npcHandler.topic[cid] = 8
+			npcHandler:setTopic(playerId, 8)
 		else
-			npcHandler.topic[cid] = 0
+			npcHandler:setTopic(playerId, 0)
 		end
 
-		npcHandler:say(message, cid, false, true, 10)
-	elseif MsgContains(message, "druid") and npcHandler.topic[cid] == 0 then
+		npcHandler:say(message, npc, creature, 10)
+	elseif MsgContains(message, "druid") and npcHandler:getTopic(playerId) == 0 then
 		local message = {
 			"Druidas sao curandeiros e comungam com a natureza, de onde vem suas magias de terra. \z
 			Eles podem se transformar em animais para mudar o rumo da batalha, como um grande urso capaz de ignorar muito dano ou um lobo feroz que rasga os inimigos, \z
@@ -319,13 +318,13 @@ local function creatureSayCallback(npc, creature, type, message)
 		if player:getLevel() >= 8 then
 			table.insert(message, "Diga-me: VOCE QUER INICIAR SUA JORNADA COMO UM DRUID?"..
 									" Responda com um orgulhoso {YES} se essa eh sua escolha!")
-			npcHandler.topic[cid] = 7
+			npcHandler:setTopic(playerId, 7)
 		else
-			npcHandler.topic[cid] = 0
+			npcHandler:setTopic(playerId, 0)
 		end
 
-		npcHandler:say(message, cid, false, true, 10)
-	elseif MsgContains(message, "paladin") and npcHandler.topic[cid] == 0 then
+		npcHandler:say(message, npc, creature, 10)
+	elseif MsgContains(message, "paladin") and npcHandler:getTopic(playerId) == 0 then
 		local message = {
 			"Paladinos sao os cavaleiros sagrados da igreja. Eles sao resistentes e possuem habilidade excepcional com escudos, \z
 				alem de serem agraciados com milagres. ... ",
@@ -338,13 +337,13 @@ local function creatureSayCallback(npc, creature, type, message)
 		if player:getLevel() >= 8 then
 			table.insert(message, "Diga-me: VOCE QUER INICIAR SUA JORNADA COMO UM DRUID?"..
 									" Responda com um orgulhoso {YES} se essa eh sua escolha!")
-			npcHandler.topic[cid] = 6
+			npcHandler:setTopic(playerId, 6)
 		else
-			npcHandler.topic[cid] = 0
+			npcHandler:setTopic(playerId, 0)
 		end
 
-		npcHandler:say(message, cid, false, true, 10)
-	elseif MsgContains(message, "knight") and npcHandler.topic[cid] == 0 then
+		npcHandler:say(message, npc, creature, 10)
+	elseif MsgContains(message, "knight") and npcHandler:getTopic(playerId) == 0 then
 		local message = {
 			"Knight eh o guerreiro classico que se da bem com todo tipo de armamento. Eles sao fortes, entao podem \z
 				carregar itens mais pesados e usar armaduras resistentes. ... ",
@@ -356,14 +355,14 @@ local function creatureSayCallback(npc, creature, type, message)
 		if player:getLevel() >= 8 then
 			table.insert(message, "Diga-me: VOCE QUER INICIAR SUA JORNADA COMO UM KNIGHT?"..
 									" Responda com um orgulhoso {YES} se essa eh sua escolha!")
-			npcHandler.topic[cid] = 5
+			npcHandler:setTopic(playerId, 5)
 		else
-			npcHandler.topic[cid] = 0
+			npcHandler:setTopic(playerId, 0)
 		end
 
-		npcHandler:say(message, cid, false, true, 10)
+		npcHandler:say(message, npc, creature, 10)
 	-- ASSASSIN --
-	elseif MsgContains(message, "assassin") and npcHandler.topic[cid] == 0 then
+	elseif MsgContains(message, "assassin") and npcHandler:getTopic(playerId) == 0 then
 		local message = {
 			"Assassinos dominam a arte de matar silenciosamente sua vitima e escapar sem serem vistos. \z
 				Eles podem ficar invisiveis e sao rapidos. ...",
@@ -376,14 +375,14 @@ local function creatureSayCallback(npc, creature, type, message)
 		if player:getLevel() >= 8 then
 			table.insert(message, "Diga-me: VOCE QUER INICIAR SUA JORNADA COMO UM ASSASSIN?"..
 									" Responda com um orgulhoso {YES} se essa eh sua escolha!")
-			npcHandler.topic[cid] = 9
+			npcHandler:setTopic(playerId, 9)
 		else
-			npcHandler.topic[cid] = 0
+			npcHandler:setTopic(playerId, 0)
 		end
 
-		npcHandler:say(message, cid, false, true, 10)
+		npcHandler:say(message, npc, creature, 10)
 	-- NECROMANCER --
-	elseif MsgContains(message, "necromancer") and npcHandler.topic[cid] == 0 then
+	elseif MsgContains(message, "necromancer") and npcHandler:getTopic(playerId) == 0 then
 		local message = {
 			"Necromantes, sao magos que se devotaram a magia negra. \z
 				Eles podem controlar a vida e a morte com magias que consomem a sua propria vida no processo. ...",
@@ -396,14 +395,14 @@ local function creatureSayCallback(npc, creature, type, message)
 		if player:getLevel() >= 8 then
 			table.insert(message, "Diga-me: VOCE QUER INICIAR SUA JORNADA COMO UM NECROMANTE?"..
 									" Responda com um orgulhoso {YES} se essa eh sua escolha!")
-			npcHandler.topic[cid] = 10
+			npcHandler:setTopic(playerId, 10)
 		else
-			npcHandler.topic[cid] = 0
+			npcHandler:setTopic(playerId, 0)
 		end
 
-		npcHandler:say(message, cid, false, true, 10)
+		npcHandler:say(message, npc, creature, 10)
 	-- HUNTER --
-	elseif MsgContains(message, "hunter") and npcHandler.topic[cid] == 0 then
+	elseif MsgContains(message, "hunter") and npcHandler:getTopic(playerId) == 0 then
 		local message = {
 			"Hunters sao os mestres da exploracao, aprenderam a viver na natureza, se tornando eximios com arcos e flechas. \z
 				Conseguem nao so sobreviver em contato com outros animais, mas tambem domestica-los para obter vantagem nos combates e uma companhia permanente.",
@@ -414,23 +413,23 @@ local function creatureSayCallback(npc, creature, type, message)
 		if player:getLevel() >= 8 then
 			table.insert(message, "Diga-me: VOCE QUER INICIAR SUA JORNADA COMO UM HUNTER?"..
 									" Responda com um orgulhoso {YES} se essa eh sua escolha!")
-			npcHandler.topic[cid] = 11
+			npcHandler:setTopic(playerId, 11)
 		else
-			npcHandler.topic[cid] = 0
+			npcHandler:setTopic(playerId, 0)
 		end
 
-		npcHandler:say(message, cid, false, true, 10)
+		npcHandler:say(message, npc, creature, 10)
 	--nova classe aqui--
 	-- trocar intervalo aceito >= 5 and <= x --
-	elseif ((npcHandler.topic[cid] >= 5) and (npcHandler.topic[cid] <= 11)) then
+	elseif ((npcHandler:getTopic(playerId) >= 5) and (npcHandler:getTopic(playerId) <= 11)) then
 		if MsgContains(message, "yes") then
 			for index, value in pairs(topicTable) do
-				if npcHandler.topic[cid] == index then
+				if npcHandler:getTopic(playerId) == index then
 					if player:getStorageValue(Storage.Dawnport.DoorVocation) == -1 then
 						-- Change to new vocation, convert magic level and skills and set proper stats
 						player:changeVocation(value)
 						player:setStorageValue(Storage.Dawnport.DoorVocation, value)
-						if (npcHandler.topic[cid] == 9) or (npcHandler.topic[cid] == 11) then
+						if (npcHandler:getTopic(playerId) == 9) or (npcHandler:getTopic(playerId) == 11) then
 							player:setMaxMana(100)
 						else end
 						-- Teleportar para thais --
@@ -438,13 +437,13 @@ local function creatureSayCallback(npc, creature, type, message)
 						if town then
 							player:teleportTo(town:getTemplePosition())
 							player:addItem(2175, 1)
-							player:setTown(town)
+							player:setTown(8)
 							player:ajustarMana()
 						else
 							player:sendCancelMessage("Town not found.")
 						end -- fim do teleportar para thais
 					else
-						npcHandler.topic[cid] = 0
+						npcHandler:setTopic(playerId, 0)
 						return true
 					end
 				end

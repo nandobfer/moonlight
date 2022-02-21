@@ -144,7 +144,9 @@ function Player:getWeapons()
 	if leftItem or rightItem then
 		player:sendTextMessage(MESSAGE_EVENT_ADVANCE,
 			"Voce nao consegue fazer isso se estiver empunhando um escudo ou uma arma de duas maos!")
+	else end
 	if leftItem then
+	else end
 end
 
 	-- Retorna metamorfose

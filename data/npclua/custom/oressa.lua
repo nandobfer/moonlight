@@ -286,11 +286,11 @@ local function creatureSayCallback(npc, creature, type, message)
 		npc, creature, 10)
 		npcHandler:setTopic(playerId, 8)
 	-- Choosing dialog start
-	-- elseif msgcontains(msg, "decidido") and npcHandler.topic[cid] == 0 then
-	elseif msgcontains(msg, "decidido") then
+	-- elseif MsgContains(message, "decidido") and npcHandler.topic[cid] == 0 then
+	elseif MsgContains(message, "decidido") then
 		npcHandler:say("Qual classe voce escolheu? {knight}, {sorcerer}, {paladin}, {druid}, {assassin}, {necromancer} ou {hunter}?", cid)
 	-- Say vocations name
-	elseif msgcontains(msg, "sorcerer") and npcHandler.topic[cid] == 0 then
+	elseif MsgContains(message, "sorcerer") and npcHandler.topic[cid] == 0 then
 		local message = {
 			"Sorcerers, ou feiticeiros, manipulam os elementos a fim de realizar seus objetivos.  ...",
 			"Eles nao podem tomar muito dano ou carregar muitos itens, mas sao devastadores na hora de causar dano, \z
@@ -308,7 +308,7 @@ local function creatureSayCallback(npc, creature, type, message)
 		end
 
 		npcHandler:say(message, cid, false, true, 10)
-	elseif msgcontains(msg, "druid") and npcHandler.topic[cid] == 0 then
+	elseif MsgContains(message, "druid") and npcHandler.topic[cid] == 0 then
 		local message = {
 			"Druidas sao curandeiros e comungam com a natureza, de onde vem suas magias de terra. \z
 			Eles podem se transformar em animais para mudar o rumo da batalha, como um grande urso capaz de ignorar muito dano ou um lobo feroz que rasga os inimigos, \z
@@ -325,7 +325,7 @@ local function creatureSayCallback(npc, creature, type, message)
 		end
 
 		npcHandler:say(message, cid, false, true, 10)
-	elseif msgcontains(msg, "paladin") and npcHandler.topic[cid] == 0 then
+	elseif MsgContains(message, "paladin") and npcHandler.topic[cid] == 0 then
 		local message = {
 			"Paladinos sao os cavaleiros sagrados da igreja. Eles sao resistentes e possuem habilidade excepcional com escudos, \z
 				alem de serem agraciados com milagres. ... ",
@@ -344,7 +344,7 @@ local function creatureSayCallback(npc, creature, type, message)
 		end
 
 		npcHandler:say(message, cid, false, true, 10)
-	elseif msgcontains(msg, "knight") and npcHandler.topic[cid] == 0 then
+	elseif MsgContains(message, "knight") and npcHandler.topic[cid] == 0 then
 		local message = {
 			"Knight eh o guerreiro classico que se da bem com todo tipo de armamento. Eles sao fortes, entao podem \z
 				carregar itens mais pesados e usar armaduras resistentes. ... ",
@@ -363,7 +363,7 @@ local function creatureSayCallback(npc, creature, type, message)
 
 		npcHandler:say(message, cid, false, true, 10)
 	-- ASSASSIN --
-	elseif msgcontains(msg, "assassin") and npcHandler.topic[cid] == 0 then
+	elseif MsgContains(message, "assassin") and npcHandler.topic[cid] == 0 then
 		local message = {
 			"Assassinos dominam a arte de matar silenciosamente sua vitima e escapar sem serem vistos. \z
 				Eles podem ficar invisiveis e sao rapidos. ...",
@@ -383,7 +383,7 @@ local function creatureSayCallback(npc, creature, type, message)
 
 		npcHandler:say(message, cid, false, true, 10)
 	-- NECROMANCER --
-	elseif msgcontains(msg, "necromancer") and npcHandler.topic[cid] == 0 then
+	elseif MsgContains(message, "necromancer") and npcHandler.topic[cid] == 0 then
 		local message = {
 			"Necromantes, sao magos que se devotaram a magia negra. \z
 				Eles podem controlar a vida e a morte com magias que consomem a sua propria vida no processo. ...",
@@ -403,7 +403,7 @@ local function creatureSayCallback(npc, creature, type, message)
 
 		npcHandler:say(message, cid, false, true, 10)
 	-- HUNTER --
-	elseif msgcontains(msg, "hunter") and npcHandler.topic[cid] == 0 then
+	elseif MsgContains(message, "hunter") and npcHandler.topic[cid] == 0 then
 		local message = {
 			"Hunters sao os mestres da exploracao, aprenderam a viver na natureza, se tornando eximios com arcos e flechas. \z
 				Conseguem nao so sobreviver em contato com outros animais, mas tambem domestica-los para obter vantagem nos combates e uma companhia permanente.",
@@ -423,7 +423,7 @@ local function creatureSayCallback(npc, creature, type, message)
 	--nova classe aqui--
 	-- trocar intervalo aceito >= 5 and <= x --
 	elseif ((npcHandler.topic[cid] >= 5) and (npcHandler.topic[cid] <= 11)) then
-		if msgcontains(msg, "yes") then
+		if MsgContains(message, "yes") then
 			for index, value in pairs(topicTable) do
 				if npcHandler.topic[cid] == index then
 					if player:getStorageValue(Storage.Dawnport.DoorVocation) == -1 then

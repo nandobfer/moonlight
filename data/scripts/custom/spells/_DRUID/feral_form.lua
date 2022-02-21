@@ -13,7 +13,7 @@ function spell.onCastSpell(creature, variant)
 
 	 -- TRANSFORMAR --
 	if form ~= "feral" then
-		player:addForm("Werewolf", 500)
+		player:addForm("Midnight Panther", 500)
 	else end
 	
     return true

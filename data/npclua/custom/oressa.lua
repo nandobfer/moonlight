@@ -436,7 +436,7 @@ local function creatureSayCallback(npc, creature, type, message)
 						local town = Town(8)
 						if town then
 							player:teleportTo(town:getTemplePosition())
-							player:addItem(2175, 1)
+							player:addItem(3059, 1)
 							player:setTown(8)
 							player:ajustarMana()
 						else

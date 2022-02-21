@@ -31,7 +31,7 @@ end
 spell:name("Haste")
 spell:words("utani hur")
 spell:group("support")
-spell:vocation("druid;true", "elder druid;true", "knight;true", "elite knight;true", "assassin;true", "hunter;true")
+spell:vocation("druid;true", "elder druid;true", "knight;true", "elite knight;true", "assassin;true", "hunter;true"; "paladin;true")
 spell:id(6)
 spell:cooldown(2 * 1000)
 spell:groupCooldown(2 * 1000)

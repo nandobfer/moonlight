@@ -240,7 +240,7 @@ function Player:addForm(form, skill)
 		bear_regen:setParameter(CONDITION_PARAM_HEALTHTICKS, 5 * 1000)
 		player:addCondition(bear_regen)
 		
-	elseif form == "Werewolf" then
+	elseif form == "Midnight Panther" then
 		player:setStorageValue(Storage_.feral_form, 1) -- wolf
 		local feral_speed = Condition(CONDITION_HASTE)
 		feral_speed:setParameter(CONDITION_PARAM_TICKS, -1)

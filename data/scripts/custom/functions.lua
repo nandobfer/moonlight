@@ -136,6 +136,17 @@ end
 
 -- //////////////////////////////////////////////// DRUIDA ///////////////////////////////////////////////
 
+function Player:getWeapons()
+	local player = self:getPlayer()
+	local leftItem = player:getSlotItem(CONST_SLOT_LEFT) -- salva o item equipado na variavel
+	local rightItem = player:getSlotItem(CONST_SLOT_RIGHT) -- salva o item equipado na variavel
+	
+	if leftItem or rightItem then
+		player:sendTextMessage(MESSAGE_EVENT_ADVANCE,
+			"Voce nao consegue fazer isso se estiver empunhando um escudo ou uma arma de duas maos!")
+	if leftItem then
+end
+
 	-- Retorna metamorfose
 function Player:getForm()
 	if self:getStorageValue(Storage_.bear_form) == 1 then
@@ -186,6 +197,15 @@ function Player:addForm(form, skill)
 	skill_bonus:setTicks(-1)
 	change_outfit:setTicks(-1)
 	player:setStorageValue(Storage_.metamorfose, 1)
+	
+	-- Deleta arma e escudo
+	-- local leftItem = player:getSlotItem(CONST_SLOT_LEFT)
+	-- local rightItem = player:getSlotItem(CONST_SLOT_RIGHT) 
+	-- player:unEquip(leftItem.itemid)
+	-- player:unEquip(rightItem.itemid)
+	
+	-- Adiciona arma e escudo na BP
+	
 	
 	--FIST SKILL--
 	skill_bonus:setParameter(CONDITION_PARAM_SKILL_FISTPERCENT, skill)

@@ -25,7 +25,7 @@ function spellbook.onUse(player, item, fromPosition, target, toPosition, isHotke
 	["Conjure Wand of Darkness"] = "'Transforma temporariamente parte da sua vida em energia das trevas, produzindo uma arma magica capaz de causar muito dano de morte, porem dura apenas 15 minutos'" ,
 
 		-- Assassin --
-	["Eviscerate"] = "'Consome pontos de combo pra causar alto dano fisico baseado na quantidade de pontos consumidos'" ,
+	["Eviscerate"] = "'Consome pontos de combo pra causar alto dano fisico baseado na quantidade de pontos consumidos, alem de envenenar o alvo'" ,
 	["Stealth"] = "'Modo furtivo'" ,
 	["Poison Bomb"] = "'Consome pontos de combo pra causar dano de veneno em area baseado na quantidade de pontos consumidos'" ,
 	["Throw Knife"] = "'Arremessa uma faca envenenada no alvo, gerando um ponto de combo'" ,

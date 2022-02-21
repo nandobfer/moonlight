@@ -86,7 +86,7 @@ monster.loot = {
 
 monster.attacks = {
 	{name ="melee", interval = 2000, chance = 100, skill = 90, attack = 80},
-	{name ="divine missile", interval = 2000, chance = 10, minDamage = -135, maxDamage = -700, target = true},
+	{name ="judgement", interval = 2000, chance = 10, minDamage = -135, maxDamage = -700, target = true},
 	{name ="berserk", interval = 2000, chance = 20, minDamage = -90, maxDamage = -500, range = 7, target = true},
 	{name ="combat", interval = 2000, chance = 10, type = COMBAT_LIFEDRAIN, minDamage = -135, maxDamage = -280, range = 7, radius = 5, effect = CONST_ME_MAGIC_BLUE, target = true},
 	{name ="combat", interval = 2000, chance = 10, type = COMBAT_ENERGYDAMAGE, minDamage = -210, maxDamage = -600, length = 8, spread = 3, effect = CONST_ME_ENERGYAREA, target = false},

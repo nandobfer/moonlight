@@ -5159,7 +5159,7 @@
 		<attribute key="decayTo" value="0"/>
 		<attribute key="weight" value="80"/>
 	</item>
-	<item id="3101" article="a" name="spellbook">
+	<item id="3101" article="a" name="spell book">
 		<attribute key="defense" value="14"/>
 		<attribute key="weight" value="1800"/>
 		<attribute key="imbuementslot" value="1"/>

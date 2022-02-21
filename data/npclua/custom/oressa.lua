@@ -286,7 +286,8 @@ local function creatureSayCallback(npc, creature, type, message)
 		npc, creature, 10)
 		npcHandler:setTopic(playerId, 8)
 	-- Choosing dialog start
-	elseif msgcontains(msg, "decidido") and npcHandler.topic[cid] == 0 then
+	-- elseif msgcontains(msg, "decidido") and npcHandler.topic[cid] == 0 then
+	elseif msgcontains(msg, "decidido") then
 		npcHandler:say("Qual classe voce escolheu? {knight}, {sorcerer}, {paladin}, {druid}, {assassin}, {necromancer} ou {hunter}?", cid)
 	-- Say vocations name
 	elseif msgcontains(msg, "sorcerer") and npcHandler.topic[cid] == 0 then

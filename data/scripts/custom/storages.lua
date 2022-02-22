@@ -9,6 +9,7 @@ Storage_ = {
 	recover_mana = 100000004,
 	recover_life = 100000005,
 	feral_form = 100000006,
+	plant_form = 100000007,
 	
 		--Assassin
 	combo_points = 100000010,

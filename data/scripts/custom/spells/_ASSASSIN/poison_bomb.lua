@@ -32,7 +32,7 @@ end
 spell:group("attack")
 spell:id(19)
 spell:name("Poison Bomb")
-spell:words("exevo poison bomb")
+spell:words("exori gran mas sin")
 spell:level(75)
 spell:mana(40)
 spell:isPremium(true)

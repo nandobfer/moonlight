@@ -23,7 +23,7 @@ function tiroRapido(combat, creatureid, var, i)
 	local creature = Creature(creatureid)
 	combat:execute(creature, var)
 	-- if i < (creature:getSkillLevel(SKILL_DISTANCE) / 5) then
-	if i < attacks then
+	if i < config.attacks then
 		i = i + 1
 		addEvent(tiroRapido, config.interval, combat, creature:getId(), var, i)
 	else

@@ -14,6 +14,18 @@ function Player:ajustarMana()
 	end
 end
 
+-- checa se a posição é andável
+function isWalkable(pos)
+	local tile = Tile(pos)
+	if not tile or not tile:getGround() and not tile:hasFlag(TILESTATE_IMMOVABLEBLOCKSOLID or TILESTATE_BLOCKSOLID) then
+		return false
+	else 
+		if tile and tile:getGround() and not tile:hasFlag(bit.bor(TILESTATE_IMMOVABLEBLOCKSOLID)) and not tile:getTopCreature() then
+			return true
+		else end
+	end
+end
+
 
 -- //////////////////////////////////////////////// ASSASSIN ///////////////////////////////////////////////
 
@@ -240,7 +252,8 @@ function Player:addForm(form, skill)
 		bear_regen:setParameter(CONDITION_PARAM_HEALTHTICKS, 5 * 1000)
 		player:addCondition(bear_regen)
 		
-	elseif form == "Midnight Panther" then
+	-- elseif form == "Midnight Panther" then
+	else
 		player:setStorageValue(Storage_.feral_form, 1) -- wolf
 		local feral_speed = Condition(CONDITION_HASTE)
 		feral_speed:setParameter(CONDITION_PARAM_TICKS, -1)

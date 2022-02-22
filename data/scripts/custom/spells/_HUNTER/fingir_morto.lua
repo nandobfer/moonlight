@@ -1,7 +1,7 @@
 local spell = Spell("instant")
 
 local corpse = Condition(CONDITION_OUTFIT)
-corpse:setOutfit({lookTypeEx = 3058})
+corpse:setOutfit({lookTypeEx = 4240})
 local root = Condition(CONDITION_ROOTED)
 root:setFormula(0, 0, 0, 0)
 local pacify = Condition(CONDITION_PACIFIED)

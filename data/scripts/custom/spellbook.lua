@@ -38,6 +38,7 @@ function spellbook.onUse(player, item, fromPosition, target, toPosition, isHotke
 		-- Druid --
 	["Bear Form"] = "'Se transforma em Urso, aumentando consideravelmente sua vitalidade, seu dano desarmado (porque urso tem garra) e regenera vida'" ,
 	["Feral Form"] = "'Se transforma em uma fera, aumentando consideravelmente sua velocidade e seu dano desarmado'" ,
+	["Plant Beast Form"] = "'Mistura seu poder de transformacao com a manipulacao de planta, se transformando em uma poderosa besta de madeira e folhas, recebendo um aumento consideravel na vida, na regeneracao de vida, alem de um aumento altissimo no dano desarmado. Porem essa magia ainda nao esta dominada e a transformacao dura poucos segundos'" ,
 	["Food"] = "'Conjura comida'" ,
 	["Rip"] = "'*Requer metamorfose* Rasga os inimigos a sua frente, aplicando sangramento'" ,
 	["Growl"] = "'*Requer metamorfose* Rosna pro inimigo de forma ameacadora'" ,
@@ -52,6 +53,7 @@ function spellbook.onUse(player, item, fromPosition, target, toPosition, isHotke
 	["Terra Wave"] = "'Faz brotar um monte de cipo na sua frente, causando dano de terra aos atingidos'" ,
 	["Ultimate Terra Strike"] = "'Brota uma planta gigante embaixo do alvo, causando dano altissimo de terra'" ,
 	["Wrath of Nature"] = "'Faz crescer uma floresta a sua volta, causando alto dano de terra a todos atingidos'" ,
+	["Focused Wrath of Nature"] = "'Canaliza toda a forca da floresta em um unico alvo, causando dano altissimo'" ,
 	
 		-- Paladin --
 	["Divine Caldera"] = "'Conjura o poder sagrado da luz em uma grande area a sua volta, causando dano a todos que merecem e curando os aliados'" ,

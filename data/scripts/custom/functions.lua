@@ -167,6 +167,8 @@ function Player:getForm()
 		return "bear"
 	elseif self:getStorageValue(Storage_.feral_form) == 1 then
 		return "feral"
+	elseif self:getStorageValue(Storage_.plant_form) == 1 then
+		return "plant"
 	else
 		return false
 	end
@@ -175,8 +177,12 @@ end
 	-- Destransformar
 function Player:removeForm()
 	self:setStorageValue(Storage_.metamorfose, 0) -- Storage_.metamorfose geral
-	if self:getForm() == "bear" then
-		self:setStorageValue(Storage_.bear_form, 0) -- bear
+	if self:getForm() == "bear" or self:getForm() == "plant" then
+		if self:getForm() == "bear" then
+			self:setStorageValue(Storage_.bear_form, 0) -- bear
+		else
+			self:setStorageValue(Storage_.plant_form, 0) -- plant
+		end
 		--MAX HP MOD--
 		self:setStorageValue(recover_life, self:getHealth() / self:getMaxHealth() * 100)
 		self:setMaxHealth(self:getMaxHealth() - self:getStorageValue(Storage_.bear_bonus_life)) -- define HP como o atual transformado - o que ele ganhou quando transformou
@@ -236,8 +242,15 @@ function Player:addForm(form, skill)
 	change_outfit:setOutfit(MonsterType(form):getOutfit())
 	player:addCondition(change_outfit)
 	
-	if form == "werebear" then
-		player:setStorageValue(Storage_.bear_form, 1) -- bear
+	if form == "werebear" or form == "Leaf Golem" then
+		if form == "werebear" then
+			player:setStorageValue(Storage_.bear_form, 1) -- bear
+		else
+			player:setStorageValue(Storage_.plant_form, 1) -- plant
+			addEvent(function()
+				player:removeForm()
+			end, 1000 * 15)
+		end
 		local bear_regen = Condition(CONDITION_REGENERATION)
 		bear_regen:setTicks(-1)
 		bear_regen:setParameter(CONDITION_PARAM_BUFF_SPELL, true)

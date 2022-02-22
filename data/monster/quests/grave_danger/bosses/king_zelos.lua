@@ -99,7 +99,7 @@ monster.elements = {
 
 monster.immunities = {
 	{type = "paralyze", condition = true},
-	{type = "invisible", condition = true},
+	{type = "invisible", condition = false},
 }
 
 monster.voices = {

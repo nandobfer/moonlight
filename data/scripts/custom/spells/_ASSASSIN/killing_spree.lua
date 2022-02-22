@@ -24,17 +24,6 @@ combat:setCallback(CALLBACK_PARAM_SKILLVALUE, "onGetFormulaValues")
 
 local spell = Spell("instant")
 
-function isWalkable(nextPos)
-	local tile = Tile(nextPos)
-	if not tile or not tile:getGround() and not tile:hasFlag(TILESTATE_IMMOVABLEBLOCKSOLID or TILESTATE_BLOCKSOLID) then
-		return false
-	else 
-		if tile and tile:getGround() and not tile:hasFlag(bit.bor(TILESTATE_IMMOVABLEBLOCKSOLID)) then
-			return true
-		else end
-	end
-end
-
 function killingSpree(playerid, targetid, positions, original_position, creatureid, var)
 	local player = Creature(playerid)
 	local target = Creature(targetid)

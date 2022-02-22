@@ -2,9 +2,10 @@ local spell = Spell("instant")
 
 function spell.onCastSpell(creature, variant)
 	local player = creature:getPlayer()
-	if player:getItemCount(3588) > 4 and player:getItemCount(236) > 0 then -- busca 5 blueberry e 1 empty flask
-		player:removeItem(3588, 5) -- remove 5 blueberry
-		return creature:conjureItem(283, 236, 1, CONST_ME_MAGIC_GREEN) -- transforma flask em potion
+	if player:getItemCount(3588) >= 25 and player:getItemCount(236) >= 5 then -- busca 25 blueberry e 5 empty flask
+		player:removeItem(3588, 25) -- remove 25 blueberry
+		player:removeItem(236, 4) -- remove 4 flask
+		return creature:conjureItem(283, 236, 5, CONST_ME_MAGIC_GREEN) -- transforma flask em potion
 	else
 		player:getPosition():sendMagicEffect(CONST_ME_POFF)
 		--creature:sendCancelMessage(RETURNVALUE_NOTPOSSIBLE)

@@ -42,7 +42,11 @@ local spell = Spell("instant")
 
 function spell.onCastSpell(creature, var)
 	if (creature:getStorageValue(Storage_.metamorfose) > 0) then -- se tiver transformado
-		return combat:execute(creature, var)
+		if creature:getPlayer():getFreeHands() then
+			return combat:execute(creature, var)
+		else
+			return false
+		end
 	else
 		creature:sendCancelMessage(RETURNVALUE_NOTPOSSIBLE)
 		creature:sendTextMessage(MESSAGE_EVENT_ADVANCE,

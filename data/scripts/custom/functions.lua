@@ -218,13 +218,26 @@ function Player:addForm(form, skill)
 	change_outfit:setTicks(-1)
 	player:setStorageValue(Storage_.metamorfose, 1)
 	
-	-- Deleta arma e escudo
-	-- local leftItem = player:getSlotItem(CONST_SLOT_LEFT)
-	-- local rightItem = player:getSlotItem(CONST_SLOT_RIGHT) 
-	-- player:unEquip(leftItem.itemid)
-	-- player:unEquip(rightItem.itemid)
-	
-	-- Adiciona arma e escudo na BP
+	-- Desequipa armas
+	local leftItem = player:getSlotItem(CONST_SLOT_LEFT)
+	local rightItem = player:getSlotItem(CONST_SLOT_RIGHT)
+	local container = player:getSlotItem(CONST_SLOT_BACKPACK)
+	if leftItem then
+		if container then
+			leftItem:moveTo(container)
+		else
+			player:addItem(leftItem.itemid)
+			player:removeItem(leftItem.itemid, 1, -1, false) -- itemid, count, subtype, ignore equiped
+		end
+	else end
+	if rightItem then
+		if container then
+			rightItem:moveTo(container)
+		else
+			player:addItem(rightItem.itemid)
+			player:removeItem(rightItem.itemid, 1, -1, false) -- itemid, count, subtype, ignore equiped
+		end
+	else end
 	
 	
 	--FIST SKILL--

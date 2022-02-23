@@ -31,6 +31,7 @@ Storage_ = {
 	elemental_overload = 100000050,
 	teleport = {
 		thais = 100000051,
+		carlin = 100000052,
 	}
 	
 	

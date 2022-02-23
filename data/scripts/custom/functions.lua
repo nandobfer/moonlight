@@ -148,17 +148,18 @@ end
 
 -- //////////////////////////////////////////////// DRUIDA ///////////////////////////////////////////////
 
-function Player:getWeapons()
+function Player:getFreeHands()
 	local player = self:getPlayer()
 	local leftItem = player:getSlotItem(CONST_SLOT_LEFT) -- salva o item equipado na variavel
 	local rightItem = player:getSlotItem(CONST_SLOT_RIGHT) -- salva o item equipado na variavel
 	
 	if leftItem or rightItem then
 		player:sendTextMessage(MESSAGE_EVENT_ADVANCE,
-			"Voce nao consegue fazer isso se estiver empunhando um escudo ou uma arma de duas maos!")
-	else end
-	if leftItem then
-	else end
+			"Voce nao consegue fazer isso se estiver empunhando algo nas maos!")
+		return false
+	else
+		return true
+	end
 end
 
 	-- Retorna metamorfose

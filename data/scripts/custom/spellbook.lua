@@ -130,10 +130,10 @@ function spellbook.onUse(player, item, fromPosition, target, toPosition, isHotke
 	["Haste"] = "'Por um momento, aguca os sentidos pra ficar mais rapido'" ,
 	["Light"] = "'Conjura uma pequena luz pra iluminar a area ao seu redor'" ,
 	["Strong Haste"] = "'Por um breve momento, aguca muito os sentidos pra ficar muito mais rapido'" ,
-	["Scarlet Vial"] = "'Fermenta 1 blueberry em um frasco vazio para criar uma pocao de vida'" ,
-	["Great Scarlet Vial"] = "'Fermenta 15 blueberries em um frasco vazio para criar uma pocao de vida maior'" ,
-	["Strong Scarlet Vial"] = "'Fermenta 5 blueberries em um frasco vazio para criar uma pocao de vida forte'" ,
-	["Ultimate Scarlet Vial"] = "'Fermenta 25 blueberry em um frasco vazio para criar uma pocao de vida extraordinaria'" ,
+	["Scarlet Vial"] = "'Fermenta 5 blueberry em 5 frascos vazios para criar 5 pocoes de vida'" ,
+	["Great Scarlet Vial"] = "'Fermenta 75 blueberries em 5 frascos vazios para criar 5 pocoes de vida maior'" ,
+	["Strong Scarlet Vial"] = "'Fermenta 25 blueberries em 5 frascos vazios para criar 5 pocoes de vida forte'" ,
+	["Ultimate Scarlet Vial"] = "'Fermenta 125 blueberry em 5 frascos vazios para criar 5 pocoes de vida extraordinaria'" ,
 	["Dismiss Pet"] = "'Dispensa seus pets'" ,
 	
 	}

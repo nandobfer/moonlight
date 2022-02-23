@@ -10,6 +10,7 @@ Storage_ = {
 	recover_life = 100000005,
 	feral_form = 100000006,
 	plant_form = 100000007,
+	feral_animal_skin = 100000008,
 	
 		--Assassin
 	combo_points = 100000010,
@@ -34,6 +35,14 @@ Storage_ = {
 	
 	
 }
+
+-- Feral_Forms = {
+	-- Pantera = "Midnight Panther",
+	-- Cao = "Gnarlhound",
+	-- Leao = "Noble Lion",
+	-- Tigre = "Tiger",
+	
+-- }
 
 -- Values extraction function
 local function extractValues(tab, ret)

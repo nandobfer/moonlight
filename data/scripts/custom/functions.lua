@@ -276,7 +276,7 @@ function Player:addForm(form, skill)
 		
 		--LIFE REGEN--
 		bear_regen:setParameter(CONDITION_PARAM_HEALTHGAIN, player:getMaxHealth() * 0.1)
-		bear_regen:setParameter(CONDITION_PARAM_HEALTHTICKS, 5 * 1000)
+		bear_regen:setParameter(CONDITION_PARAM_HEALTHTICKS, 10 * 1000)
 		player:addCondition(bear_regen)
 		
 	-- elseif form == "Midnight Panther" then

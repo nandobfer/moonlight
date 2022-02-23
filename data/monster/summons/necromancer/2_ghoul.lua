@@ -33,8 +33,8 @@ monster.Bestiary = {
 		Also found behind a wall in both Rookgaard and Paradox Tower, although they cannot be reached."
 	}
 
-monster.health = 150
-monster.maxHealth = 100
+monster.health = 250
+monster.maxHealth = 250
 monster.race = "blood"
 monster.corpse = 5976
 monster.speed = 320

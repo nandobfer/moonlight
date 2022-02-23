@@ -26,8 +26,8 @@ monster.Bestiary = {
 	Locations = "Desert north of Ankrahmun."
 	}
 
-monster.health = 85
-monster.maxHealth = 85
+monster.health = 125
+monster.maxHealth = 125
 monster.race = "undead"
 monster.corpse = 2843
 monster.speed = 300

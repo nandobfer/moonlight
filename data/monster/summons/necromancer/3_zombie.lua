@@ -26,8 +26,8 @@ monster.Bestiary = {
 	Locations = "Cemetery Quarter, Drefia, Vampire Castle, Treasure Island, Isle of Evil, Upper Spike."
 	}
 
-monster.health = 250
-monster.maxHealth = 250
+monster.health = 350
+monster.maxHealth = 350
 monster.race = "undead"
 monster.corpse = 9875
 monster.speed = 360

@@ -29,8 +29,8 @@ monster.Bestiary = {
 		Ramoa, Helheim, Vengoth, Upper Spike, Lion's Rock."
 	}
 
-monster.health = 400
-monster.maxHealth = 400
+monster.health = 500
+monster.maxHealth = 500
 monster.race = "undead"
 monster.corpse = 5963
 monster.speed = 360

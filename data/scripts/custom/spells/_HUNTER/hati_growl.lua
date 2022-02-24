@@ -11,7 +11,12 @@ combat:setCallback(CALLBACK_PARAM_TARGETCREATURE, "onTargetCreature")
 local spell = Spell("instant")
 
 function spell.onCastSpell(creature, variant)
-	return combat:execute(creature, variant)
+	local player = creature:getMaster()
+	if player:getStorageValue(Storage_.growl) < 1 then
+		return false
+	else
+		return combat:execute(creature, variant)
+	end
 end
 
 spell:name("hati growl")

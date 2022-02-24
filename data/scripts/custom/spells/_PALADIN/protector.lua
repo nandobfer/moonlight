@@ -14,9 +14,11 @@ function protector(player)
 		condition:setParameter(CONDITION_PARAM_BUFF_DAMAGERECEIVED, 85)
 		condition:setParameter(CONDITION_PARAM_BUFF_SPELL, true)
 		player:addCondition(condition)
+		player:sendTextMessage(MESSAGE_HOTKEY_PRESSED, "Protector ON")
 	else
 		player:setStorageValue(Storage_.protector, 0)
 		player:removeCondition(CONDITION_ATTRIBUTES)
+		player:sendTextMessage(MESSAGE_HOTKEY_PRESSED, "Protector OFF")
 	end
 end
 

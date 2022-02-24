@@ -32,12 +32,14 @@ function spell.onCastSpell(creature, variant)
 	if player:getLoneWolf() then
 		player:setStorageValue(Storage_.lone_wolf, 0)
 		player:removeCondition(CONDITION_ATTRIBUTES)
+		player:sendTextMessage(MESSAGE_HOTKEY_PRESSED, "Lone Wolf OFF")
 		return true
 	elseif #player:getSummons() > 0 then
 		player:sendCancelMessage("Nao pode fazer isto enquanto possuir um pet.")
 		return false
 	else
 		player:setStorageValue(Storage_.lone_wolf, 1)
+		player:sendTextMessage(MESSAGE_HOTKEY_PRESSED, "Lone Wolf ON")
 		return combat:execute(creature, variant)
 	end
 end

@@ -1,8 +1,8 @@
 local condition = Condition(CONDITION_ATTRIBUTES)
 -- condition:setParameter(CONDITION_PARAM_SUBID, 5)
 condition:setParameter(CONDITION_PARAM_TICKS, -1)
-condition:setParameter(CONDITION_PARAM_SKILL_MELEEPERCENT, 135)
-condition:setParameter(CONDITION_PARAM_BUFF_DAMAGERECEIVED, 145)
+condition:setParameter(CONDITION_PARAM_SKILL_MELEEPERCENT, 150)
+condition:setParameter(CONDITION_PARAM_BUFF_DAMAGERECEIVED, 150)
 condition:setParameter(CONDITION_PARAM_DISABLE_DEFENSE, true)
 condition:setParameter(CONDITION_PARAM_BUFF_SPELL, true)
 
@@ -17,10 +17,12 @@ function spell.onCastSpell(creature, var)
 	local player = creature:getPlayer()
 	if not player:getBloodRage() then
 		player:setStorageValue(Storage_.blood_rage, 1)
+		player:sendTextMessage(MESSAGE_HOTKEY_PRESSED, "Blood Rage ON")
 		return combat:execute(creature, var)
 	else
 		player:setStorageValue(Storage_.blood_rage, 0)
 		player:removeCondition(CONDITION_ATTRIBUTES)
+		player:sendTextMessage(MESSAGE_HOTKEY_PRESSED, "Blood Rage OFF")
 		return true
 	end
 end

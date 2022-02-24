@@ -15,7 +15,16 @@ combat:setCallback(CALLBACK_PARAM_TARGETCREATURE, "onTargetCreature")
 local spell = Spell("instant")
 
 function spell.onCastSpell(creature, variant)
-	return combat:execute(creature, variant)
+	local player = creature:getPlayer()
+	if player:getStorageValue(Storage_.growl) < 1 then
+		player:setStorageValue(Storage_.growl, 1)
+		player:sendTextMessage(MESSAGE_HOTKEY_PRESSED, "Taunt ON")
+		return combat:execute(creature, variant)
+	else
+		player:setStorageValue(Storage_.growl, 0)
+		player:sendTextMessage(MESSAGE_HOTKEY_PRESSED, "Taunt OFF")
+		return true
+	end
 end
 
 spell:name("Pet Taunt")

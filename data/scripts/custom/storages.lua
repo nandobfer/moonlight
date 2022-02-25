@@ -26,7 +26,8 @@ Storage_ = {
 	
 		--Hunter
 	lone_wolf = 100000040,
-	
+	growl = 100000041,
+
 		--Sorcerer
 	elemental_overload = 100000050,
 	teleport = {
@@ -37,13 +38,15 @@ Storage_ = {
 	
 }
 
--- Feral_Forms = {
-	-- Pantera = "Midnight Panther",
-	-- Cao = "Gnarlhound",
-	-- Leao = "Noble Lion",
-	-- Tigre = "Tiger",
+Feral_Forms = {
+	{name = "Midnight Panther", id = -1},
+	{name = "Midnight Panther", id = 1},
+	{name = "Gnarlhound", id = 2},
+	{name = "Noble Lion", id = 3},
+	{name = "Tiger", id = 4},
+	{name = "War Wolf", id = 5},
 	
--- }
+}
 
 -- Values extraction function
 local function extractValues(tab, ret)

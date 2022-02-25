@@ -4,36 +4,23 @@ combat:setParameter(COMBAT_PARAM_EFFECT, CONST_ME_DRAWBLOOD)
 combat:setParameter(COMBAT_PARAM_DISTANCEEFFECT, CONST_ANI_EXPLOSION)
 combat:setParameter(COMBAT_PARAM_BLOCKARMOR, 1)
 
-local condition = Condition(CONDITION_BLEEDING) -- sangramento bear
-condition:setParameter(CONDITION_PARAM_DELAYED, 1)
-local condition2 = Condition(CONDITION_BLEEDING) -- sangramento feral
-condition2:setParameter(CONDITION_PARAM_DELAYED, 1)
-
 function onGetFormulaValues(player, level, attack)
 
 	local min = 0
 	local max = -1
 	
 	local skillfist = player:getSkillLevel(SKILL_FIST)
-	min = ((level / 2) + (skillfist * 2 / 3))
-	max = ((level / 2) + (skillfist * 2.5))
+	min = ((level / 2) + (skillfist * 2 / 3)) / 2
+	max = ((level / 2) + (skillfist * 2.5)) / 2
+		
 		
 	if (player:getStorageValue(Storage_.bear_form) > 0) then -- se for urso, causa metade do dano
-		min = min / 2
-		max = max / 2
-		local bleedbear = (level / 2) + (skillfist * 2.5) / 4 -- max / 4 , usar a variavel max estava bugando ao transformar em feral
-		condition:addDamage(2, 1000, - bleedbear)
-		condition:addDamage(3, 1000, - bleedbear * 2 / 3)
-		condition:addDamage(5, 1000, - bleedbear / 3)
-		combat:addCondition(condition)
-		
-	else 
-		condition2:addDamage(2, 1000, -(max / 2))
-		condition2:addDamage(3, 1000, -(max / 2) * 2 / 3)
-		condition2:addDamage(5, 1000, -(max / 2) / 3)
-		combat:addCondition(condition2)
+		applyBleeding(player, combat, 0.3)
+		return -min / 2 , -max / 2
+	else
+		applyBleeding(player, combat, 0.4)
+		return -min, -max
 	end
-	return -min, -max
 end
 
 combat:setCallback(CALLBACK_PARAM_LEVELMAGICVALUE, "onGetFormulaValues")

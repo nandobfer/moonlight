@@ -1,7 +1,8 @@
 local config = {
 	heal = true,
 	save = true,
-	effect = false
+	effect = true,
+	spells = true
 }
 
 local advanceSave = CreatureEvent("AdvanceSave")
@@ -21,6 +22,15 @@ function advanceSave.onAdvance(player, skill, oldLevel, newLevel)
 
 	if config.save then
 		player:save()
+	end
+	
+	if config.spells then
+		for _, spell in ipairs(player:getInstantSpells()) do
+			if spell.level == newLevel then
+				player:sendTextMessage(MESSAGE_EVENT_ADVANCE,
+			"Voce desbloqueou a habilidade " .. spell.name .. " - " .. spell.words .. " : " .. spell.mana .. "\n Leia seu livro de feiticos para saber mais sobre ela!" )
+			end
+		end
 	end
 	return true
 end

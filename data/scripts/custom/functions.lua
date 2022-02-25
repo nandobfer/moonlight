@@ -297,6 +297,18 @@ function Player:addForm(form, skill)
 	end
 end
 
+	-- Aplica sangramento de 8 segundos
+function applyBleeding(player, combat, mod)
+	local level = player:getLevel()
+	local skill = player:getSkillLevel(SKILL_FIST)
+	local condition = Condition(CONDITION_BLEEDING)
+	condition:setParameter(CONDITION_PARAM_DELAYED, 1)
+	condition:addDamage(2, 1000, -((level / 2) + (skill * mod)))
+	condition:addDamage(2, 1000, -((level / 2) + (skill * mod)) * 2 / 3)
+	condition:addDamage(4, 1000, -((level / 2) + (skill * mod)) / 3)
+	combat:addCondition(condition)
+end
+
 -- //////////////////////////////////////////////// SORCERER ///////////////////////////////////////////////
 
 function tryElementalOverload(combat, creature, var)

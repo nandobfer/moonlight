@@ -14,6 +14,9 @@ function spell.onCastSpell(creature, variant)
 	 -- TRANSFORMAR --
 	if form ~= "plant" then
 		player:addForm("Leaf Golem", 700)
+		addEvent(function()
+			player:removeForm()
+		end, 1000 * 15)
 	else end
 	
     return true

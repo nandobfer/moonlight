@@ -170,6 +170,8 @@ function Player:getForm()
 		return "feral"
 	elseif self:getStorageValue(Storage_.plant_form) == 1 then
 		return "plant"
+	elseif self:getStorageValue(Storage_.manticore_form) == 1 then
+		return "manticore"
 	else
 		return false
 	end
@@ -194,8 +196,12 @@ function Player:removeForm()
 		--MAX MANA MOD--
 		self:setMaxMana(self:getMaxMana() + self:getStorageValue(Storage_.max_mana))
 		self:addMana(self:getStorageValue(Storage_.recover_mana) * self:getMaxMana() / 100)
-	elseif self:getForm() == "feral" then
-		self:setStorageValue(Storage_.feral_form, 0) -- feral
+	elseif self:getForm() == "feral" or self:getForm() == "manticore" then
+		if self:getForm() == "feral" then
+			self:setStorageValue(Storage_.feral_form, 0) -- feral
+		else
+			self:setStorageValue(Storage_.manticore_form, 0) -- manticore
+		end
 		--FERAL MODS--
 		self:removeCondition(CONDITION_HASTE)
 		--MAX MANA MOD--
@@ -261,9 +267,6 @@ function Player:addForm(form, skill)
 			player:setStorageValue(Storage_.bear_form, 1) -- bear
 		else
 			player:setStorageValue(Storage_.plant_form, 1) -- plant
-			addEvent(function()
-				player:removeForm()
-			end, 1000 * 15)
 		end
 		local bear_regen = Condition(CONDITION_REGENERATION)
 		bear_regen:setTicks(-1)
@@ -281,7 +284,11 @@ function Player:addForm(form, skill)
 		
 	-- elseif form == "Midnight Panther" then
 	else
-		player:setStorageValue(Storage_.feral_form, 1) -- wolf
+		if form == "Manticore" then -- maticore 
+			player:setStorageValue(Storage_.manticore_form, 1) -- manticore
+		else
+			player:setStorageValue(Storage_.feral_form, 1) -- feral
+		end
 		local feral_speed = Condition(CONDITION_HASTE)
 		feral_speed:setParameter(CONDITION_PARAM_TICKS, -1)
 		feral_speed:setParameter(CONDITION_PARAM_BUFF_SPELL, true)

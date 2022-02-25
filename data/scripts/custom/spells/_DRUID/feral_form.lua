@@ -13,7 +13,11 @@ function spell.onCastSpell(creature, variant)
 
 	 -- TRANSFORMAR --
 	if form ~= "feral" then
-		player:addForm("Midnight Panther", 500)
+		for index, value in ipairs(Feral_Forms) do
+			if Feral_Forms[index].id == player:getStorageValue(Storage_.feral_animal_skin) then
+				player:addForm(Feral_Forms[index].name, 500)
+			else end
+		end
 	else end
 	
     return true

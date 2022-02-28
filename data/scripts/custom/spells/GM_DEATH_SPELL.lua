@@ -13,6 +13,7 @@ local spell = Spell("instant")
 
 function spell.onCastSpell(creature, var)
 	creature:getTarget():addHealth(-(creature:getTarget():getMaxHealth()))
+	creature:getTarget():getPosition():sendMagicEffect(CONST_ME_YALAHARIGHOST)
 	return true
 end
 

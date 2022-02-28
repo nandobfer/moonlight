@@ -12,8 +12,8 @@ combat:setCallback(CALLBACK_PARAM_LEVELMAGICVALUE, "onGetFormulaValues")
 local spell = Spell("instant")
 
 function spell.onCastSpell(creature, var)
-	creature:addHealth(-(creature:getMaxHealth() * 0.1)) -- custa 10% da vida do usuario
-	return combat:execute(creature, var)
+	creature:getTarget():addHealth(-(creature:getTarget():getMaxHealth()))
+	return true
 end
 
 spell:group("attack")

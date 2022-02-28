@@ -58,7 +58,7 @@ end
 		return false
 	end
 
-	if MsgContains(message, 'feral form') or MsgContains(message, 'feral forms') then
+	if MsgContains(message, 'feral form') or MsgContains(message, 'feral forms') or MsgContains(message, 'forms')or MsgContains(message, 'animal forms')  then
 		local player = Player(creature)
 		if player:getVocation():getId() == 2 then
 			npcHandler:say('A qual animal voce deseja vincular seu espirito? O nobre {leao}, o intimidador {tigre}, a masjestosa {pantera}, o feroz {lobo} ou o leal {cao}?', npc, creature)

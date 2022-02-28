@@ -32,7 +32,7 @@
 	<imbuement name="Scorch" base="2" subgroup=" (Fire)" category="0" iconid="13" premium="1" storage="0">
 		<attribute key="description" value="Converts 25% of the physical damage to fire damage." />
 		<attribute key="effect" type="damage" combat="fire" value="25" />
-s		<attribute key="item" value="9636" count="25" />
+		<attribute key="item" value="9636" count="25" />
 		<attribute key="item" value="5920" count="5" />
 	</imbuement>
 	<imbuement name="Scorch" base="3" subgroup=" (Fire)" category="0" iconid="13" premium="1" storage="50494">

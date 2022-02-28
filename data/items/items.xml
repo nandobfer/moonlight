@@ -1759,38 +1759,38 @@
 	</item>
 	<item id="814" article="a" name="terra amulet">
 		<attribute key="slotType" value="necklace"/>
-		<attribute key="showCharges" value="1"/>
+		<!-- <attribute key="showCharges" value="1"/> -->
 		<attribute key="showAttributes" value="1"/>
 		<attribute key="absorbpercentpoison" value="20"/>
 		<attribute key="absorbpercentfire" value="-10"/>
-		<attribute key="charges" value="200"/>
+		<!-- <attribute key="charges" value="200"/> -->
 		<attribute key="weight" value="500"/>
 	</item>
 	<item id="815" article="a" name="glacier amulet">
 		<attribute key="slotType" value="necklace"/>
-		<attribute key="showCharges" value="1"/>
+		<!-- <attribute key="showCharges" value="1"/> -->
 		<attribute key="showAttributes" value="1"/>
 		<attribute key="absorbpercentice" value="20"/>
 		<attribute key="absorbpercentenergy" value="-10"/>
-		<attribute key="charges" value="200"/>
+		<!-- <attribute key="charges" value="200"/> -->
 		<attribute key="weight" value="500"/>
 	</item>
 	<item id="816" article="a" name="lightning pendant">
 		<attribute key="slotType" value="necklace"/>
-		<attribute key="showCharges" value="1"/>
+		<!-- <attribute key="showCharges" value="1"/> -->
 		<attribute key="showAttributes" value="1"/>
 		<attribute key="absorbpercentpoison" value="-10"/>
 		<attribute key="absorbpercentenergy" value="20"/>
-		<attribute key="charges" value="200"/>
+		<!-- <attribute key="charges" value="200"/> -->
 		<attribute key="weight" value="500"/>
 	</item>
 	<item id="817" article="a" name="magma amulet">
 		<attribute key="slotType" value="necklace"/>
-		<attribute key="showCharges" value="1"/>
+		<!-- <attribute key="showCharges" value="1"/> -->
 		<attribute key="showAttributes" value="1"/>
 		<attribute key="absorbpercentice" value="-10"/>
 		<attribute key="absorbpercentfire" value="20"/>
-		<attribute key="charges" value="200"/>
+		<!-- <attribute key="charges" value="200"/> -->
 		<attribute key="weight" value="500"/>
 	</item>
 	<item id="818" name="magma boots">
@@ -4608,14 +4608,20 @@
 	</item>
 	<item id="3007" article="a" name="crystal ring">
 		<attribute key="slotType" value="ring"/>
+		<attribute key="showAttributes" value="1"/>
 		<attribute key="weight" value="90"/>
+		<attribute key="armor" value="1"/>
 	</item>
 	<item id="3008" article="a" name="crystal necklace">
 		<attribute key="slotType" value="necklace"/>
+		<attribute key="showAttributes" value="1"/>
+		<attribute key="armor" value="1"/>
 		<attribute key="weight" value="490"/>
 	</item>
 	<item id="3009" article="a" name="bronze necklace">
 		<attribute key="slotType" value="necklace"/>
+		<attribute key="showAttributes" value="1"/>
+		<attribute key="armor" value="2"/>
 		<attribute key="weight" value="409"/>
 	</item>
 	<item id="3010" article="an" name="emerald bangle">
@@ -4633,18 +4639,26 @@
 	<item id="3013" article="a" name="golden amulet">
 		<attribute key="description" value="Many gems glitter on the amulet"/>
 		<attribute key="slotType" value="necklace"/>
+		<attribute key="showAttributes" value="1"/>
+		<attribute key="armor" value="1"/>
 		<attribute key="weight" value="830"/>
 	</item>
 	<item id="3014" article="a" name="star amulet">
 		<attribute key="slotType" value="necklace"/>
+		<attribute key="showAttributes" value="1"/>
+		<attribute key="armor" value="1"/>
 		<attribute key="weight" value="610"/>
 	</item>
 	<item id="3015" article="a" name="silver necklace">
 		<attribute key="slotType" value="necklace"/>
+		<attribute key="showAttributes" value="1"/>
+		<attribute key="armor" value="1"/>
 		<attribute key="weight" value="480"/>
 	</item>
 	<item id="3016" article="a" name="ruby necklace">
 		<attribute key="slotType" value="necklace"/>
+		<attribute key="showAttributes" value="1"/>
+		<attribute key="armor" value="1"/>
 		<attribute key="weight" value="570"/>
 	</item>
 	<item id="3017" article="a" name="silver brooch" plural="silver brooches">
@@ -4652,10 +4666,14 @@
 	</item>
 	<item id="3018" article="a" name="scarab amulet">
 		<attribute key="slotType" value="necklace"/>
+		<attribute key="showAttributes" value="1"/>
+		<attribute key="armor" value="1"/>
 		<attribute key="weight" value="770"/>
 	</item>
 	<item id="3019" article="a" name="demonbone amulet">
 		<attribute key="slotType" value="necklace"/>
+		<attribute key="showAttributes" value="1"/>
+		<attribute key="armor" value="1"/>
 		<attribute key="weight" value="690"/>
 	</item>
 	<item id="3020" name="some golden fruits">
@@ -4663,6 +4681,8 @@
 	</item>
 	<item id="3021" article="a" name="sapphire amulet">
 		<attribute key="slotType" value="necklace"/>
+		<attribute key="showAttributes" value="1"/>
+		<attribute key="armor" value="1"/>
 		<attribute key="weight" value="680"/>
 	</item>
 	<item id="3022" article="an" name="ancient tiara">
@@ -4685,6 +4705,8 @@
 	</item>
 	<item id="3025" article="an" name="ancient amulet">
 		<attribute key="slotType" value="necklace"/>
+		<attribute key="showAttributes" value="1"/>
+		<attribute key="armor" value="1"/>
 		<attribute key="weight" value="840"/>
 	</item>
 	<item id="3026" article="a" name="white pearl">
@@ -4747,10 +4769,10 @@
 	</item>
 	<item id="3045" article="a" name="strange talisman">
 		<attribute key="slotType" value="necklace"/>
-		<attribute key="showCharges" value="1"/>
+		<!-- <attribute key="showCharges" value="1"/> -->
 		<attribute key="showAttributes" value="1"/>
 		<attribute key="absorbpercentenergy" value="10"/>
-		<attribute key="charges" value="200"/>
+		<!-- <attribute key="charges" value="200"/> -->
 		<attribute key="weight" value="290"/>
 	</item>
 	<item id="3046" article="a" name="magic light wand">
@@ -4814,10 +4836,10 @@
 	</item>
 	<item id="3054" article="a" name="silver amulet">
 		<attribute key="slotType" value="necklace"/>
-		<attribute key="showCharges" value="1"/>
+		<!-- <attribute key="showCharges" value="1"/> -->
 		<attribute key="showAttributes" value="1"/>
 		<attribute key="absorbpercentpoison" value="10"/>
-		<attribute key="charges" value="200"/>
+		<!-- <attribute key="charges" value="200"/> -->
 		<attribute key="weight" value="500"/>
 	</item>
 	<item id="3055" article="a" name="platinum amulet">
@@ -4828,10 +4850,10 @@
 	</item>
 	<item id="3056" article="a" name="bronze amulet">
 		<attribute key="slotType" value="necklace"/>
-		<attribute key="showCharges" value="1"/>
+		<!-- <attribute key="showCharges" value="1"/> -->
 		<attribute key="showAttributes" value="1"/>
 		<attribute key="absorbpercentmanadrain" value="20"/>
-		<attribute key="charges" value="200"/>
+		<!-- <attribute key="charges" value="200"/> -->
 		<attribute key="weight" value="500"/>
 	</item>
 	<item id="3057" article="an" name="amulet of loss">
@@ -4992,34 +5014,34 @@
 	</item>
 	<item id="3082" article="an" name="elven amulet">
 		<attribute key="slotType" value="necklace"/>
-		<attribute key="showCharges" value="1"/>
+		<!-- <attribute key="showCharges" value="1"/> -->
 		<attribute key="showAttributes" value="1"/>
 		<attribute key="absorbpercentall" value="5"/>
-		<attribute key="charges" value="50"/>
+		<!-- <attribute key="charges" value="50"/> -->
 		<attribute key="weight" value="270"/>
 	</item>
 	<item id="3083" article="a" name="garlic necklace">
 		<attribute key="slotType" value="necklace"/>
-		<attribute key="showCharges" value="1"/>
+		<!-- <attribute key="showCharges" value="1"/> -->
 		<attribute key="showAttributes" value="1"/>
 		<attribute key="absorbpercentlifedrain" value="20"/>
-		<attribute key="charges" value="150"/>
+		<!-- <attribute key="charges" value="150"/> -->
 		<attribute key="weight" value="380"/>
 	</item>
 	<item id="3084" article="a" name="protection amulet">
 		<attribute key="slotType" value="necklace"/>
-		<attribute key="showCharges" value="1"/>
+		<!-- <attribute key="showCharges" value="1"/> -->
 		<attribute key="showAttributes" value="1"/>
 		<attribute key="absorbpercentphysical" value="6"/>
-		<attribute key="charges" value="250"/>
+		<!-- <attribute key="charges" value="250"/> -->
 		<attribute key="weight" value="550"/>
 	</item>
 	<item id="3085" article="a" name="dragon necklace">
 		<attribute key="slotType" value="necklace"/>
-		<attribute key="showCharges" value="1"/>
+		<!-- <attribute key="showCharges" value="1"/> -->
 		<attribute key="showAttributes" value="1"/>
 		<attribute key="absorbpercentfire" value="8"/>
-		<attribute key="charges" value="200"/>
+		<!-- <attribute key="charges" value="200"/> -->
 		<attribute key="weight" value="630"/>
 	</item>
 	<item id="3086" article="a" name="stealth ring">
@@ -19774,39 +19796,39 @@
 	<item id="9301" article="a" name="bonfire amulet">
 		<attribute key="description" value="It engulfs you in flames - fire against fire"/>
 		<attribute key="slotType" value="necklace"/>
-		<attribute key="showCharges" value="1"/>
+		<!-- <attribute key="showCharges" value="1"/> -->
 		<attribute key="showAttributes" value="1"/>
-		<attribute key="absorbpercentphysical" value="60"/>
-		<attribute key="absorbpercentfire" value="40"/>
-		<attribute key="charges" value="5"/>
+		<attribute key="absorbpercentphysical" value="20"/>
+		<attribute key="absorbpercentfire" value="20"/>
+		<!-- <attribute key="charges" value="5"/> -->
 		<attribute key="weight" value="700"/>
 	</item>
 	<item id="9302" article="a" name="sacred tree amulet">
 		<attribute key="description" value="Its leaves stretch out to cover your whole body if you receive earth damage"/>
 		<attribute key="slotType" value="necklace"/>
-		<attribute key="showCharges" value="1"/>
+		<!-- <attribute key="showCharges" value="1"/> -->
 		<attribute key="showAttributes" value="1"/>
-		<attribute key="absorbpercentphysical" value="60"/>
-		<attribute key="absorbpercentpoison" value="40"/>
-		<attribute key="charges" value="5"/>
+		<attribute key="absorbpercentphysical" value="20"/>
+		<attribute key="absorbpercentpoison" value="20"/>
+		<!-- <attribute key="charges" value="5"/> -->
 		<attribute key="weight" value="700"/>
 	</item>
 	<item id="9303" article="a" name="leviathan's amulet">
 		<attribute key="description" value="It holds the last breath of Leviathan"/>
 		<attribute key="slotType" value="necklace"/>
-		<attribute key="showCharges" value="1"/>
-		<attribute key="absorbpercentphysical" value="60"/>
-		<attribute key="absorbpercentice" value="40"/>
-		<attribute key="charges" value="5"/>
+		<!-- <attribute key="showCharges" value="1"/> -->
+		<attribute key="absorbpercentphysical" value="20"/>
+		<attribute key="absorbpercentice" value="20"/>
+		<!-- <attribute key="charges" value="5"/> -->
 		<attribute key="weight" value="700"/>
 	</item>
 	<item id="9304" article="a" name="shockwave amulet">
 		<attribute key="description" value="It tickles your neck in a rather pleasant way and absorbs loads of damage"/>
 		<attribute key="slotType" value="necklace"/>
-		<attribute key="showCharges" value="1"/>
-		<attribute key="absorbpercentphysical" value="60"/>
-		<attribute key="absorbpercentenergy" value="40"/>
-		<attribute key="charges" value="5"/>
+		<!-- <attribute key="showCharges" value="1"/> -->
+		<attribute key="absorbpercentphysical" value="20"/>
+		<attribute key="absorbpercentenergy" value="20"/>
+		<!-- <attribute key="charges" value="5"/> -->
 		<attribute key="weight" value="700"/>
 	</item>
 	<item id="9306" article="a" name="mechanical fishing rod">
@@ -25560,10 +25582,10 @@
 	<item fromid="13988" toid="13989" name="shallow water"/>
 	<item id="13990" article="a" name="necklace of the deep">
 		<attribute key="slotType" value="necklace"/>
-		<attribute key="showCharges" value="1"/>
+		<!-- <attribute key="showCharges" value="1"/> -->
 		<attribute key="showAttributes" value="1"/>
 		<attribute key="absorbpercentlifedrain" value="50"/>
-		<attribute key="charges" value="50"/>
+		<!-- <attribute key="charges" value="50"/> -->
 		<attribute key="weight" value="500"/>
 	</item>
 	<item id="13991" article="a" name="deepling axe">
@@ -27307,11 +27329,11 @@
 	</item>
 	<item id="16108" article="a" name="gill necklace">
 		<attribute key="slotType" value="necklace"/>
-		<attribute key="showCharges" value="1"/>
+		<!-- <attribute key="showCharges" value="1"/> -->
 		<attribute key="showAttributes" value="1"/>
 		<attribute key="absorbpercentphysical" value="15"/>
 		<attribute key="absorbpercentpoison" value="10"/>
-		<attribute key="charges" value="750"/>
+		<!-- <attribute key="charges" value="750"/> -->
 		<attribute key="weight" value="409"/>
 	</item>
 	<item id="16109" article="a" name="prismatic helmet">
@@ -27359,11 +27381,11 @@
 	</item>
 	<item id="16113" article="a" name="prismatic necklace">
 		<attribute key="slotType" value="necklace"/>
-		<attribute key="showCharges" value="1"/>
+		<!-- <attribute key="showCharges" value="1"/> -->
 		<attribute key="showAttributes" value="1"/>
 		<attribute key="absorbpercentphysical" value="10"/>
 		<attribute key="absorbpercentenergy" value="15"/>
-		<attribute key="charges" value="750"/>
+		<!-- <attribute key="charges" value="750"/> -->
 		<attribute key="weight" value="650"/>
 	</item>
 	<item id="16114" article="a" name="prismatic ring">
@@ -34345,11 +34367,11 @@
 	</item>
 	<item id="21183" article="a" name="glooth amulet">
 		<attribute key="slotType" value="necklace"/>
-		<attribute key="showCharges" value="1"/>
+		<!-- <attribute key="showCharges" value="1"/> -->
 		<attribute key="showAttributes" value="1"/>
 		<attribute key="absorbpercentphysical" value="10"/>
 		<attribute key="absorbpercentmagic" value="10"/>
-		<attribute key="charges" value="20"/>
+		<!-- <attribute key="charges" value="20"/> -->
 		<attribute key="weight" value="220"/>
 	</item>
 	<item id="21184" article="a" name="cup of cowcoa">
@@ -38125,38 +38147,38 @@
 	</item>
 	<item id="23526" article="a" name="collar of blue plasma">
 		<attribute key="slotType" value="necklace"/>
-		<attribute key="showduration" value="1"/>
+		<!-- <attribute key="showduration" value="1"/> -->
 		<attribute key="showAttributes" value="1"/>
 		<attribute key="magicpoints" value="10"/>
 		<attribute key="skilldist" value="20"/>
-		<attribute key="duration" value="1800"/>
+		<!-- <attribute key="duration" value="1800"/> -->
 		<attribute key="transformdeequipto" value="23542"/>
 		<attribute key="decayTo" value="0"/>
 		<attribute key="weight" value="500"/>
 	</item>
 	<item id="23527" article="a" name="collar of green plasma">
 		<attribute key="slotType" value="necklace"/>
-		<attribute key="showduration" value="1"/>
+		<!-- <attribute key="showduration" value="1"/> -->
 		<attribute key="showAttributes" value="1"/>
 		<attribute key="magicpoints" value="15"/>
 		<attribute key="manaticks" value="6000"/>
 		<attribute key="managain" value="8"/>
 		<attribute key="healthticks" value="6000"/>
 		<attribute key="healthgain" value="2"/>
-		<attribute key="duration" value="1800"/>
+		<!-- <attribute key="duration" value="1800"/> -->
 		<attribute key="transformdeequipto" value="23543"/>
 		<attribute key="decayTo" value="0"/>
 		<attribute key="weight" value="500"/>
 	</item>
 	<item id="23528" article="a" name="collar of red plasma">
 		<attribute key="slotType" value="necklace"/>
-		<attribute key="showduration" value="1"/>
+		<!-- <attribute key="showduration" value="1"/> -->
 		<attribute key="showAttributes" value="1"/>
 		<attribute key="absorbpercentphysical" value="5"/>
 		<attribute key="skillclub" value="500"/>
 		<attribute key="skillaxe" value="20"/>
 		<attribute key="skillsword" value="15"/>
-		<attribute key="duration" value="1800"/>
+		<!-- <attribute key="duration" value="1800"/> -->
 		<attribute key="transformdeequipto" value="23544"/>
 		<attribute key="decayTo" value="0"/>
 		<attribute key="weight" value="500"/>
@@ -47116,12 +47138,12 @@
 	</item>
 	<item id="30342" article="an" name="enchanted sleep shawl">
 		<attribute key="slotType" value="necklace"/>
-		<attribute key="showduration" value="1"/>
+		<!-- <attribute key="showduration" value="1"/> -->
 		<attribute key="showAttributes" value="1"/>
 		<attribute key="absorbpercentphysical" value="7"/>
 		<attribute key="absorbpercentpoison" value="24"/>
 		<attribute key="skilldist" value="15"/>
-		<attribute key="duration" value="3600"/>
+		<!-- <attribute key="duration" value="3600"/> -->
 		<attribute key="decayTo" value="30343"/>
 		<attribute key="armor" value="3"/>
 		<attribute key="weight" value="430"/>
@@ -47133,12 +47155,12 @@
 	</item>
 	<item id="30344" article="an" name="enchanted pendulet">
 		<attribute key="slotType" value="necklace"/>
-		<attribute key="showduration" value="1"/>
+		<!-- <attribute key="showduration" value="1"/> -->
 		<attribute key="showAttributes" value="1"/>
 		<attribute key="absorbpercentphysical" value="5"/>
 		<attribute key="absorbpercentenergy" value="18"/>
 		<attribute key="skilldist" value="15"/>
-		<attribute key="duration" value="7200"/>
+		<!-- <attribute key="duration" value="7200"/> -->
 		<attribute key="decayTo" value="30345"/>
 		<attribute key="armor" value="2"/>
 		<attribute key="weight" value="650"/>
@@ -47344,7 +47366,7 @@
 		<attribute key="absorbpercentphysical" value="3"/>
 		<attribute key="absorbpercentpoison" value="14"/>
 		<attribute key="magicpoints" value="15"/>
-		<attribute key="duration" value="7200"/>
+		<!-- <attribute key="duration" value="7200"/> -->
 		<attribute key="decayTo" value="30403"/>
 		<attribute key="armor" value="2"/>
 		<attribute key="weight" value="500"/>

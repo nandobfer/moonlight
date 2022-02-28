@@ -10350,56 +10350,56 @@ local items = {
 		itemid = 817,
 		type = "equip",
 		slot = "necklace",
-		level = 60
+		level = 20
 	},
 	{
 		-- magma amulet
 		itemid = 817,
 		type = "deequip",
 		slot = "necklace",
-		level = 60
+		level = 20
 	},
 	{
 		-- lightning pendant
 		itemid = 816,
 		type = "equip",
 		slot = "necklace",
-		level = 60
+		level = 20
 	},
 	{
 		-- lightning pendant
 		itemid = 816,
 		type = "deequip",
 		slot = "necklace",
-		level = 60
+		level = 20
 	},
 	{
 		-- glacier amulet
 		itemid = 815,
 		type = "equip",
 		slot = "necklace",
-		level = 60
+		level = 20
 	},
 	{
 		-- glacier amulet
 		itemid = 815,
 		type = "deequip",
 		slot = "necklace",
-		level = 60
+		level = 20
 	},
 	{
 		-- terra amulet
 		itemid = 814,
 		type = "equip",
 		slot = "necklace",
-		level = 60
+		level = 20
 	},
 	{
 		-- terra amulet
 		itemid = 814,
 		type = "deequip",
 		slot = "necklace",
-		level = 60
+		level = 20
 	},
 	{
 		-- terra boots

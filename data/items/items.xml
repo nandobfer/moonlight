@@ -900,6 +900,7 @@
 	<item id="645" name="blue legs">
 		<attribute key="slotType" value="legs"/>
 		<attribute key="armor" value="8"/>
+		<attribute key="magicpoints" value="5"/>
 		<attribute key="weight" value="1800"/>
 	</item>
 	<item id="646" article="an" name="elvenhair rope">
@@ -6988,6 +6989,10 @@
 	<item id="3382" name="crown legs">
 		<attribute key="slotType" value="legs"/>
 		<attribute key="armor" value="8"/>
+		<attribute key="skilldist" value="5"/>
+		<attribute key="skillsword" value="5"/>
+		<attribute key="skillaxe" value="5"/>
+		<attribute key="skillclub" value="5"/>
 		<attribute key="weight" value="6500"/>
 	</item>
 	<item id="3383" article="a" name="dark armor">
@@ -7073,6 +7078,10 @@
 	<item id="3389" name="demon legs">
 		<attribute key="slotType" value="legs"/>
 		<attribute key="armor" value="9"/>
+		<attribute key="skilldist" value="10"/>
+		<attribute key="skillsword" value="10"/>
+		<attribute key="skillaxe" value="10"/>
+		<attribute key="skillclub" value="10"/>
 		<attribute key="weight" value="7000"/>
 	</item>
 	<item id="3390" article="a" name="horned helmet">

@@ -13,7 +13,7 @@ local function levitate(creature, parameter)
 			if tile then
 				return creature:move(tile, bit.bor(FLAG_IGNOREBLOCKITEM, FLAG_IGNOREBLOCKCREATURE))
 			end
-		end
+		-- end
 	end
 	return RETURNVALUE_NOTPOSSIBLE
 end

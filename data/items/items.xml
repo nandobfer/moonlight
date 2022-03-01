@@ -5955,6 +5955,7 @@
 		<attribute key="weaponType" value="sword"/>
 		<attribute key="elementfire" value="11"/>
 		<attribute key="attack" value="24"/>
+		<attribute key="magicpoints" value="5"/>
 		<attribute key="extradef" value="1"/>
 		<attribute key="defense" value="20"/>
 		<attribute key="weight" value="2300"/>
@@ -15477,6 +15478,7 @@
 		<attribute key="weaponType" value="sword"/>
 		<attribute key="slotType" value="two-handed"/>
 		<attribute key="attack" value="47"/>
+		<attribute key="magicpoints" value="5"/>
 		<attribute key="defense" value="22"/>
 		<attribute key="weight" value="15000"/>
 		<attribute key="upgradeclassification" value="2"/>
@@ -15507,6 +15509,7 @@
 		<attribute key="description" value="This sword is only granted to a scrapper of the Svargrond arena"/>
 		<attribute key="weaponType" value="sword"/>
 		<attribute key="attack" value="44"/>
+		<attribute key="magicpoints" value="5"/>
 		<attribute key="extradef" value="2"/>
 		<attribute key="defense" value="25"/>
 		<attribute key="weight" value="3500"/>
@@ -15646,6 +15649,7 @@
 		<attribute key="weaponType" value="sword"/>
 		<attribute key="slotType" value="two-handed"/>
 		<attribute key="attack" value="44"/>
+		<attribute key="magicpoints" value="5"/>
 		<attribute key="defense" value="28"/>
 		<attribute key="weight" value="8200"/>
 		<attribute key="upgradeclassification" value="2"/>
@@ -15675,6 +15679,7 @@
 	<item id="7404" article="an" name="assassin dagger">
 		<attribute key="weaponType" value="sword"/>
 		<attribute key="attack" value="40"/>
+		<attribute key="magicpoints" value="20"/>
 		<attribute key="extradef" value="-2"/>
 		<attribute key="defense" value="12"/>
 		<attribute key="weight" value="1700"/>
@@ -15736,6 +15741,7 @@
 	<item id="7408" article="a" name="wyvern fang">
 		<attribute key="weaponType" value="sword"/>
 		<attribute key="attack" value="32"/>
+		<attribute key="magicpoints" value="3"/>
 		<attribute key="extradef" value="1"/>
 		<attribute key="defense" value="19"/>
 		<attribute key="weight" value="2000"/>
@@ -15851,6 +15857,7 @@
 	<item id="7417" article="a" name="runed sword">
 		<attribute key="weaponType" value="sword"/>
 		<attribute key="attack" value="45"/>
+		<attribute key="magicpoints" value="5"/>
 		<attribute key="extradef" value="2"/>
 		<attribute key="defense" value="32"/>
 		<attribute key="weight" value="4600"/>
@@ -16164,6 +16171,7 @@
 	<item id="7449" article="a" name="crystal sword">
 		<attribute key="weaponType" value="sword"/>
 		<attribute key="slotType" value="two-handed"/>
+		<attribute key="magicpoints" value="5"/>
 		<attribute key="attack" value="35"/>
 		<attribute key="defense" value="26"/>
 		<attribute key="weight" value="6900"/>
@@ -17618,6 +17626,7 @@
 	<item id="8103" article="the" name="epiphany">
 		<attribute key="weaponType" value="sword"/>
 		<attribute key="attack" value="50"/>
+		<attribute key="magicpoints" value="5"/>
 		<attribute key="extradef" value="3"/>
 		<attribute key="defense" value="35"/>
 		<attribute key="weight" value="4500"/>
@@ -27590,6 +27599,7 @@
 	<item id="16160" article="a" name="crystalline sword">
 		<attribute key="weaponType" value="sword"/>
 		<attribute key="attack" value="47"/>
+		<attribute key="magicpoints" value="5"/>
 		<attribute key="extradef" value="1"/>
 		<attribute key="defense" value="34"/>
 		<attribute key="weight" value="4800"/>
@@ -27683,6 +27693,7 @@
 		<attribute key="weaponType" value="sword"/>
 		<attribute key="skillsword" value="5"/>
 		<attribute key="attack" value="49"/>
+		<attribute key="magicpoints" value="5"/>
 		<attribute key="extradef" value="2"/>
 		<attribute key="defense" value="35"/>
 		<attribute key="weight" value="4500"/>
@@ -37191,6 +37202,7 @@
 		<attribute key="weaponType" value="sword"/>
 		<attribute key="elementfire" value="26"/>
 		<attribute key="attack" value="26"/>
+		<attribute key="magicpoints" value="5"/>
 		<attribute key="extradef" value="3"/>
 		<attribute key="defense" value="31"/>
 		<attribute key="weight" value="5900"/>
@@ -45646,6 +45658,7 @@
 		<attribute key="elementfire" value="41"/>
 		<attribute key="skillsword" value="5"/>
 		<attribute key="attack" value="10"/>
+		<attribute key="magicpoints" value="10"/>
 		<attribute key="extradef" value="3"/>
 		<attribute key="defense" value="20"/>
 		<attribute key="weight" value="4300"/>
@@ -45662,6 +45675,7 @@
 		<attribute key="elementice" value="40"/>
 		<attribute key="skillsword" value="5"/>
 		<attribute key="attack" value="10"/>
+		<attribute key="magicpoints" value="10"/>
 		<attribute key="extradef" value="3"/>
 		<attribute key="defense" value="22"/>
 		<attribute key="weight" value="4300"/>
@@ -47320,6 +47334,7 @@
 	<item id="30398" name="cobra sword">
 		<attribute key="skillsword" value="3"/>
 		<attribute key="attack" value="52"/>
+		<attribute key="magicpoints" value="10"/>
 		<attribute key="extradef" value="2"/>
 		<attribute key="defense" value="31"/>
 		<attribute key="weight" value="6300"/>
@@ -52188,6 +52203,7 @@
 		<attribute key="skilllifechance" value="100"/>
 		<attribute key="skillsword" value="20"/>
 		<attribute key="attack" value="7"/>
+		<attribute key="magicpoints" value="15"/>
 		<attribute key="extradef" value="3"/>
 		<attribute key="defense" value="32"/>
 		<attribute key="weight" value="6300"/>
@@ -52209,6 +52225,7 @@
 		<attribute key="criticalhitchance" value="10"/>
 		<attribute key="skillsword" value="20"/>
 		<attribute key="attack" value="10"/>
+		<attribute key="magicpoints" value="15"/>
 		<attribute key="defense" value="35"/>
 		<attribute key="weight" value="8100"/>
 		<attribute key="upgradeclassification" value="4"/>

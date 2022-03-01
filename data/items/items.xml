@@ -1737,6 +1737,7 @@
 		<attribute key="absorbpercentpoison" value="8"/>
 		<attribute key="absorbpercentfire" value="-8"/>
 		<attribute key="armor" value="11"/>
+		<attribute key="magicpoints" value="10"/>
 		<attribute key="weight" value="2250"/>
 		<attribute key="upgradeclassification" value="2"/>
 	</item>
@@ -1849,6 +1850,7 @@
 		<attribute key="absorbpercentice" value="8"/>
 		<attribute key="absorbpercentenergy" value="-8"/>
 		<attribute key="armor" value="11"/>
+		<attribute key="magicpoints" value="10"/>
 		<attribute key="weight" value="2250"/>
 		<attribute key="upgradeclassification" value="2"/>
 	</item>
@@ -1857,6 +1859,7 @@
 		<attribute key="absorbpercentpoison" value="-8"/>
 		<attribute key="absorbpercentenergy" value="8"/>
 		<attribute key="armor" value="11"/>
+		<attribute key="magicpoints" value="10"/>
 		<attribute key="weight" value="2250"/>
 		<attribute key="upgradeclassification" value="2"/>
 	</item>
@@ -1865,6 +1868,7 @@
 		<attribute key="absorbpercentice" value="-8"/>
 		<attribute key="absorbpercentfire" value="8"/>
 		<attribute key="armor" value="11"/>
+		<attribute key="magicpoints" value="10"/>
 		<attribute key="weight" value="2250"/>
 		<attribute key="upgradeclassification" value="2"/>
 	</item>
@@ -6750,6 +6754,7 @@
 	<item id="3357" article="a" name="plate armor">
 		<attribute key="slotType" value="body"/>
 		<attribute key="armor" value="10"/>
+		<attribute key="skillshield" value="5"/>
 		<attribute key="weight" value="12000"/>
 		<attribute key="upgradeclassification" value="1"/>
 	</item>
@@ -6777,6 +6782,11 @@
 	<item id="3360" article="a" name="golden armor">
 		<attribute key="slotType" value="body"/>
 		<attribute key="armor" value="14"/>
+		<attribute key="skillshield" value="5"/>
+		<attribute key="skilldist" value="5"/>
+		<attribute key="skillsword" value="5"/>
+		<attribute key="skillaxe" value="5"/>
+		<attribute key="skillclub" value="5"/>
 		<attribute key="weight" value="8000"/>
 		<attribute key="upgradeclassification" value="2"/>
 		<attribute key="imbuementslot" value="2">
@@ -6828,6 +6838,11 @@
 	<item id="3366" article="a" name="magic plate armor">
 		<attribute key="slotType" value="body"/>
 		<attribute key="armor" value="17"/>
+		<attribute key="skilldist" value="10"/>
+		<attribute key="skillshield" value="10"/>
+		<attribute key="skillsword" value="10"/>
+		<attribute key="skillaxe" value="10"/>
+		<attribute key="skillclub" value="10"/>
 		<attribute key="weight" value="8500"/>
 		<attribute key="upgradeclassification" value="2"/>
 		<attribute key="imbuementslot" value="2">
@@ -6870,6 +6885,7 @@
 	<item id="3370" article="a" name="knight armor">
 		<attribute key="slotType" value="body"/>
 		<attribute key="armor" value="12"/>
+		<attribute key="skillshield" value="5"/>
 		<attribute key="weight" value="12000"/>
 		<attribute key="upgradeclassification" value="2"/>
 		<attribute key="imbuementslot" value="2">
@@ -6937,6 +6953,7 @@
 	<item id="3380" article="a" name="noble armor">
 		<attribute key="slotType" value="body"/>
 		<attribute key="armor" value="11"/>
+		<attribute key="skillshield" value="5"/>
 		<attribute key="weight" value="12000"/>
 		<attribute key="upgradeclassification" value="1"/>
 		<attribute key="imbuementslot" value="2">
@@ -6952,6 +6969,10 @@
 	<item id="3381" article="a" name="crown armor">
 		<attribute key="slotType" value="body"/>
 		<attribute key="armor" value="13"/>
+		<attribute key="skilldist" value="5"/>
+		<attribute key="skillsword" value="5"/>
+		<attribute key="skillaxe" value="5"/>
+		<attribute key="skillclub" value="5"/>
 		<attribute key="weight" value="9900"/>
 		<attribute key="upgradeclassification" value="2"/>
 		<attribute key="imbuementslot" value="1">
@@ -6998,6 +7019,11 @@
 	<item id="3386" article="a" name="dragon scale mail">
 		<attribute key="slotType" value="body"/>
 		<attribute key="armor" value="15"/>
+		<attribute key="skillshield" value="5"/>
+		<attribute key="skilldist" value="5"/>
+		<attribute key="skillsword" value="5"/>
+		<attribute key="skillaxe" value="5"/>
+		<attribute key="skillclub" value="5"/>
 		<attribute key="weight" value="11400"/>
 		<attribute key="upgradeclassification" value="2"/>
 		<attribute key="imbuementslot" value="1">
@@ -7028,6 +7054,10 @@
 	<item id="3388" article="a" name="demon armor">
 		<attribute key="slotType" value="body"/>
 		<attribute key="armor" value="16"/>
+		<attribute key="skilldist" value="10"/>
+		<attribute key="skillsword" value="10"/>
+		<attribute key="skillaxe" value="10"/>
+		<attribute key="skillclub" value="10"/>
 		<attribute key="weight" value="8000"/>
 		<attribute key="upgradeclassification" value="2"/>
 		<attribute key="imbuementslot" value="2">
@@ -7135,6 +7165,7 @@
 		<attribute key="slotType" value="body"/>
 		<attribute key="absorbpercentphysical" value="5"/>
 		<attribute key="armor" value="10"/>
+		<attribute key="skillshield" value="5"/>
 		<attribute key="weight" value="13000"/>
 		<attribute key="upgradeclassification" value="3"/>
 		<attribute key="imbuementslot" value="2">
@@ -7156,6 +7187,10 @@
 	<item id="3399" article="an" name="elven mail">
 		<attribute key="slotType" value="body"/>
 		<attribute key="armor" value="9"/>
+		<attribute key="skilldist" value="5"/>
+		<attribute key="skillsword" value="5"/>
+		<attribute key="skillaxe" value="5"/>
+		<attribute key="skillclub" value="5"/>
 		<attribute key="weight" value="9000"/>
 		<attribute key="upgradeclassification" value="3"/>
 		<attribute key="imbuementslot" value="3">
@@ -7195,6 +7230,9 @@
 	<item id="3404" article="a" name="leopard armor">
 		<attribute key="slotType" value="body"/>
 		<attribute key="armor" value="9"/>
+		<attribute key="magicpoints" value="5"/>
+		<attribute key="skilldist" value="5"/>
+		<attribute key="skillsword" value="5"/>
 		<attribute key="weight" value="9500"/>
 		<attribute key="upgradeclassification" value="2"/>
 		<attribute key="imbuementslot" value="2">
@@ -7975,6 +8013,7 @@
 		<attribute key="description" value="It is a magic robe"/>
 		<attribute key="slotType" value="body"/>
 		<attribute key="armor" value="11"/>
+		<attribute key="magicpoints" value="5"/>
 		<attribute key="weight" value="2200"/>
 		<attribute key="upgradeclassification" value="2"/>
 		<attribute key="imbuementslot" value="2">
@@ -13358,6 +13397,8 @@
 	<item id="6095" article="a" name="pirate shirt">
 		<attribute key="slotType" value="body"/>
 		<attribute key="armor" value="3"/>
+		<attribute key="skilldist" value="15"/>
+		<attribute key="skillsword" value="15"/>
 		<attribute key="weight" value="2000"/>
 		<attribute key="upgradeclassification" value="1"/>
 	</item>
@@ -16909,6 +16950,7 @@
 		<attribute key="absorbpercentdeath" value="2"/>
 		<attribute key="absorbpercentholy" value="-2"/>
 		<attribute key="armor" value="11"/>
+		<attribute key="magicpoints" value="10"/>
 		<attribute key="weight" value="2500"/>
 	</item>
 	<item fromid="7994" toid="7995" article="a" name="toolbox"/>
@@ -17195,6 +17237,7 @@
 		<attribute key="absorbpercentice" value="-3"/>
 		<attribute key="absorbpercentfire" value="3"/>
 		<attribute key="armor" value="13"/>
+		<attribute key="skillshield" value="10"/>
 		<attribute key="weight" value="8500"/>
 		<attribute key="upgradeclassification" value="2"/>
 	</item>
@@ -17203,6 +17246,7 @@
 		<attribute key="absorbpercentice" value="3"/>
 		<attribute key="absorbpercentenergy" value="-3"/>
 		<attribute key="armor" value="13"/>
+		<attribute key="skillshield" value="10"/>
 		<attribute key="weight" value="8450"/>
 		<attribute key="upgradeclassification" value="2"/>
 	</item>
@@ -17244,7 +17288,7 @@
 		<attribute key="slotType" value="body"/>
 		<attribute key="absorbpercentpoison" value="-5"/>
 		<attribute key="absorbpercentenergy" value="5"/>
-		<attribute key="skillclub" value="50"/>
+		<attribute key="skillclub" value="10"/>
 		<attribute key="armor" value="15"/>
 		<attribute key="weight" value="12000"/>
 		<attribute key="upgradeclassification" value="2"/>
@@ -21545,6 +21589,10 @@
 		<attribute key="slotType" value="body"/>
 		<attribute key="speed" value="20"/>
 		<attribute key="armor" value="13"/>
+		<attribute key="skilldist" value="10"/>
+		<attribute key="skillsword" value="10"/>
+		<attribute key="skillaxe" value="10"/>
+		<attribute key="skillclub" value="10"/>
 		<attribute key="weight" value="9550"/>
 		<attribute key="upgradeclassification" value="2"/>
 	</item>
@@ -21823,6 +21871,7 @@
 		<attribute key="absorbpercentpoison" value="-10"/>
 		<attribute key="absorbpercentenergy" value="10"/>
 		<attribute key="armor" value="11"/>
+		<attribute key="magicpoints" value="10"/>
 		<attribute key="weight" value="2350"/>
 		<attribute key="upgradeclassification" value="2"/>
 	</item>
@@ -34226,6 +34275,7 @@
 		<attribute key="absorbpercentpoison" value="5"/>
 		<attribute key="absorbpercentfire" value="-5"/>
 		<attribute key="armor" value="9"/>
+		<attribute key="magicpoints" value="5"/>
 		<attribute key="weight" value="2900"/>
 		<attribute key="upgradeclassification" value="2"/>
 	</item>
@@ -34241,6 +34291,7 @@
 	<item id="21166" article="a" name="mooh'tah plate">
 		<attribute key="slotType" value="body"/>
 		<attribute key="armor" value="12"/>
+		<attribute key="skillshield" value="10"/>
 		<attribute key="weight" value="12500"/>
 		<attribute key="upgradeclassification" value="2"/>
 		<attribute key="imbuementslot" value="2">
@@ -36086,6 +36137,11 @@
 		<attribute key="absorbpercentice" value="5"/>
 		<attribute key="absorbpercentpoison" value="5"/>
 		<attribute key="armor" value="11"/>
+		<attribute key="magicpoints" value="5"/>
+		<attribute key="skilldist" value="5"/>
+		<attribute key="skillsword" value="5"/>
+		<attribute key="skillaxe" value="5"/>
+		<attribute key="skillclub" value="5"/>
 		<attribute key="weight" value="4900"/>
 		<attribute key="upgradeclassification" value="2"/>
 	</item>

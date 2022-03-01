@@ -9,7 +9,8 @@ local function levitate(creature, parameter)
 		if not tile or not tile:getGround() and not tile:hasFlag(parameter == "up" and TILESTATE_IMMOVABLEBLOCKSOLID or TILESTATE_BLOCKSOLID) then
 			tile = Tile(toPosition.x, toPosition.y, toPosition.z + (parameter == "up" and -1 or 1))
 
-			if tile and tile:getGround() and not tile:hasFlag(bit.bor(TILESTATE_IMMOVABLEBLOCKSOLID, TILESTATE_FLOORCHANGE)) then
+			-- if tile and tile:getGround() and not tile:hasFlag(bit.bor(TILESTATE_IMMOVABLEBLOCKSOLID, TILESTATE_FLOORCHANGE)) then
+			if tile then
 				return creature:move(tile, bit.bor(FLAG_IGNOREBLOCKITEM, FLAG_IGNOREBLOCKCREATURE))
 			end
 		end
@@ -34,7 +35,7 @@ end
 spell:name("Parkour")
 spell:words("exani sin")
 spell:group("support")
-spell:vocation("assassin;true")
+spell:vocation("assassin;true", "hunter;true")
 spell:id(81)
 spell:cooldown(1 * 1000)
 spell:groupCooldown(1 * 1000)

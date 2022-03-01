@@ -71,7 +71,7 @@ function spell.onCastSpell(player, variant)
 	summon:setHealth(summon:getMaxHealth())
 	
 	-- sumona skoll se o hunter for level 40 ou maior
-	if player:getLevel() >= 40 and #player:getSummons() < 1 then 
+	if player:getLevel() >= 40 then 
 		local summon2 = Game.createMonster(monster2Name, position, true, false, player)
 		summon2:getPosition():sendMagicEffect(CONST_ME_TELEPORT)
 		

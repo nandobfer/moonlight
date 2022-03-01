@@ -17157,6 +17157,7 @@
 		<attribute key="absorbpercentdeath" value="8"/>
 		<attribute key="absorbpercentholy" value="-8"/>
 		<attribute key="armor" value="11"/>
+		<attribute key="magicpoints" value="10"/>
 		<attribute key="weight" value="2900"/>
 		<attribute key="upgradeclassification" value="4"/>
 	</item>
@@ -17166,6 +17167,7 @@
 		<attribute key="absorbpercentice" value="12"/>
 		<attribute key="absorbpercentenergy" value="-12"/>
 		<attribute key="armor" value="12"/>
+		<attribute key="magicpoints" value="10"/>
 		<attribute key="weight" value="2950"/>
 		<attribute key="upgradeclassification" value="4"/>
 	</item>
@@ -17175,6 +17177,7 @@
 		<attribute key="absorbpercentice" value="-12"/>
 		<attribute key="absorbpercentfire" value="12"/>
 		<attribute key="armor" value="12"/>
+		<attribute key="magicpoints" value="10"/>
 		<attribute key="weight" value="2850"/>
 		<attribute key="upgradeclassification" value="2"/>
 	</item>
@@ -17184,6 +17187,7 @@
 		<attribute key="absorbpercentpoison" value="-12"/>
 		<attribute key="absorbpercentenergy" value="12"/>
 		<attribute key="armor" value="12"/>
+		<attribute key="magicpoints" value="10"/>
 		<attribute key="weight" value="2850"/>
 		<attribute key="upgradeclassification" value="2"/>
 	</item>
@@ -17192,6 +17196,7 @@
 		<attribute key="absorbpercentpoison" value="12"/>
 		<attribute key="absorbpercentfire" value="-12"/>
 		<attribute key="armor" value="12"/>
+		<attribute key="magicpoints" value="10"/>
 		<attribute key="weight" value="2850"/>
 		<attribute key="upgradeclassification" value="2"/>
 	</item>
@@ -17307,6 +17312,10 @@
 		<attribute key="absorbpercentdeath" value="10"/>
 		<attribute key="absorbpercentholy" value="-10"/>
 		<attribute key="armor" value="13"/>
+		<attribute key="skilldist" value="10"/>
+		<attribute key="skillsword" value="10"/>
+		<attribute key="skillaxe" value="10"/>
+		<attribute key="skillclub" value="10"/>
 		<attribute key="weight" value="7500"/>
 		<attribute key="upgradeclassification" value="2"/>
 	</item>
@@ -17315,6 +17324,10 @@
 		<attribute key="absorbpercentice" value="-7"/>
 		<attribute key="absorbpercentfire" value="7"/>
 		<attribute key="armor" value="13"/>
+		<attribute key="skilldist" value="10"/>
+		<attribute key="skillsword" value="10"/>
+		<attribute key="skillaxe" value="10"/>
+		<attribute key="skillclub" value="10"/>
 		<attribute key="weight" value="7500"/>
 		<attribute key="upgradeclassification" value="4"/>
 	</item>
@@ -17323,6 +17336,10 @@
 		<attribute key="absorbpercentice" value="7"/>
 		<attribute key="absorbpercentenergy" value="-7"/>
 		<attribute key="armor" value="13"/>
+		<attribute key="skilldist" value="10"/>
+		<attribute key="skillsword" value="10"/>
+		<attribute key="skillaxe" value="10"/>
+		<attribute key="skillclub" value="10"/>
 		<attribute key="weight" value="7500"/>
 		<attribute key="upgradeclassification" value="2"/>
 	</item>
@@ -17347,6 +17364,8 @@
 		<attribute key="absorbpercentdeath" value="5"/>
 		<attribute key="absorbpercentholy" value="-5"/>
 		<attribute key="armor" value="14"/>
+		<attribute key="magicpoints" value="10"/>
+		<attribute key="skillsword" value="10"/>
 		<attribute key="weight" value="11000"/>
 		<attribute key="upgradeclassification" value="2"/>
 	</item>
@@ -17355,6 +17374,8 @@
 		<attribute key="absorbpercentdeath" value="12"/>
 		<attribute key="absorbpercentholy" value="-12"/>
 		<attribute key="armor" value="12"/>
+		<attribute key="magicpoints" value="15"/>
+		<attribute key="skillsword" value="15"/>
 		<attribute key="weight" value="3100"/>
 		<attribute key="upgradeclassification" value="2"/>
 	</item>
@@ -21880,6 +21901,8 @@
 		<attribute key="absorbpercentice" value="-10"/>
 		<attribute key="absorbpercentfire" value="10"/>
 		<attribute key="armor" value="11"/>
+		<attribute key="magicpoints" value="5"/>
+		<attribute key="skillsword" value="5"/>
 		<attribute key="weight" value="2450"/>
 		<attribute key="upgradeclassification" value="2"/>
 	</item>
@@ -22944,7 +22967,9 @@
 		<attribute key="slotType" value="body"/>
 		<attribute key="speed" value="20"/>
 		<attribute key="armor" value="15"/>
-		<attribute key="weight" value="12000"/>
+		<attribute key="magicpoints" value="10"/>
+		<attribute key="skillsword" value="10"/>
+		<attribute key="weight" value="9000"/>
 		<attribute key="upgradeclassification" value="2"/>
 		<attribute key="imbuementslot" value="2">
 			<attribute key="life leech" value="3"/>
@@ -40272,6 +40297,8 @@
 		<attribute key="absorbpercentenergy" value="12"/>
 		<attribute key="speed" value="20"/>
 		<attribute key="armor" value="12"/>
+		<attribute key="magicpoints" value="10"/>
+		<attribute key="skilldist" value="10"/>
 		<attribute key="weight" value="400"/>
 		<attribute key="upgradeclassification" value="2"/>
 	</item>
@@ -45747,6 +45774,7 @@
 		<attribute key="slotType" value="body"/>
 		<attribute key="absorbpercentenergy" value="10"/>
 		<attribute key="magicpoints" value="15"/>
+		<attribute key="skillsword" value="15"/>
 		<attribute key="armor" value="12"/>
 		<attribute key="weight" value="2500"/>
 		<attribute key="upgradeclassification" value="3"/>
@@ -48923,6 +48951,7 @@
 		<attribute key="slotType" value="body"/>
 		<attribute key="absorbpercentdeath" value="6"/>
 		<attribute key="magicpoints" value="20"/>
+		<attribute key="skillsword" value="20"/>
 		<attribute key="armor" value="16"/>
 		<attribute key="weight" value="5200"/>
 		<attribute key="upgradeclassification" value="3"/>
@@ -52509,6 +52538,7 @@
 		<attribute key="loottype" value="armor"/>
 		<attribute key="absorbpercentdeath" value="10"/>
 		<attribute key="magicpoints" value="20"/>
+		<attribute key="skillsword" value="20"/>
 		<attribute key="armor" value="17"/>
 		<attribute key="weight" value="2400"/>
 		<attribute key="upgradeclassification" value="4"/>

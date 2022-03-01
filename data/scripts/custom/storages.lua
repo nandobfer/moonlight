@@ -34,6 +34,11 @@ Storage_ = {
 	teleport = {
 		thais = 100000051,
 		carlin = 100000052,
+		venore = 100000053,
+		edron = 100000054,
+		libertybay = 100000055,
+		svargrond = 100000056,
+		
 	}
 	
 	
@@ -48,6 +53,12 @@ Feral_Forms = {
 	{name = "War Wolf", id = 5},
 	
 }
+
+
+
+
+
+
 
 -- Values extraction function
 local function extractValues(tab, ret)

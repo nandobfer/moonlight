@@ -11,14 +11,23 @@ function onGetFormulaValues(player, skill, attack, factor)
 	local min = (level / 5) + (skill + attack) / 3
 	local max = (level / 5) + skill + attack
 	
-	applyPoison(player, combat, 0.3)
+	return -min / 4, -max / 4
+end
+
+function onTargetCreature(creature, target)
+	local player = creature:getPlayer()
+	
+	-- player, tipo, multiplier, duracao
+	applyDot(player, target, "poison", 0.2, 5)
 	
 	if math.random(1, 100) <= 30 then
 		player:setStorageValue(Storage_.bonus_combo_points, player:getStorageValue(Storage_.bonus_combo_points) + 1)
 	else end
-	
-	return -min / 4, -max / 4
 end
+local combat2 = Combat()
+combat2:setArea(createCombatArea(AREA_CIRCLE3X3))
+combat2:setCallback(CALLBACK_PARAM_TARGETCREATURE, "onTargetCreature")
+
 combat:setCallback(CALLBACK_PARAM_SKILLVALUE, "onGetFormulaValues")
 
 local spell = Spell("instant")
@@ -30,6 +39,7 @@ function spell.onCastSpell(creature, var)
 	else
 		player:removeStealth()
 		combat:execute(creature, var)
+		combat2:execute(creature, var)
 		if player:getStorageValue(Storage_.bonus_combo_points) ~= 0 then
 			player:addComboPoints(player:getStorageValue(Storage_.bonus_combo_points))
 			player:setStorageValue(Storage_.bonus_combo_points, 0)

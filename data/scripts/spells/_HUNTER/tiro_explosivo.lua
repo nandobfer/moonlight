@@ -8,13 +8,8 @@ function onGetFormulaValues(player, level, maglevel)
 	local min = (level * 0.5) + 4
 	local max = (level * 1.5) + 12
 	
-	local condition = Condition(CONDITION_FIRE)
-	condition:setParameter(CONDITION_PARAM_DELAYED, 1)
-	condition:addDamage(2, 1000, -(level / 3))
-	condition:addDamage(2, 1000, -(level / 3 * 3 / 4))
-	condition:addDamage(2, 1000, -(level / 3 * 2 / 4))
-	condition:addDamage(2, 1000, -(level / 3 / 4))
-	combat:addCondition(condition)
+	-- player, tipo, multiplier, duracao
+	applyDot(player:getId(), "burning", 1, 8)
 	
 	return -min, -max
 end

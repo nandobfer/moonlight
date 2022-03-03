@@ -17,9 +17,6 @@ function onTargetCreature(creature, target)
 	-- player, tipo, multiplier, duracao
 	applyDot(player, target, "burning", 1, 8)
 	
-	if math.random(1, 100) <= 30 then
-		player:setStorageValue(Storage_.bonus_combo_points, player:getStorageValue(Storage_.bonus_combo_points) + 1)
-	else end
 end
 local combat2 = Combat()
 combat2:setArea(createCombatArea(AREA_SQUARE1X1))

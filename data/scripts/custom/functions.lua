@@ -343,12 +343,13 @@ function Player:addForm(form, skill)
 		
 	-- elseif form == "Midnight Panther" then
 	else
-		if form == "Manticore" then -- maticore 
+		if form == "Manticore" then -- manticore 
 			player:setStorageValue(Storage_.manticore_form, 1) -- manticore
 		else
 			player:setStorageValue(Storage_.feral_form, 1) -- feral
 		end
 		local feral_speed = Condition(CONDITION_HASTE)
+		skill_bonus:setParameter(CONDITION_PARAM_SKILL_CRITICAL_HIT_CHANCE, 25)
 		feral_speed:setParameter(CONDITION_PARAM_TICKS, -1)
 		feral_speed:setParameter(CONDITION_PARAM_BUFF_SPELL, true)
 		feral_speed:setFormula(0.7, -56, 0.7, -56)

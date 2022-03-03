@@ -134,11 +134,9 @@ function applyPoison(player, combat, mod)
 	combat:addCondition(condition)
 end
 
-function applyDot(playerid, _, mod, duration)
-	local player = Creature(playerid)
+function applyDot(player, target, _, mod, duration)
 	local level = player:getLevel()
 	local ml = player:getMagicLevel()
-	local target = player:getTarget()
 	
 	local critical = {
 		chance = player:getStorageValue(Storage_.crit.chance),

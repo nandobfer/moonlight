@@ -22,6 +22,12 @@ Storage_ = {
 	combo_points = 100000010,
 	stealth = 100000011,
 	bonus_combo_points = 100000012,
+	training_sin = {
+		i = 100000013,
+		ii = 100000014,
+		iii = 100000015,
+		iv = 100000016,
+	},
 	
 		--Paladin
 	protector = 100000020,

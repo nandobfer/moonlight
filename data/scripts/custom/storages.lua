@@ -1,4 +1,9 @@
 Storage_ = {
+	
+	crit = {
+		bonus = 200000000,
+		chance = 200000001,
+	},
 
 	-- Classes --
 		--Druid

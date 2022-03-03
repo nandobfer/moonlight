@@ -61,7 +61,7 @@ end
 spell:group("attack")
 spell:id(59)
 spell:name("Rip")
-spell:words("exori min")
+spell:words("exori moe rip")
 spell:level(30)
 spell:mana(0)
 spell:isPremium(true)

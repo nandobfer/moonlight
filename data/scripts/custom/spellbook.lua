@@ -33,7 +33,11 @@ function spellbook.onUse(player, item, fromPosition, target, toPosition, isHotke
 	["Ambush"] = "'Embosca o alvo causando dano altissimo e gera 2 pontos de combo. So pode ser usado invisivel'" ,
 	["Parkour"] = "'Requer parametro 'up' ou 'down'. Permite o assassino pular para uma posicao acima ou abaixo a sua frente'" ,
 	["Fan of Knives"] = "'Arremessa facas envenenadas em todos inimigos proximos. Cada inimigo atingido tem chance de gerar um ponto de combo'" ,
-	["Killing Spree"] = "'Se teleporta em volta do alvo e realiza uma serie de ataques muito rapidos antes de retornar para a posicao inicial'" ,
+	["Killing Spree"] = "'Aparece em volta do alvo e realiza uma serie de ataques muito rapidos antes de retornar para a posicao inicial'" ,
+	["Treinamento de assassino I"] = "'*Diga as palavras magicas uma vez* Voce inicia seu treinamento na ordem dos assassinos e aprende a mirar no ponto fraco das vitimas, recebendo um leve aumento na chance de golpear criticamente'" ,
+	["Treinamento de assassino II"] = "'*Diga as palavras magicas uma vez* Voce finaliza treinamento na ordem dos assassinos e suas tecnicas sao mais letais, recebendo um leve aumento na chance de golpear criticamente'" ,
+	["Treinamento de assassino III"] = "'*Diga as palavras magicas uma vez* Voce chega ao topo na ordem dos assassinos e se torna um especialista em assassinatos, recebendo um leve aumento na chance de golpear criticamente'" ,
+	["Treinamento de assassino IV"] = "'*Diga as palavras magicas uma vez* Voce se torna um dos lideres na ordem dos assassinos e mestre na arte de matar, recebendo um leve aumento na chance de golpear criticamente'" ,
 
 		-- Druid --
 	["Bear Form"] = "'Se transforma em Urso, aumentando consideravelmente sua vitalidade, seu dano desarmado (porque urso tem garra) e regenera vida'" ,

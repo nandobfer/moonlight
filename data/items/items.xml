@@ -6166,7 +6166,7 @@
 		<attribute key="maxhitchance" value="76"/>
 		<attribute key="range" value="4"/>
 		<attribute key="attack" value="25"/>
-		<attribute key="weight" value="500"/>
+		<attribute key="weight" value="50"/>
 	</item>
 	<item id="3299" article="a" name="poison dagger">
 		<attribute key="weaponType" value="sword"/>

@@ -1,3 +1,7 @@
+local config = {
+	duration = 30 -- em segundos
+	}
+
 local combat = Combat()
 combat:setParameter(COMBAT_PARAM_EFFECT, CONST_ME_MAGIC_BLUE)
 --combat:setParameter(COMBAT_PARAM_AGGRESSIVE, false)
@@ -37,13 +41,15 @@ function spell.onCastSpell(creature, var) -- onCast com verificação de weapon 
 			position.x = position.x + 1
 			player:setStorageValue(Storage_.stealth, 1)
 			position:sendMagicEffect(CONST_ME_SMOKE)
-		else
-			player:sendTextMessage(MESSAGE_HOTKEY_PRESSED, "You are visible again.")
-			player:removeCondition(CONDITION_INVISIBLE)
-			position.x = position.x + 1
-			player:setStorageValue(Storage_.stealth, 0)
-			position:sendMagicEffect(CONST_ME_SMOKE)
-		end
+			
+			addEvent(function()
+				player:sendTextMessage(MESSAGE_HOTKEY_PRESSED, "You are visible again.")
+				player:removeCondition(CONDITION_INVISIBLE)
+				position.x = position.x + 1
+				player:setStorageValue(Storage_.stealth, 0)
+				-- position:sendMagicEffect(CONST_ME_SMOKE)
+			end, config.duration * 1000)
+		else end
 		return combat:execute(creature, var)
 	end
 end
@@ -53,7 +59,7 @@ spell:words("utana vid")
 spell:group("support")
 spell:vocation("assassin;true")
 spell:id(45)
-spell:cooldown(2 * 1000)
+spell:cooldown(30 * 1000)
 spell:groupCooldown(2 * 1000)
 spell:level(15)
 spell:mana(20)

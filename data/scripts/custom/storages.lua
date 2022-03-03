@@ -23,10 +23,10 @@ Storage_ = {
 	stealth = 100000011,
 	bonus_combo_points = 100000012,
 	training_sin = {
-		i = 100000013,
-		ii = 100000014,
-		iii = 100000015,
-		iv = 100000016,
+		i = 100000013, -- 5% crit at lvl 10
+		ii = 100000014, -- 5% crit at lvl 50
+		iii = 100000015, -- 5% crit at lvl 100
+		iv = 100000016, -- 5% crit at lvl 200
 	},
 	
 		--Paladin

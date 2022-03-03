@@ -18,6 +18,7 @@ function protector(player)
 	else
 		player:setStorageValue(Storage_.protector, 0)
 		player:removeCondition(CONDITION_ATTRIBUTES)
+		player:setBaseCritical()
 		player:sendTextMessage(MESSAGE_HOTKEY_PRESSED, "Protector OFF")
 	end
 end

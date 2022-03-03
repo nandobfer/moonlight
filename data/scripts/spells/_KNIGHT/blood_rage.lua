@@ -22,6 +22,7 @@ function spell.onCastSpell(creature, var)
 	else
 		player:setStorageValue(Storage_.blood_rage, 0)
 		player:removeCondition(CONDITION_ATTRIBUTES)
+		player:setBaseCritical()
 		player:sendTextMessage(MESSAGE_HOTKEY_PRESSED, "Blood Rage OFF")
 		return true
 	end

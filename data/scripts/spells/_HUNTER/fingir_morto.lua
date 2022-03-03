@@ -34,6 +34,7 @@ function spell.onCastSpell(creature, variant)
 		player:removeCondition(CONDITION_ROOTED)
 		player:removeCondition(CONDITION_PACIFIED)
 		player:removeCondition(CONDITION_ATTRIBUTES)
+		player:setBaseCritical()
 		player:getPosition():sendMagicEffect(CONST_ME_MAGIC_RED)
 		
 		

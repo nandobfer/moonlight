@@ -32,6 +32,7 @@ function spell.onCastSpell(creature, variant)
 	if player:getLoneWolf() then
 		player:setStorageValue(Storage_.lone_wolf, 0)
 		player:removeCondition(CONDITION_ATTRIBUTES)
+		player:setBaseCritical()
 		player:sendTextMessage(MESSAGE_HOTKEY_PRESSED, "Lone Wolf OFF")
 		return true
 	elseif #player:getSummons() > 0 then

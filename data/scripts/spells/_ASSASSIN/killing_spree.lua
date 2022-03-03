@@ -16,7 +16,7 @@ function onGetFormulaValues(player, skill, attack, factor)
 	local max = (level / 5) + skill + attack
 	
 	-- player, tipo, multiplier, duracao
-	applyDot(player:getId(), "poison", 0.3, 5)
+	applyDot(player, target, "poison", 0.3, 5)
 	
 	return -min / 2, -max / 2 -- TODO : Use New Real Formula instead of an %
 end

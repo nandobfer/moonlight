@@ -12,7 +12,7 @@ function onGetFormulaValues(player, skill, attack, factor)
 	local max = ((level / 5) + (skill + attack)) * cp
 	
 	-- player, tipo, multiplier, duracao
-	applyDot(player:getId(), "poison", 0.7, 10)
+	applyDot(player, target, "poison", 0.7, 10)
 
 	return -min / 2, -max / 2
 end

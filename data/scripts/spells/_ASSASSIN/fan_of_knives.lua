@@ -11,8 +11,7 @@ function onGetFormulaValues(player, skill, attack, factor)
 	local min = (level / 5) + (skill + attack) / 3
 	local max = (level / 5) + skill + attack
 	
-	-- player, tipo, multiplier, duracao
-	applyDot(player:getId(), "poison", 0.2, 5)
+	applyPoison(player, combat, 0.3)
 	
 	if math.random(1, 100) <= 30 then
 		player:setStorageValue(Storage_.bonus_combo_points, player:getStorageValue(Storage_.bonus_combo_points) + 1)

@@ -1,7 +1,7 @@
 local spell = Spell("instant")
 
 local config = {
-	add = 15
+	add = 5
 }
 
 function spell.onCastSpell(creature, variant)

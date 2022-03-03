@@ -9,7 +9,8 @@ function onGetFormulaValues(player, level, maglevel)
 	local min = cp * level / 2
 	local max = cp * level
 	
-	applyPoison(player, combat, 0.5)
+	-- player, tipo, multiplier, duracao
+	applyDot(player:getId(), "poison", 0.4, 5)
 	
 	return -min, -max
 end

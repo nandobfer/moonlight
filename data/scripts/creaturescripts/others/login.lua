@@ -123,8 +123,8 @@ function playerLogin.onLogin(player)
 		player:setGhostMode(true)
 	end
 	-- Boosted creature
-	player:sendTextMessage(MESSAGE_BOOSTED_CREATURE, "Today's boosted creature: " .. Game.getBoostedCreature() .. " \
-	Boosted creatures yield more experience points, carry more loot than usual and respawn at a faster rate.")
+	-- player:sendTextMessage(MESSAGE_BOOSTED_CREATURE, "Today's boosted creature: " .. Game.getBoostedCreature() .. " \
+	-- Boosted creatures yield more experience points, carry more loot than usual and respawn at a faster rate.")
 
 	-- Stamina
 	nextUseStaminaTime[playerId] = 1
@@ -211,6 +211,10 @@ function playerLogin.onLogin(player)
 		onExerciseTraining[player:getId()] = nil
 		player:setTraining(false)
 	end
+	
+	--BASE CRITICAL DAMAGE
+	player:setBaseCritical()
+	
 	return true
 end
 playerLogin:register()

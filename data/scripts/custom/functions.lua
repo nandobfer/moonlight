@@ -26,6 +26,29 @@ function isWalkable(pos)
 	end
 end
 
+-- Base Critical Chance and Damage -- INSERIR SEMPRE QUE USAR removeCondition(CONDITION_ATTRIBUTES)
+function Player:setBaseCritical()
+	local player = self:getPlayer()
+	
+	-- definindo storage inicial para todos
+	if player:getStorageValue(Storage_.crit.chance) < 1 or player:getStorageValue(Storage_.crit.bonus) < 1 then
+		player:setStorageValue(Storage_.crit.chance, 10)
+		player:setStorageValue(Storage_.crit.bonus, 100)
+	else end
+	
+	local critical = {
+		chance = player:getStorageValue(Storage_.crit.chance),
+		bonus = player:getStorageValue(Storage_.crit.bonus)
+	}
+	
+	local condition = Condition(CONDITION_ATTRIBUTES)
+	condition:setParameter(CONDITION_PARAM_SUBID, 1)
+	condition:setTicks(-1)
+	condition:setParameter(CONDITION_PARAM_SKILL_CRITICAL_HIT_CHANCE, critical.chance)
+	condition:setParameter(CONDITION_PARAM_SKILL_CRITICAL_HIT_DAMAGE, critical.bonus)
+	player:addCondition(condition)
+end
+
 
 -- //////////////////////////////////////////////// ASSASSIN ///////////////////////////////////////////////
 
@@ -210,6 +233,7 @@ function Player:removeForm()
 	end
 --FIST SKILL--
 	self:removeCondition(CONDITION_ATTRIBUTES)
+	self:setBaseCritical()
 		
 --OUTFIT--
 	self:removeCondition(CONDITION_OUTFIT)

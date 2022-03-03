@@ -28,7 +28,7 @@ function spellbook.onUse(player, item, fromPosition, target, toPosition, isHotke
 	["Eviscerate"] = "'Consome pontos de combo pra causar alto dano fisico baseado na quantidade de pontos consumidos, alem de envenenar o alvo'" ,
 	["Stealth"] = "'Modo furtivo'" ,
 	["Poison Bomb"] = "'Consome pontos de combo pra causar dano de veneno em area baseado na quantidade de pontos consumidos'" ,
-	["Throw Knife"] = "'Arremessa uma faca envenenada no alvo, gerando um ponto de combo'" ,
+	["Throw Knife"] = "'*Requer faca de arremesso* Arremessa uma faca envenenada no alvo, gerando um ponto de combo'" ,
 	["Combo Points"] = "'Diz quantos pontos de combo voce possui'" ,
 	["Ambush"] = "'Embosca o alvo causando dano altissimo e gera 2 pontos de combo. So pode ser usado invisivel'" ,
 	["Parkour"] = "'Requer parametro 'up' ou 'down'. Permite o assassino pular para uma posicao acima ou abaixo a sua frente'" ,
@@ -38,6 +38,7 @@ function spellbook.onUse(player, item, fromPosition, target, toPosition, isHotke
 	["Treinamento de assassino II"] = "'*Diga as palavras magicas uma vez* Voce finaliza treinamento na ordem dos assassinos e suas tecnicas sao mais letais, recebendo um leve aumento na chance de golpear criticamente'" ,
 	["Treinamento de assassino III"] = "'*Diga as palavras magicas uma vez* Voce chega ao topo na ordem dos assassinos e se torna um especialista em assassinatos, recebendo um leve aumento na chance de golpear criticamente'" ,
 	["Treinamento de assassino IV"] = "'*Diga as palavras magicas uma vez* Voce se torna um dos lideres na ordem dos assassinos e mestre na arte de matar, recebendo um leve aumento na chance de golpear criticamente'" ,
+	["Mutilate"] = "'Acerta com sua arma envenenada, envenando o alvo e gerando um ponto de combo'" ,
 
 		-- Druid --
 	["Bear Form"] = "'Se transforma em Urso, aumentando consideravelmente sua vitalidade, seu dano desarmado (porque urso tem garra) e regenera vida'" ,
@@ -51,7 +52,7 @@ function spellbook.onUse(player, item, fromPosition, target, toPosition, isHotke
 	["Heal Friend"] = "'Cura um alvo aliado com ervas medicinais'" ,
 	["Mass Healing"] = "'O poder da natureza cura todos os aliados proximos'" ,
 	["Nature's Embrace"] = "'Cura um aliado com uma medicina natural poderosissima'" ,
-	["Bite"] = "'*Requer metamorfose* Morde o alvo, causando sangramento'" ,
+	["Claw"] = "'*Requer metamorfose* Dilacera o alvo, causando sangramento'" ,
 	["Strong Terra Strike"] = "'Brota uma planta poderosa embaixo do alvo, causando dano moderado de terra'" ,
 	["Terra Strike"] = "'Brota uma plantinha embaixo do alvo, causando dano de terra'" ,
 	["Terra Wave"] = "'Faz brotar um monte de cipo na sua frente, causando dano de terra aos atingidos'" ,

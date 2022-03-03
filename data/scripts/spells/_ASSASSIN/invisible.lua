@@ -43,7 +43,7 @@ function spell.onCastSpell(creature, var) -- onCast com verificação de weapon 
 			position:sendMagicEffect(CONST_ME_SMOKE)
 			
 			addEvent(function()
-				player:sendTextMessage(MESSAGE_HOTKEY_PRESSED, "You are visible again.")
+				-- player:sendTextMessage(MESSAGE_HOTKEY_PRESSED, "You are visible again.")
 				player:removeCondition(CONDITION_INVISIBLE)
 				position.x = position.x + 1
 				player:setStorageValue(Storage_.stealth, 0)

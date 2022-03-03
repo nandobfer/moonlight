@@ -134,7 +134,43 @@ function applyPoison(player, combat, mod)
 	combat:addCondition(condition)
 end
 
-
+function applyDot(playerid, _, mod, duration)
+	local player = Creature(playerid)
+	local level = player:getLevel()
+	local ml = player:getMagicLevel()
+	local target = player:getTarget()
+	
+	local critical = {
+		chance = player:getStorageValue(Storage_.crit.chance),
+		bonus = player:getStorageValue(Storage_.crit.bonus) / 100
+	}
+	
+	local type = {
+		
+		element = {
+			poison = COMBAT_EARTHDAMAGE,
+		},
+		effect = {
+			poison = CONST_ME_POISONAREA,
+		},
+		formula = {
+			poison = -((level / 2) + (2 * ml)) * mod,
+		}
+	}
+	
+	doTargetCombatHealth(0, target, type.element[_], type.formula[_], type.formula[_], type.effect[_])
+	
+	for i = 1, duration, 1 do
+		addEvent(function()
+			doTargetCombatHealth(0, target, type.element[_], type.formula[_], type.formula[_], type.effect[_])
+			if math.random(1, 100) <= critical.chance then
+				doTargetCombatHealth(0, target, type.element[_], type.formula[_] * critical.bonus, type.formula[_] * critical.bonus, type.effect[_])
+				target:getPosition():sendMagicEffect(CONST_ME_CRITICAL_DAMAGE)
+			end
+		end, i * 1000)
+	end
+	
+end
 
 
 

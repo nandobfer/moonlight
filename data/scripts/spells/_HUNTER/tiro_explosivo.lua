@@ -7,17 +7,30 @@ combat:setArea(createCombatArea(AREA_SQUARE1X1))
 function onGetFormulaValues(player, level, maglevel)
 	local min = (level * 0.5) + 4
 	local max = (level * 1.5) + 12
-	
-	-- player, tipo, multiplier, duracao
-	applyDot(player:getId(), "burning", 1, 8)
-	
+
 	return -min, -max
 end
+
+function onTargetCreature(creature, target)
+	local player = creature:getPlayer()
+	
+	-- player, tipo, multiplier, duracao
+	applyDot(player, target, "burning", 1, 8)
+	
+	if math.random(1, 100) <= 30 then
+		player:setStorageValue(Storage_.bonus_combo_points, player:getStorageValue(Storage_.bonus_combo_points) + 1)
+	else end
+end
+local combat2 = Combat()
+combat2:setArea(createCombatArea(AREA_SQUARE1X1))
+combat2:setCallback(CALLBACK_PARAM_TARGETCREATURE, "onTargetCreature")
+
 combat:setCallback(CALLBACK_PARAM_LEVELMAGICVALUE, "onGetFormulaValues")
 
 local spell = Spell("instant")
 
 function spell.onCastSpell(creature, var)
+	combat2:execute(creature, var)
 	return combat:execute(creature, var)
 end
 

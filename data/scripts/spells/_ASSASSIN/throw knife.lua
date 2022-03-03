@@ -11,7 +11,7 @@ function onGetFormulaValues(player, skill, attack, factor)
 	local max = (level / 5) + skill + attack
 	
 	-- player, tipo, multiplier, duracao
-	applyDot(player, target, "poison", 0.3, 5)
+	applyDot(player, player:getTarget(), "poison", 0.3, 5)
 	
 	return -min / 2, -max / 2 -- TODO : Use New Real Formula instead of an %
 end
@@ -25,9 +25,16 @@ function spell.onCastSpell(creature, var)
 	if not player:getSinWeapons() then
 		return false
 	else
-		player:addComboPoints(1)
-		player:removeStealth()
-		return combat:execute(creature, var)
+		if player:getItemCount(3298) >= 1 then
+			player:removeItem(3298, 1)
+			player:addComboPoints(1)
+			player:removeStealth()
+			return combat:execute(creature, var)
+		else
+			player:getPosition():sendMagicEffect(CONST_ME_POFF)
+			player:sendTextMessage(MESSAGE_EVENT_ADVANCE,
+			"Voce nao tem facas de arremesso para arremessar!")
+		end
 	end
 end
 

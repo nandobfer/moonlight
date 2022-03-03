@@ -44,7 +44,7 @@ end
 
 spell:group("attack")
 spell:id(148)
-spell:name("Bite")
+spell:name("Claw")
 spell:words("exori moe ico")
 spell:level(16)
 spell:mana(0)

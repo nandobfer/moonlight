@@ -9,11 +9,20 @@ function onGetFormulaValues(player, level, maglevel)
 	local min = cp * level / 2
 	local max = cp * level
 	
-	-- player, tipo, multiplier, duracao
-	applyDot(player:getId(), "poison", 0.4, 5)
-	
 	return -min, -max
 end
+
+function onTargetCreature(creature, target)
+	local player = creature:getPlayer()
+	
+	-- player, tipo, multiplier, duracao
+	applyDot(player, target, "poison", 0.4, 5)
+	
+end
+local combat2 = Combat()
+combat2:setArea(createCombatArea(AREA_CIRCLE3X3))
+combat2:setCallback(CALLBACK_PARAM_TARGETCREATURE, "onTargetCreature")
+
 combat:setCallback(CALLBACK_PARAM_LEVELMAGICVALUE, "onGetFormulaValues")
 
 local spell = Spell("instant")

@@ -14,11 +14,11 @@ function onGetFormulaValues(player, level, attack)
 	max = ((level / 2) + (skillfist * 2.5)) / 2
 		
 		
-	if (player:getStorageValue(Storage_.bear_form) > 0) then -- se for urso, causa metade do dano
-		applyBleeding(player, combat, 0.3)
+	if player:getForm() == "bear" or player:getForm() == "plant" then -- se for urso, causa metade do dano
+		applyDot(player, player:getTarget(), "bleeding", 0.3, 12)
 		return -min / 2 , -max / 2
 	else
-		applyBleeding(player, combat, 0.4)
+		applyDot(player, player:getTarget(), "bleeding", 0.6, 12)
 		return -min, -max
 	end
 end
@@ -28,7 +28,7 @@ combat:setCallback(CALLBACK_PARAM_LEVELMAGICVALUE, "onGetFormulaValues")
 local spell = Spell("instant")
 
 function spell.onCastSpell(creature, var)
-	if (creature:getStorageValue(Storage_.metamorfose) > 0) then -- se tiver transformado
+	if creature:getForm() then -- se tiver transformado
 		if creature:getPlayer():getFreeHands() then
 			return combat:execute(creature, var)
 		else

@@ -17,19 +17,11 @@ function spell.onCastSpell(player, variant)
 		return false
 	end
 
-	-- if not getPlayerFlagValue(player, PlayerFlag_CanSummonAll) then
-		-- if not monsterType:isSummonable() then
-			-- player:sendCancelMessage(RETURNVALUE_NOTPOSSIBLE)
-			-- position:sendMagicEffect(CONST_ME_POFF)
-			-- return false
-		-- end
-
-		if #player:getSummons() >= 2 then
-			player:sendCancelMessage("Hati e Skoll ja estao com voce.")
-			position:sendMagicEffect(CONST_ME_POFF)
-			return false
-		end
-	-- end
+	if #player:getSummons() >= 2 then
+		player:sendCancelMessage("Hati e Skoll ja estao com voce.")
+		position:sendMagicEffect(CONST_ME_POFF)
+		return false
+	end
 	
 	-- variaveis do pet scaling
 	local damage_scaling_value = (player:getLevel() * 5) + 100 -- dano do pet aumenta em 5% por level do hunter

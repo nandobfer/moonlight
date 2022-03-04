@@ -16,7 +16,7 @@ end
 
 function onTargetCreature(creature, target)
 	local player = creature:getPlayer()
-	if target:isMonster() and master and not master:isMonster() then
+	if target:isMonster() and target:getMaster() and not target:getMaster():isMonster() then
 		return false
 	else
 		-- player, tipo, multiplier, duracao

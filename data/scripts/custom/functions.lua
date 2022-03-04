@@ -255,9 +255,6 @@ function Player:removeForm()
 		self:setHealth(self:getStorageValue(recover_life) * self:getMaxHealth() / 100)
 		--LIFE REGEN--
 		self:removeCondition(CONDITION_REGENERATION)
-		--MAX MANA MOD--
-		self:setMaxMana(self:getMaxMana() + self:getStorageValue(Storage_.max_mana))
-		self:addMana(self:getStorageValue(Storage_.recover_mana) * self:getMaxMana() / 100)
 	elseif self:getForm() == "feral" or self:getForm() == "manticore" then
 		if self:getForm() == "feral" then
 			self:setStorageValue(Storage_.feral_form, 0) -- feral
@@ -266,10 +263,16 @@ function Player:removeForm()
 		end
 		--FERAL MODS--
 		self:removeCondition(CONDITION_HASTE)
-		--MAX MANA MOD--
-		self:setMaxMana(self:getMaxMana() + self:getStorageValue(Storage_.max_mana))
+	end
+--MAX MANA MOD--
+	self:setMaxMana(self:getMaxMana() + self:getStorageValue(Storage_.max_mana))
+	if self:getStorageValue(Storage_,leveledup) > 0 then
+		self:addMana(self:getMaxMana())
+		self:setStorageValue(Storage_.leveledup, 0)
+	else
 		self:addMana(self:getStorageValue(Storage_.recover_mana) * self:getMaxMana() / 100)
 	end
+	
 --FIST SKILL--
 	self:removeCondition(CONDITION_ATTRIBUTES)
 	self:setBaseCritical()

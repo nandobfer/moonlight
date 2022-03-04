@@ -309,22 +309,6 @@ function Player:addForm(form, skill)
 		end
 	else end
 	
-	
-	--FIST SKILL--
-	skill_bonus:setParameter(CONDITION_PARAM_SKILL_FISTPERCENT, skill)
-	player:addCondition(skill_bonus)
-	
-	--MAX MANA MOD--
-	player:setStorageValue(Storage_.max_mana, player:getMaxMana()) --salva mana maxima na storage
-	player:setStorageValue(Storage_.recover_mana, player:getMana() / player:getMaxMana() * 100)
-	player:setMaxMana(0) -- zera a mana máxima
-	
-	--change_outfit--
-	--player:setStorageValue(Storage_.bear_form, player:getOutfit().lookType)
-	--player:setOutfit({lookType = 720})
-	change_outfit:setOutfit(MonsterType(form):getOutfit())
-	player:addCondition(change_outfit)
-	
 	if form == "werebear" or form == "Leaf Golem" then
 		if form == "werebear" then
 			player:setStorageValue(Storage_.bear_form, 1) -- bear
@@ -359,6 +343,21 @@ function Player:addForm(form, skill)
 		feral_speed:setFormula(0.7, -56, 0.7, -56)
 		player:addCondition(feral_speed)
 	end
+	
+	--FIST SKILL--
+	skill_bonus:setParameter(CONDITION_PARAM_SKILL_FISTPERCENT, skill)
+	player:addCondition(skill_bonus)
+	
+	--MAX MANA MOD--
+	player:setStorageValue(Storage_.max_mana, player:getMaxMana()) --salva mana maxima na storage
+	player:setStorageValue(Storage_.recover_mana, player:getMana() / player:getMaxMana() * 100)
+	player:setMaxMana(0) -- zera a mana máxima
+	
+	--change_outfit--
+	--player:setStorageValue(Storage_.bear_form, player:getOutfit().lookType)
+	--player:setOutfit({lookType = 720})
+	change_outfit:setOutfit(MonsterType(form):getOutfit())
+	player:addCondition(change_outfit)
 end
 
 	-- Aplica sangramento de 8 segundos

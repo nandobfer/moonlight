@@ -30,7 +30,7 @@ combat:setCallback(CALLBACK_PARAM_SKILLVALUE, "onGetFormulaValues")
 local spell = Spell("instant")
 
 function spell.onCastSpell(creature, var)
-	if player:getForm() then -- se tiver transformado
+	if creature:getForm() then -- se tiver transformado
 		if creature:getPlayer():getFreeHands() then
 			return combat:execute(creature, var)
 		else

@@ -17,6 +17,7 @@ Storage_ = {
 	plant_form = 100000007,
 	feral_animal_skin = 100000008,
 	manticore_form = 100000009,
+	leveledup = 1000000010,
 	
 		--Assassin
 	combo_points = 100000010,

@@ -16,7 +16,7 @@ function onGetFormulaValues(_player, level, magicLevel) -- already compared to t
 	min = min * (2 - hp_mod / 100)
 	max = max * (2 - hp_mod / 100)
 	
-	player:addHealth(math.random(min, max))
+	_player:addHealth(math.random(min, max))
 	return true
 end
 

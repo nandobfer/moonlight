@@ -103,7 +103,7 @@ end
 	-- Gerador de combo points, ASSASSIN
 function Player:addComboPoints(cp)
 	if (self:getStorageValue(Storage_.combo_points) < 0) then -- se a storage for -1
-		self:setStorageValue(Storage_.combo_points, 1) -- seta 1
+		self:setStorageValue(Storage_.combo_points, cp) -- seta 1
 		self:say("Combo Points: " .. self:getStorageValue(Storage_.combo_points) .. ".", TALKTYPE_MONSTER_SAY)
 		-- self:setMaxMana(getStorageValue(Storage_.combo_points))
 	elseif (self:getStorageValue(Storage_.combo_points) < 5) then -- se a storage/cp for menor que 5

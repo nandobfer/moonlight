@@ -4801,10 +4801,10 @@
 	</item>
 	<item id="3048" article="a" name="might ring">
 		<attribute key="slotType" value="ring"/>
-		<attribute key="showCharges" value="1"/>
+		<!-- <attribute key="showCharges" value="1"/> -->
 		<attribute key="showAttributes" value="1"/>
-		<attribute key="absorbpercentall" value="20"/>
-		<attribute key="charges" value="20"/>
+		<attribute key="absorbpercentall" value="5"/>
+		<!-- <attribute key="charges" value="20"/> -->
 		<attribute key="weight" value="100"/>
 	</item>
 	<item id="3049" article="a" name="stealth ring">

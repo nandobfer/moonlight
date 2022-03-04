@@ -54,11 +54,6 @@ function applyDot(player, target, _, mod, duration)
 	local level = player:getLevel()
 	local ml = player:getMagicLevel()
 	
-	local critical = {
-		chance = player:getStorageValue(Storage_.crit.chance),
-		bonus = player:getStorageValue(Storage_.crit.bonus) / 100
-	}
-	
 	local type = {
 		poison = {
 			element = COMBAT_EARTHDAMAGE,
@@ -79,19 +74,24 @@ function applyDot(player, target, _, mod, duration)
 		},
 	}
 	
-	doTargetCombatHealth(0, target, type[_].element, type[_].formula, type[_].formula, type[_].effect)
-	
-	for i = 1, duration, 1 do
-		addEvent(function()
-			doTargetCombatHealth(0, target, type[_].element, type[_].formula, type[_].formula, type[_].effect)
-			if math.random(1, 100) <= critical.chance then
-				doTargetCombatHealth(0, target, type[_].element, type[_].formula * critical.bonus, type[_].formula * critical.bonus, type[_].effect)
-				target:getPosition():sendMagicEffect(CONST_ME_CRITICAL_DAMAGE)
-			end
-		end, i * 1000)
+	local function Dot(playerid, targetid, element, formula, effect, duration, interval)
+		if duration < 1 or not Creature(targetid) then
+			return false
+		else
+			duration = duration -1
+			doTargetCombatHealth(0, Creature(targetid), element, formula, formula, effect)
+			if math.random(1, 100) <= Creature(playerid):getStorageValue(Storage_.crit.chance) then
+				doTargetCombatHealth(0, Creature(targetid), element, formula * (Creature(playerid):getStorageValue(Storage_.crit.bonus) / 100), formula * (Creature(playerid):getStorageValue(Storage_.crit.bonus) / 100), effect)
+				Creature(targetid):getPosition():sendMagicEffect(CONST_ME_CRITICAL_DAMAGE)
+			else end
+			addEvent(Dot, interval, playerid, targetid, element, formula, effect, duration, interval)
+		end
 	end
-	
+
+	Dot(player:getId(), target:getId(), type[_].element, type[_].formula, type[_].effect, duration + 1, 1000)
 end
+
+
 
 -- //////////////////////////////////////////////// ASSASSIN ///////////////////////////////////////////////
 

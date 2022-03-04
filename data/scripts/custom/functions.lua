@@ -84,7 +84,9 @@ function applyDot(player, target, _, mod, duration)
 				doTargetCombatHealth(0, Creature(targetid), element, formula * (Creature(playerid):getStorageValue(Storage_.crit.bonus) / 100), formula * (Creature(playerid):getStorageValue(Storage_.crit.bonus) / 100), effect)
 				Creature(targetid):getPosition():sendMagicEffect(CONST_ME_CRITICAL_DAMAGE)
 			else end
-			addEvent(Dot, interval, playerid, targetid, element, formula, effect, duration, interval)
+			if Creature(targetid) then
+				addEvent(Dot, interval, playerid, targetid, element, formula, effect, duration, interval)
+			else end
 		end
 	end
 

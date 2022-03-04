@@ -18,7 +18,7 @@ function onTargetCreature(creature, target)
 	local player = creature:getPlayer()
 	if target:isMonster() and master and not master:isMonster() then
 		return false
-	else
+	else end
 	
 	-- player, tipo, multiplier, duracao
 	applyDot(player, target, "poison", 0.2, 5)

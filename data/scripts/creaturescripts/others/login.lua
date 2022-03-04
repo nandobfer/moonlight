@@ -215,6 +215,8 @@ function playerLogin.onLogin(player)
 	--BASE CRITICAL DAMAGE
 	player:setBaseCritical()
 	
+	player:setStorageValue(Storage_.leveledup, 1)
+	
 	return true
 end
 playerLogin:register()

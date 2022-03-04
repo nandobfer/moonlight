@@ -15,7 +15,9 @@ function onGetFormulaValues(_player, level, magicLevel) -- already compared to t
 	local hp_mod = _player:getHealth() / _player:getMaxHealth() * 100
 	min = min * (2 - hp_mod / 100)
 	max = max * (2 - hp_mod / 100)
-	return min, max
+	
+	player:addHealth(math.random(min, max))
+	return true
 end
 
 combat:setCallback(CALLBACK_PARAM_LEVELMAGICVALUE, "onGetFormulaValues")

@@ -49,6 +49,49 @@ function Player:setBaseCritical()
 	player:addCondition(condition)
 end
 
+-- Aplica um DOT critável
+function applyDot(player, target, _, mod, duration)
+	local level = player:getLevel()
+	local ml = player:getMagicLevel()
+	
+	local critical = {
+		chance = player:getStorageValue(Storage_.crit.chance),
+		bonus = player:getStorageValue(Storage_.crit.bonus) / 100
+	}
+	
+	local type = {
+		poison = {
+			element = COMBAT_EARTHDAMAGE,
+			effect = CONST_ME_POISONAREA,
+			formula = -((level / 2) + (2 * ml)) * mod
+		},
+		
+		burning = {
+			element = COMBAT_FIREDAMAGE,
+			effect = CONST_ME_HITBYFIRE,
+			formula = -(level / 3) * mod
+		},
+		
+		bleeding = {
+			element = COMBAT_PHYSICALDAMAGE,
+			effect = CONST_ME_DRAWBLOOD,
+			formula = - ((level / 2) + player:getSkillLevel(SKILL_FIST) * 2 / 3) * mod
+		},
+	}
+	
+	doTargetCombatHealth(0, target, type[_].element, type[_].formula, type[_].formula, type[_].effect)
+	
+	for i = 1, duration, 1 do
+		addEvent(function()
+			doTargetCombatHealth(0, target, type[_].element, type[_].formula, type[_].formula, type[_].effect)
+			if math.random(1, 100) <= critical.chance then
+				doTargetCombatHealth(0, target, type[_].element, type[_].formula * critical.bonus, type[_].formula * critical.bonus, type[_].effect)
+				target:getPosition():sendMagicEffect(CONST_ME_CRITICAL_DAMAGE)
+			end
+		end, i * 1000)
+	end
+	
+end
 
 -- //////////////////////////////////////////////// ASSASSIN ///////////////////////////////////////////////
 
@@ -133,45 +176,6 @@ function applyPoison(player, combat, mod)
 	condition:addDamage(6, 1000, -((level / 2) + (2 * ml)) / 3 * mod)
 	combat:addCondition(condition)
 end
-
-function applyDot(player, target, _, mod, duration)
-	local level = player:getLevel()
-	local ml = player:getMagicLevel()
-	
-	local critical = {
-		chance = player:getStorageValue(Storage_.crit.chance),
-		bonus = player:getStorageValue(Storage_.crit.bonus) / 100
-	}
-	
-	local type = {
-		poison = {
-			element = COMBAT_EARTHDAMAGE,
-			effect = CONST_ME_POISONAREA,
-			formula = -((level / 2) + (2 * ml)) * mod
-		},
-		
-		burning = {
-			element = COMBAT_FIREDAMAGE,
-			effect = CONST_ME_HITBYFIRE,
-			formula = -(level / 5) * mod
-		},
-	}
-	
-	doTargetCombatHealth(0, target, type[_].element, type[_].formula, type[_].formula, type[_].effect)
-	
-	for i = 1, duration, 1 do
-		addEvent(function()
-			doTargetCombatHealth(0, target, type[_].element, type[_].formula, type[_].formula, type[_].effect)
-			if math.random(1, 100) <= critical.chance then
-				doTargetCombatHealth(0, target, type[_].element, type[_].formula * critical.bonus, type[_].formula * critical.bonus, type[_].effect)
-				target:getPosition():sendMagicEffect(CONST_ME_CRITICAL_DAMAGE)
-			end
-		end, i * 1000)
-	end
-	
-end
-
-
 
 -- //////////////////////////////////////////////// PALADIN ///////////////////////////////////////////////
 

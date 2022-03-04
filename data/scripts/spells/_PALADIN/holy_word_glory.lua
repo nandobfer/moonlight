@@ -31,7 +31,7 @@ end
 
 spell:name("Holy Word: Glory")
 spell:words("exura gran san")
-spell:group("healing")
+spell:group("support")
 spell:vocation("paladin;true", "royal paladin;true")
 spell:id(125)
 spell:cooldown(1 * 1000)

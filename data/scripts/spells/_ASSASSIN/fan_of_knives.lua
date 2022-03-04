@@ -18,14 +18,14 @@ function onTargetCreature(creature, target)
 	local player = creature:getPlayer()
 	if target:isMonster() and master and not master:isMonster() then
 		return false
-	else end
-	
-	-- player, tipo, multiplier, duracao
-	applyDot(player, target, "poison", 0.2, 5)
-	
-	if math.random(1, 100) <= 30 then
-		player:setStorageValue(Storage_.bonus_combo_points, player:getStorageValue(Storage_.bonus_combo_points) + 1)
-	else end
+	else
+		-- player, tipo, multiplier, duracao
+		applyDot(player, target, "poison", 0.2, 5)
+		
+		if math.random(1, 100) <= 30 then
+			player:setStorageValue(Storage_.bonus_combo_points, player:getStorageValue(Storage_.bonus_combo_points) + 1)
+		else end
+	end
 end
 local combat2 = Combat()
 combat2:setArea(createCombatArea(AREA_CIRCLE3X3))

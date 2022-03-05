@@ -1,8 +1,10 @@
 local combat = Combat()
--- combat:setParameter(COMBAT_PARAM_EFFECT, CONST_ME_MAGIC_BLUE)
 combat:setParameter(COMBAT_PARAM_AGGRESSIVE, 0)
--- combat:setParameter(COMBAT_PARAM_DISPEL, CONDITION_PARALYZE)
 combat:setArea(createCombatArea(AREA_SQUARE1X1))
+
+local combat2 = Combat()
+combat2:setParameter(COMBAT_PARAM_AGGRESSIVE, 0)
+combat2:setArea(createCombatArea(AREA_CIRCLE3X3))
 
 function onTargetCreature(creatureid, target)
 	local master = target:getMaster()
@@ -13,8 +15,29 @@ function onTargetCreature(creatureid, target)
 		return false
 	end
 	
-	doTargetCombatHealth(0, target, COMBAT_HOLYDAMAGE, -Creature(creatureid):getLevel()/2, -Creature(creatureid):getLevel()*1.5, CONST_ME_HOLYDAMAGE)
+	local min = -Creature(creatureid):getLevel() / 2
+	local max = -Creature(creatureid):getLevel() * 1.5
+	
+	doTargetCombatHealth(0, target, COMBAT_HOLYDAMAGE, min, max, CONST_ME_HOLYDAMAGE)
 
+	return true
+end
+
+function onTargetCreature2(creatureid, target)
+	local master = target:getMaster()
+	if master and not master:isMonster() then
+		return false
+	end
+	if not target:isMonster() then
+		return false
+	end
+	
+	local min = -Creature(creatureid):getLevel() / 2
+	local max = -Creature(creatureid):getLevel() * 1.5
+	
+	doTargetCombatHealth(0, target, COMBAT_HOLYDAMAGE, min * 2, max * 2, CONST_ME_HOLYDAMAGE)
+	
+	Creature(creatureid):getPosition():sendMagicEffect(CONST_ME_HOLYAREA)
 	return true
 end
 
@@ -23,11 +46,16 @@ local function aura(creatureid, var)
 		return false
 	else
 		addEvent(aura, 1000 * 2, creatureid, var)
-		return combat:execute(creatureid, var)
+		if not Creature(creatureid):getAuraMastery() then
+			return combat:execute(creatureid, var)
+		else
+			return combat2:execute(creatureid, var)
+		end
 	end
 end
 
 combat:setCallback(CALLBACK_PARAM_TARGETCREATURE, "onTargetCreature")
+combat2:setCallback(CALLBACK_PARAM_TARGETCREATURE, "onTargetCreature2")
 
 local spell = Spell("instant")
 

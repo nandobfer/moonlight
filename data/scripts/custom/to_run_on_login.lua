@@ -31,6 +31,8 @@ function classStartUp(player)
 		-- hunterStartUp(player)
 	elseif class == "Knight" then
 		-- knightStartUp(player)
+	elseif class == "Paladin" then
+		paladinStartUp(player)
 	
 	end
 end
@@ -51,7 +53,9 @@ end
 
 -- //////////////////////////////////////////////// PALADIN ///////////////////////////////////////////////
 
-
+function paladinStartUp(player)
+	player:resetAura()
+end
 
 -- //////////////////////////////////////////////// DRUIDA ///////////////////////////////////////////////
 

@@ -131,6 +131,7 @@ function spellbook.onUse(player, item, fromPosition, target, toPosition, isHotke
 	["Comando para Matar"] = "'Ordena seu ajudante a morder o alvo, causando dano fisico e aplicando sangramento '" ,
 	["Lone Wolf"] = "'Como um lobo solitario, sua habilidade com armas a distancia aumenta consideravelmente. So pode ser usado se nao possuir nenhum pet'" ,
 	["Barragem"] = "'Atira numa velocidade de 10 flechas por segundo. A quantidade de tiros depende da sua habilidade de combate a distancia'" ,
+	["Concentracao"] = "'Aumenta sua concentracao, regenerando mais energia por um breve intervalo'" ,
 
 		--Support--
 	["Haste"] = "'Por um momento, aguca os sentidos pra ficar mais rapido'" ,

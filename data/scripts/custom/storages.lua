@@ -34,6 +34,12 @@ Storage_ = {
 		--Paladin
 	protector = 100000020,
 	holy_power = 100000021,
+	aura = {
+		active = 100000022,
+		concentration = 100000023,
+		devotion = 100000024,
+		retribution = 100000025,
+	},
 	
 		--Knight
 	blood_rage = 100000030,

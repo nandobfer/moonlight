@@ -4,7 +4,25 @@ combat:setParameter(COMBAT_PARAM_AGGRESSIVE, false)
 
 local spell = Spell("instant")
 
-function protector(player)
+-- aura que taunta a cada 1 segundo
+local combat_taunt = Combat()
+combat_taunt:setArea(createCombatArea(AREA_SQUARE1X1))
+function onTargetCreature(creature, target)
+	return doChallengeCreature(creature, target)
+end
+combat_taunt:setCallback(CALLBACK_PARAM_TARGETCREATURE, "onTargetCreature")
+
+local function taunt(creatureid, variant)
+	if Creature(creatureid):getStorageValue(Storage_.protector) < 1 then
+		return false
+	else
+		addEvent(taunt, 1000, creatureid, variant)
+		return combat_taunt:execute(Creature(creatureid), variant)
+	end
+end
+-- fim da aura
+
+local function protector(player, variant)
 	if player:getStorageValue(Storage_.protector) < 1 then
 		player:setStorageValue(Storage_.protector, 1)
 		local condition = Condition(CONDITION_ATTRIBUTES)
@@ -14,6 +32,7 @@ function protector(player)
 		condition:setParameter(CONDITION_PARAM_BUFF_DAMAGERECEIVED, 85)
 		condition:setParameter(CONDITION_PARAM_BUFF_SPELL, true)
 		player:addCondition(condition)
+		taunt(player:getId(), variant)
 		player:sendTextMessage(MESSAGE_HOTKEY_PRESSED, "Protector ON")
 	else
 		player:setStorageValue(Storage_.protector, 0)
@@ -25,7 +44,7 @@ end
 
 function spell.onCastSpell(creature, variant)
 	local player = creature:getPlayer()
-	protector(player)
+	protector(player, variant)
 	return combat:execute(creature, variant)
 end
 

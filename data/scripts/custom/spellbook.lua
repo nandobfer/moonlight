@@ -75,6 +75,9 @@ function spellbook.onUse(player, item, fromPosition, target, toPosition, isHotke
 	["Holy Word: Glory"] = "'Consome todo poder sagrado, curando sua vida pra cada poder consumido'" ,
 	["Crusader Strike"] = "'Golpeia com sua arma abencoada, causando parte do dano como sagrado. Gera 1 poder sagrado'" ,
 	["Holy Word: Templar's Verdict"] = "'Consome todo poder sagrado, reluzindo sua arma e causando dano adicional pra cada poder consumido. Parte do dano causado eh sagrado'" ,
+	["Aura da Retribuicao"] = "'*Apenas uma aura pode estar ativa* Inimigos que permanecerem perto de voce sao queimados pela luz divina'" ,
+	["Aura da Concentracao"] = "'*Apenas uma aura pode estar ativa* Emite uma luz calorosa, recuperando energia dos aliados por perto'" ,
+	["Aura da Devocao"] = "'*Apenas uma aura pode estar ativa* A luz protege os aliados por perto contra o mau, reduzindo o dano recebido'" ,
 
 		--Sorcerer--
 	["Cauterize Wounds"] = "'Calcina suas feridas, recebendo uma cura leve'" ,

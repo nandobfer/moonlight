@@ -28,6 +28,7 @@ Storage_ = {
 		ii = 100000014, -- 5% crit at lvl 50
 		iii = 100000015, -- 5% crit at lvl 100
 		iv = 100000016, -- 5% crit at lvl 200
+		master_poisoner = 100000017, -- crit from poison regen 5 mana
 	},
 	
 		--Paladin

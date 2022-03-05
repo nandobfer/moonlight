@@ -11,7 +11,7 @@ function onGetFormulaValues(player, skill, attack, factor)
 	local min = (level / 5) + (skill + attack) / 3
 	local max = (level / 5) + skill + attack
 	
-	return -min / 4, -max / 4
+	return -min / 3, -max / 3
 end
 
 function onTargetCreature(creature, target)

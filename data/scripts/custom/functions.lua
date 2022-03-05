@@ -217,6 +217,14 @@ function Player:resetAura()
 	player:setStorageValue(Storage_.aura.retribution, 0)
 end
 
+function Player:getAuraMastery()
+	if self:getStorageValue(Storage_.aura.mastery) == 1 then
+		return true
+	else
+		return false
+	end
+end
+
 -- //////////////////////////////////////////////// DRUIDA ///////////////////////////////////////////////
 
 function Player:getFreeHands()

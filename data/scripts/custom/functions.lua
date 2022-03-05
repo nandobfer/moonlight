@@ -201,7 +201,7 @@ end
 function Player:getAura()
 	if self:getStorageValue(Storage_.aura.concentration) == 1 then
 		return "concentration"
-	elseif self:getStorageValue(Storage_.aura.retribuition) == 1 then
+	elseif self:getStorageValue(Storage_.aura.retribution) == 1 then
 		return "retribution"
 	elseif self:getStorageValue(Storage_.aura.devotion) == 1 then
 		return "devotion"

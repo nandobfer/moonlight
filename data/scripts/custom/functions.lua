@@ -1,12 +1,14 @@
--- ajusta mana fixa pras vocações de energia
-function Player:ajustarMana()
-	local player = self:getPlayer()
-	local energy_class = {
+Energy_class = {
 		assassin = 9,
 		hunter = 11,
 		knight = 4
 	}
-	for _, value in ipairs (energy_class) do
+
+-- ajusta mana fixa pras vocações de energia
+function Player:ajustarMana()
+	local player = self:getPlayer()
+	
+	for _, value in ipairs (Energy_class) do
 		if value == player:getVocation():getVocationId() then
 		player:setMaxMana(100)
 		return true
@@ -26,33 +28,14 @@ function isWalkable(pos)
 	end
 end
 
--- Base Critical Chance and Damage -- INSERIR SEMPRE QUE USAR removeCondition(CONDITION_ATTRIBUTES)
-function Player:setBaseCritical()
-	local player = self:getPlayer()
-	
-	-- definindo storage inicial para todos
-	if player:getStorageValue(Storage_.crit.chance) < 1 or player:getStorageValue(Storage_.crit.bonus) < 1 then
-		player:setStorageValue(Storage_.crit.chance, 10)
-		player:setStorageValue(Storage_.crit.bonus, 100)
-	else end
-	
-	local critical = {
-		chance = player:getStorageValue(Storage_.crit.chance),
-		bonus = player:getStorageValue(Storage_.crit.bonus)
-	}
-	
-	local condition = Condition(CONDITION_ATTRIBUTES)
-	condition:setParameter(CONDITION_PARAM_SUBID, 1)
-	condition:setTicks(-1)
-	condition:setParameter(CONDITION_PARAM_SKILL_CRITICAL_HIT_CHANCE, critical.chance)
-	condition:setParameter(CONDITION_PARAM_SKILL_CRITICAL_HIT_DAMAGE, critical.bonus)
-	player:addCondition(condition)
-end
-
 -- Aplica um DOT critável
 function applyDot(player, target, _, mod, duration)
 	local level = player:getLevel()
 	local ml = player:getMagicLevel()
+	
+	if target:isNpc() then
+		return false
+	end
 	
 	local type = {
 		poison = {

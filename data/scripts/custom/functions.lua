@@ -83,6 +83,7 @@ function applyDot(player, target, _, mod, duration)
 			if math.random(1, 100) <= Creature(playerid):getStorageValue(Storage_.crit.chance) then
 				doTargetCombatHealth(0, Creature(targetid), element, formula * (Creature(playerid):getStorageValue(Storage_.crit.bonus) / 100), formula * (Creature(playerid):getStorageValue(Storage_.crit.bonus) / 100), effect)
 				Creature(targetid):getPosition():sendMagicEffect(CONST_ME_CRITICAL_DAMAGE)
+				masterPoisoner(Creature(playerid))
 			else end
 			if Creature(targetid) then
 				addEvent(Dot, interval, playerid, targetid, element, formula, effect, duration, interval)
@@ -177,6 +178,13 @@ function applyPoison(player, combat, mod)
 	condition:addDamage(6, 1000, -((level / 2) + (2 * ml)) * 2 / 3 * mod)
 	condition:addDamage(6, 1000, -((level / 2) + (2 * ml)) / 3 * mod)
 	combat:addCondition(condition)
+end
+
+function masterPoisoner(player)
+	-- if player:getVocation():getId() == 9 then
+	if player:getStorageValue(Storage_.training_sin.master_poisoner) > 0 then
+		player:addMana(5)
+	end
 end
 
 -- //////////////////////////////////////////////// PALADIN ///////////////////////////////////////////////

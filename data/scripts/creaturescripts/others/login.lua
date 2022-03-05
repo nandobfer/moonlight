@@ -217,6 +217,8 @@ function playerLogin.onLogin(player)
 	
 	player:setStorageValue(Storage_.leveledup, 1)
 	
+	classStartUp(player)
+	
 	return true
 end
 playerLogin:register()

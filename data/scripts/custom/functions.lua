@@ -197,9 +197,25 @@ function Player:removePoderSagrado()
 	self:say("Poder Sagrado: " .. self:getStorageValue(Storage_.holy_power) .. "/3", TALKTYPE_MONSTER_SAY)
 end
 
+	-- Retorna aura
+function Player:getAura()
+	if self:getStorageValue(Storage_.aura.concentration) == 1 then
+		return "concentration"
+	elseif self:getStorageValue(Storage_.aura.retribuition) == 1 then
+		return "retribution"
+	elseif self:getStorageValue(Storage_.aura.devotion) == 1 then
+		return "devotion"
+	else
+		return false
+	end
+end
 
-
-
+function Player:resetAura()
+	local player = self:getPlayer()
+	player:setStorageValue(Storage_.aura.concentration, 0)
+	player:setStorageValue(Storage_.aura.devotion, 0)
+	player:setStorageValue(Storage_.aura.retribution, 0)
+end
 
 -- //////////////////////////////////////////////// DRUIDA ///////////////////////////////////////////////
 

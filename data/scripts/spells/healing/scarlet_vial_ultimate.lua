@@ -2,15 +2,15 @@ local spell = Spell("instant")
 
 function spell.onCastSpell(creature, variant)
 	local player = creature:getPlayer()
-	if player:getItemCount(3588) >= 125 and player:getItemCount(284) >= 5 then -- busca 125 blueberry e 5 empty flask
-		player:removeItem(3588, 125) -- remove 25 blueberry
+	if player:getItemCount(3588) >= 50 and player:getItemCount(284) >= 5 then -- busca 50 blueberry e 5 empty flask
+		player:removeItem(3588, 50) -- remove 50 blueberry
 		player:removeItem(284, 4) -- remove 4 flaks
 		return creature:conjureItem(284, 7643, 5, CONST_ME_MAGIC_GREEN) -- transforma flask em potion
 	else
 		player:getPosition():sendMagicEffect(CONST_ME_POFF)
 		--creature:sendCancelMessage(RETURNVALUE_NOTPOSSIBLE)
 		player:sendTextMessage(MESSAGE_EVENT_ADVANCE,
-		"Para criar uma pocao de vida, voce precisa ter 25 blueberries que vao fermentar e um frasco vazio pra armazenar! ")
+		"Para criar uma pocao de vida, voce precisa ter 50 blueberries que vao fermentar e um frasco vazio pra armazenar! ")
 		return false
 	end
 end

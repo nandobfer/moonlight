@@ -31,7 +31,7 @@ end
 spell:name("Blood Rage")
 spell:words("utito tempo")
 spell:group("support", "focus")
-spell:vocation("knight;true", "elite knight;true", "assassin;true")
+spell:vocation("knight;true", "elite knight;true")
 spell:id(133)
 spell:cooldown(2 * 1000)
 spell:groupCooldown(2 * 1000, 2 * 1000)

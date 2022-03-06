@@ -1,8 +1,10 @@
 local combat = Combat()
--- combat:setParameter(COMBAT_PARAM_EFFECT, CONST_ME_MAGIC_BLUE)
 combat:setParameter(COMBAT_PARAM_AGGRESSIVE, 0)
--- combat:setParameter(COMBAT_PARAM_DISPEL, CONDITION_PARALYZE)
 combat:setArea(createCombatArea(AREA_CIRCLE3X3))
+
+local combat2 = Combat()
+combat2:setParameter(COMBAT_PARAM_AGGRESSIVE, 0)
+combat2:setArea(createCombatArea(AREA_CIRCLE3X3))
 
 function onTargetCreature(creature, target)
 	local master = target:getMaster()
@@ -22,16 +24,39 @@ function onTargetCreature(creature, target)
 	return true
 end
 
+function onTargetCreature2(creature, target)
+	local master = target:getMaster()
+	if target:isMonster() and not master or master and master:isMonster() then
+		return false
+	end
+	
+	if target:isNpc() then
+		return false
+	end
+	
+	local condition = Condition(CONDITION_ATTRIBUTES)
+	condition:setParameter(CONDITION_PARAM_TICKS, 1000 * 1)
+	condition:setParameter(CONDITION_PARAM_BUFF_DAMAGERECEIVED, 50)
+	condition:setParameter(CONDITION_PARAM_BUFF_SPELL, true)
+	target:addCondition(condition)
+	return true
+end
+
 local function aura(creatureid, var)
-	if Creature(creatureid):getAura() ~= "devotion" then
+	if Creature(creatureid) and Creature(creatureid):getAura() ~= "devotion" then
 		return false
 	else
 		addEvent(aura, 1000 * 1, creatureid, var)
-		return combat:execute(creature, var)
+		if not Creature(creatureid):getAuraMastery() then
+			return combat:execute(creatureid, var)
+		else
+			return combat2:execute(creatureid, var)
+		end
 	end
 end
 
 combat:setCallback(CALLBACK_PARAM_TARGETCREATURE, "onTargetCreature")
+combat2:setCallback(CALLBACK_PARAM_TARGETCREATURE, "onTargetCreature2")
 
 local spell = Spell("instant")
 

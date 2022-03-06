@@ -42,7 +42,7 @@ function onTargetCreature2(creatureid, target)
 end
 
 local function aura(creatureid, var)
-	if Creature(creatureid):getAura() ~= "retribution" then
+	if Creature(creatureid) and Creature(creatureid):getAura() ~= "retribution" then
 		return false
 	else
 		addEvent(aura, 1000 * 2, creatureid, var)

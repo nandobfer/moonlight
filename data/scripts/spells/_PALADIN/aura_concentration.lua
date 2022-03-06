@@ -1,8 +1,13 @@
 local combat = Combat()
 combat:setParameter(COMBAT_PARAM_EFFECT, CONST_ME_MAGIC_BLUE)
 combat:setParameter(COMBAT_PARAM_AGGRESSIVE, 0)
--- combat:setParameter(COMBAT_PARAM_DISPEL, CONDITION_PARALYZE)
 combat:setArea(createCombatArea(AREA_CIRCLE3X3))
+
+local combat2 = Combat()
+combat2:setParameter(COMBAT_PARAM_EFFECT, CONST_ME_MAGIC_BLUE)
+combat2:setParameter(COMBAT_PARAM_AGGRESSIVE, 0)
+combat2:setParameter(COMBAT_PARAM_DISPEL, CONDITION_PARALYZE)
+combat2:setArea(createCombatArea(AREA_CIRCLE3X3))
 
 function onTargetCreature(creature, target)
 	local master = target:getMaster()
@@ -20,16 +25,42 @@ function onTargetCreature(creature, target)
 	return true
 end
 
+function onTargetCreature2(creature, target)
+	local master = target:getMaster()
+	if target:isMonster() and not master or master and master:isMonster() then
+		return false
+	end
+	
+	if target:isNpc() then
+		return false
+	end
+	
+	if target then
+		target:addMana(20)
+		local condition = Condition(CONDITION_REGENERATION)
+		condition:setTicks(1000 * 10)
+		condition:setParameter(CONDITION_PARAM_HEALTHGAIN, target:getMaxHealth() * 0.05)
+		condition:setParameter(CONDITION_PARAM_HEALTHTICKS, 1000 * 1)
+		target:addCondition(condition)
+	end
+	return true
+end
+
 local function aura(creatureid, var)
-	if Creature(creatureid):getAura() ~= "concentration" then
+	if Creature(creatureid) and Creature(creatureid):getAura() ~= "concentration" then
 		return false
 	else
 		addEvent(aura, 1000 * 10, creatureid, var)
-		return combat:execute(creature, var)
+		if not Creature(creatureid):getAuraMastery() then
+			return combat:execute(creatureid, var)
+		else
+			return combat2:execute(creatureid, var)
+		end
 	end
 end
 
 combat:setCallback(CALLBACK_PARAM_TARGETCREATURE, "onTargetCreature")
+combat2:setCallback(CALLBACK_PARAM_TARGETCREATURE, "onTargetCreature2")
 
 local spell = Spell("instant")
 

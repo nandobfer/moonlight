@@ -110,6 +110,7 @@ function spellbook.onUse(player, item, fromPosition, target, toPosition, isHotke
 	["Enchant Staff"] = "'Encanta um cajado, aumentando seus atributos consideravelmente'" ,
 	["Enchant Spear"] = "'Encanta uma spear, aumentando muito o dano causado por ela'" ,
 	["Teleport"] = "'Teleporta voce e todos a sua volta para a cidade destino. Consome toda mana que possuir'" ,
+	["Ice Fridge"] = "'Conjura uma barreira de gelo em uma grande area a sua volta e depois explode o seu interior, causando dano de fogo. O choque termico cria nuvens carregadas que continuam eletrocutando a area'" ,
 
 		--Warrior--
 	["Annihilation"] = "'Como um tornado de aco, causa um dano altissimo a todos inimigos ao seu redor, se curando pra cada inimigo atingido'" ,

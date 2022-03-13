@@ -408,13 +408,13 @@ function tryElementalOverload(combat, creature, var)
 		
 		addEvent(function()
 			combat:execute(creature, var)
-		end, 0.75 * 1000)
+		end, 0.5 * 1000)
+		addEvent(function()
+			combat:execute(creature, var)
+		end, 1.0 * 1000)
 		addEvent(function()
 			combat:execute(creature, var)
 		end, 1.5 * 1000)
-		addEvent(function()
-			combat:execute(creature, var)
-		end, 2.25 * 1000)
 	else end
 	-- else
 end

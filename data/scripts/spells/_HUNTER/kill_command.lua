@@ -27,6 +27,7 @@ function spell.onCastSpell(creature, var)
 	local max = player:getLevel() * 2
 	
 	for _, summon in ipairs (player:getSummons()) do
+		target:addHealth(-math.random(min, max), COMBAT_PHYSICALDAMAGE)
 		if not isWalkable(toPos) then
 			repeat
 				 table.remove(positions, index)
@@ -40,7 +41,6 @@ function spell.onCastSpell(creature, var)
 		summon:teleportTo(toPos)
 		summon:getPosition():sendMagicEffect(CONST_ME_TELEPORT)
 		table.remove(positions, index)
-		target:addHealth(-math.random(min, max), COMBAT_PHYSICALDAMAGE)
 	end
 	
 	return true

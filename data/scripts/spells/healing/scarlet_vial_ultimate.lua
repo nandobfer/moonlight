@@ -25,7 +25,7 @@ function spell.onCastSpell(creature, variant)
 		player:getPosition():sendMagicEffect(CONST_ME_POFF)
 		--creature:sendCancelMessage(RETURNVALUE_NOTPOSSIBLE)
 		player:sendTextMessage(MESSAGE_EVENT_ADVANCE,
-		"Para criar " .. config.quant_potions .. " pocoes de vida voce precisa ter " .. config.quantity .. " frascos vazios! ")
+		"Para criar " .. config.quant_potions .. " pocoes de vida voce precisa ter " .. config.quant_potions .. " frascos vazios! ")
 		return false
 	end
 end

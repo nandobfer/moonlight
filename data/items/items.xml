@@ -14415,7 +14415,7 @@
 	<item id="6515" article="a" name="dead plaguesmith">
 		<attribute key="corpseType" value="blood"/>
 		<attribute key="fluidsource" value="blood"/>
-		<attribute key="duration" value="10"/>
+		<attribute key="duration" value="300"/>
 		<attribute key="decayTo" value="6521"/>
 		<attribute key="containersize" value="32"/>
 	</item>

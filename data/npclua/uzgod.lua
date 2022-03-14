@@ -89,10 +89,10 @@ local function creatureSayCallback(npc, creature, type, message)
 			npcHandler:setTopic(playerId, 6)
 		end
 	elseif(MsgContains(message, "brooch")) then
-		if player:getStorageValue(Storage.ExplorerSociety.JoiningTheExplorers) == 2 and player:getStorageValue(Storage.ExplorerSociety.QuestLine) == 2 then
+		-- if player:getStorageValue(Storage.ExplorerSociety.JoiningTheExplorers) == 2 and player:getStorageValue(Storage.ExplorerSociety.QuestLine) == 2 then
 			npcHandler:say("You got me brooch?", npc, creature)
 			npcHandler:setTopic(playerId, 3)
-		end
+		-- end
 	elseif(MsgContains(message, "yes")) then
 		if(npcHandler:getTopic(playerId) == 1) then
 			npcHandler:say("Me order book quite full is. But telling you what: You getting me something me lost and Uzgod seeing that your pickaxe comes first. Jawoll! You interested?", npc, creature)

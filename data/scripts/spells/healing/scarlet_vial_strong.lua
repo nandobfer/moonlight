@@ -1,16 +1,30 @@
+local config = {
+	flask = 283,
+	quantity = 15,
+	potion = 236,
+}
+
 local spell = Spell("instant")
+
+local success = false
 
 function spell.onCastSpell(creature, variant)
 	local player = creature:getPlayer()
-	if player:getItemCount(3588) >= 15 and player:getItemCount(283) >= 5 then -- busca 15 blueberry e 5 empty flask
-		player:removeItem(3588, 15) -- remove 25 blueberry
-		player:removeItem(283, 4) -- remove 4 flask
-		return creature:conjureItem(283, 236, 5, CONST_ME_MAGIC_GREEN) -- transforma flask em potion
+	if player:getItemCount(config.flask) >= config.quantity then -- busca 5 empty flask
+		-- player:removeItem(3588, 5) -- remove 5 blueberries
+		if mixFruits(player, config.quantity) then
+			player:removeItem(config.flask, config.quantity-1) -- remove 4 flasks -- apenas 4 pq a conjuracao remove um \/
+			return creature:conjureItem(config.flask, config.potion, config.quantity, CONST_ME_MAGIC_GREEN) -- transforma flask em potion
+		else
+			player:sendTextMessage(MESSAGE_EVENT_ADVANCE,
+			"Para criar " .. config.quantity .. " pocoes de vida, voce precisa ter " .. config.quantity .. " frutas! ")
+			return false
+		end
 	else
 		player:getPosition():sendMagicEffect(CONST_ME_POFF)
 		--creature:sendCancelMessage(RETURNVALUE_NOTPOSSIBLE)
 		player:sendTextMessage(MESSAGE_EVENT_ADVANCE,
-		"Para criar uma pocao de vida, voce precisa ter 15 blueberries que vao fermentar e 4 frascos vazios pra armazenar! ")
+		"Para criar " .. config.quantity .. " pocoes de vida, voce precisa ter " .. config.quantity .. " pocoes de vida, voce precisa ter " .. config.quantity .. " pocoes de vida, voce precisa ter " .. config.quantity .. " frascos vazios! ")
 		return false
 	end
 end

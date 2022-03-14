@@ -1,3 +1,46 @@
+Fruits = {
+	3588, -- blueberry
+	3590, -- cherry
+	3585, -- red apple
+	3586, -- orange
+	3592, -- grape
+	3593, -- melon
+	3591, -- strawberry
+	8012, -- raspberry
+}
+
+function checkFruits(player)
+	local quantity = 0
+	for index, value in ipairs(Fruits) do
+		if player:getItemCount(Fruits[index]) > 0 then
+			quantity = quantity + player:getItemCount(Fruits[index])
+		end
+	end
+	return quantity
+end
+
+function removeFruits(player, quantity)
+	if quantity < 1 then
+		return false
+	end
+	for index, value in ipairs(Fruits) do
+		if player:getItemCount(Fruits[index]) > 0 then
+			player:removeItem(Fruits[index], 1)
+			quantity = quantity - 1
+		end
+	end
+	removeFruits(player, quantity)
+end
+
+function mixFruits(player, quantity)
+	if checkFruits(player) >= quantity then
+		removeFruits(player, quantity)
+		return true
+	else
+		return false
+	end
+end
+
 Energy_class = {
 		assassin = 9,
 		hunter = 11,

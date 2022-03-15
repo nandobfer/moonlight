@@ -133,15 +133,15 @@ end
 function Player:addComboPoints(cp)
 	if (self:getStorageValue(Storage_.combo_points) < 0) then -- se a storage for -1
 		self:setStorageValue(Storage_.combo_points, cp) -- seta 1
-		self:say("Combo Points: " .. self:getStorageValue(Storage_.combo_points) .. ".", TALKTYPE_MONSTER_SAY)
+		self:sendTextMessage(MESSAGE_HOTKEY_PRESSED, "Combo Points: " .. self:getStorageValue(Storage_.combo_points) .. ".")
 		-- self:setMaxMana(getStorageValue(Storage_.combo_points))
 	elseif (self:getStorageValue(Storage_.combo_points) < 5) then -- se a storage/cp for menor que 5
 		-- local cp = self:getStorageValue(Storage_.combo_points) + 1 -- ganha 1 cp
 		self:setStorageValue(Storage_.combo_points, self:getStorageValue(Storage_.combo_points) + cp) -- salva o cp atual na storage
-		self:say("Combo Points: " .. self:getStorageValue(Storage_.combo_points) .. " ", TALKTYPE_MONSTER_SAY)
+		self:sendTextMessage(MESSAGE_HOTKEY_PRESSED, "Combo Points: " .. self:getStorageValue(Storage_.combo_points) .. " ")
 		-- self:setMaxMana(cp)
 	else
-		self:say("Combo Points: " .. self:getStorageValue(Storage_.combo_points) .. " ", TALKTYPE_MONSTER_SAY)
+		self:sendTextMessage(MESSAGE_HOTKEY_PRESSED, "Combo Points: " .. self:getStorageValue(Storage_.combo_points) .. " ")
 	end
 end
 
@@ -149,7 +149,7 @@ end
 function Player:removeComboPoints()
 	self:setStorageValue(Storage_.combo_points, 0) -- volta pra 0
 	self:setStorageValue(Storage_.bonus_combo_points, 0)
-	self:say("Combo Points:" .. self:getStorageValue(Storage_.combo_points) .. ".", TALKTYPE_MONSTER_SAY)
+	self:sendTextMessage(MESSAGE_HOTKEY_PRESSED, "Combo Points: " .. self:getStorageValue(Storage_.combo_points) .. " ")
 	-- self:say("Combo Points:" .. self:getStorageValue(Storage_.combo_points) .. ".", TALKTYPE_MONSTER_SAY)
 end
 
@@ -219,13 +219,13 @@ end
 function Player:addPoderSagrado()
 	if self:getStorageValue(Storage_.holy_power) < 1 then
 		self:setStorageValue(Storage_.holy_power, 1)
-		self:say("Poder Sagrado: " .. self:getStorageValue(Storage_.holy_power) .. "/3", TALKTYPE_MONSTER_SAY)
+		self:sendTextMessage("Poder Sagrado: " .. self:getStorageValue(Storage_.holy_power) .. "/3")
 	elseif (self:getStorageValue(Storage_.holy_power) < 3) then -- se a Storage_.holy_power for menor que 3
 		local hp = self:getStorageValue(Storage_.holy_power) + 1 -- ganha 1 hp
 		self:setStorageValue(Storage_.holy_power, hp) -- salva o hp atual na storage
-		self:say("Poder Sagrado: " .. hp .. "/3", TALKTYPE_MONSTER_SAY)
+		self:sendTextMessage("Poder Sagrado: " .. self:getStorageValue(Storage_.holy_power) .. "/3")
 	else
-		self:say("Poder Sagrado: " .. self:getStorageValue(Storage_.holy_power) .. "/3", TALKTYPE_MONSTER_SAY)
+		self:sendTextMessage("Poder Sagrado: " .. self:getStorageValue(Storage_.holy_power) .. "/3")
 	end
 end
 
@@ -237,7 +237,7 @@ end
 	-- Zerar poder sagrado
 function Player:removePoderSagrado()
 	self:setStorageValue(Storage_.holy_power, 0) -- volta pra 0
-	self:say("Poder Sagrado: " .. self:getStorageValue(Storage_.holy_power) .. "/3", TALKTYPE_MONSTER_SAY)
+	self:sendTextMessage("Poder Sagrado: " .. self:getStorageValue(Storage_.holy_power) .. "/3")
 end
 
 	-- Retorna aura

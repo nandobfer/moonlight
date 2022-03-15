@@ -34,7 +34,7 @@ function spell.onCastSpell(creature, var)
 				index = math.random(#positions)
 				toPos = positions[index]
 				if #positions < 1 then
-					return false
+					return true
 				end
 			until isWalkable(toPos)
 		end

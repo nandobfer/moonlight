@@ -7,6 +7,7 @@ function assassinDagger.onEquip(player, item, slot)
 	}
 	player:setStorageValue(Storage_.crit.bonus, critical.bonus + 50)
 	player:setStorageValue(Storage_.crit.chance, critical.chance + 15)
+    player:say("teste")
 end
 
 assassinDagger:id(7404)

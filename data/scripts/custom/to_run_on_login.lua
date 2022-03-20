@@ -21,10 +21,11 @@ function Player:setBaseCritical()
 	player:addCondition(condition)
 
 	-- caso esteja equipado com a assassin dagger
-	local leftItem = self:getSlotItem(CONST_SLOT_LEFT) -- salva o item equipado na variavel
+	--[[ local leftItem = self:getSlotItem(CONST_SLOT_LEFT) -- salva o item equipado na variavel
 	if leftItem and leftItem.itemid == 7404 then
 		player:setStorageValue(Storage_.crit.bonus, critical.bonus + 50)
-	end
+		player:setStorageValue(Storage_.crit.chance, critical.chance + 15)
+	end ]]
 end
 
 -- Class chooser startup

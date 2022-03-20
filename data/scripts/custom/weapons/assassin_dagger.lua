@@ -9,6 +9,12 @@ function assassinDagger.onEquip(player, item, slot)
 	player:setStorageValue(Storage_.crit.chance, critical.chance + 15)
 end
 
+assassinDagger:id(7404)
+assassinDagger:type("equip")
+assassinDagger:register()
+
+assassinDagger = MoveEvent()
+
 function assassinDagger.onDeEquip(player, item, slot)
     local critical = {
 		chance = player:getStorageValue(Storage_.crit.chance),
@@ -19,6 +25,5 @@ function assassinDagger.onDeEquip(player, item, slot)
 end
 
 assassinDagger:id(7404)
-assassinDagger:type("equip")
+assassinDagger:type("deequip")
 assassinDagger:register()
-

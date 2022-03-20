@@ -1,6 +1,6 @@
 local assassinDagger = Weapon(WEAPON_SWORD)
 
-function assassinDagger.onEquip(player, variant)
+function assassinDagger.onEquip(player, item, slot)
     local critical = {
 		chance = player:getStorageValue(Storage_.crit.chance),
 		bonus = player:getStorageValue(Storage_.crit.bonus)
@@ -9,7 +9,7 @@ function assassinDagger.onEquip(player, variant)
 	player:setStorageValue(Storage_.crit.chance, critical.chance + 15)
 end
 
-function assassinDagger.onDeEquip(player, variant)
+function assassinDagger.onDeEquip(player, item, slot)
     local critical = {
 		chance = player:getStorageValue(Storage_.crit.chance),
 		bonus = player:getStorageValue(Storage_.crit.bonus)

@@ -1,4 +1,4 @@
-local assassinDagger = Weapon(WEAPON_SWORD)
+local assassinDagger = MoveEvent()
 
 function assassinDagger.onEquip(player, item, slot)
     local critical = {
@@ -19,9 +19,6 @@ function assassinDagger.onDeEquip(player, item, slot)
 end
 
 assassinDagger:id(7404)
-assassinDagger:attack(80)
-assassinDagger:criticalhitdamage(50)
-assassinDagger:criticalhitchance(15)
-assassinDagger:magicpoints(20)
+assassinDagger:type("equip")
 assassinDagger:register()
 

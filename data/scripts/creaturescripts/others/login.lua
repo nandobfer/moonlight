@@ -217,7 +217,7 @@ function playerLogin.onLogin(player)
 	
 	player:setStorageValue(Storage_.leveledup, 1)
 	
-	classStartUp(player)
+	playerStartUp(player)
 	
 	return true
 end

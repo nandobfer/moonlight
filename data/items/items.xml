@@ -20393,13 +20393,13 @@
 	<item id="9392" article="a" name="claw of 'The Noxious Spawn'">
 		<attribute key="description" value="It feels tight and uncomfortable on your hand"/>
 		<attribute key="slotType" value="ring"/>
-		<attribute key="transformdeequipto" value="8477"/>
+		<attribute key="transformdeequipto" value="9393"/>
 		<attribute key="weight" value="500"/>
 	</item>
 	<item id="9393" article="a" name="claw of 'The Noxious Spawn'">
 		<attribute key="description" value="Its power is depleted at the moment"/>
 		<attribute key="duration" value="10"/>
-		<attribute key="transformdeequipto" value="8477"/>
+		<attribute key="transformdeequipto" value="9392"/>
 		<attribute key="decayTo" value="9392"/>
 		<attribute key="weight" value="500"/>
 	</item>

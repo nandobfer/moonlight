@@ -1,5 +1,3 @@
-local races_id = {human, elf}
-
 function raceStartUp(player)
     local races = {
         human = humanStartUp(player),
@@ -15,8 +13,8 @@ function humanStartUp(player)
     if player:getStorageValue(Storage_.race) ~= 0 then
         return false
     end
-end
 
+end
 
 ----------- ELF -----------
 

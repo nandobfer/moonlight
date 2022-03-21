@@ -1,5 +1,5 @@
 function raceStartUp(player)
-    local race = player:getStorageValue()
+    local race = player:getStorageValue(Storage_.race)
 
 ----------- HUMAN -----------
 

@@ -7,6 +7,46 @@ function raceStartUp(player)
         dwarf = dwarfStartUp(player),
     }
 end
+
+function Player:getRace()
+    local player = self:getPlayer()
+    if player:getStorageValue(Storage_.race) == 0 then
+        return 'human'
+    elseif player:getStorageValue(Storage_.race) == 1 then
+        return 'elf'
+    elseif player:getStorageValue(Storage_.race) == 2 then
+        return 'goblin'
+    elseif player:getStorageValue(Storage_.race) == 3 then
+        return 'orc'
+    elseif player:getStorageValue(Storage_.race) == 4 then
+        return 'dwarf'
+    else
+        return false
+    end
+end
+
+
+function raceTown(player)
+    local town
+    if player:getRace() == 'human' then
+        town = Town(8) -- Thais
+    elseif player:getRace() == 'elf' then
+        town = Town(5) -- Ab'Dendriel
+    elseif player:getRace() == 'goblin' then
+        town = Town(6) -- Carlin
+    elseif player:getRace() == 'orc' then
+        town = Town(13) -- Darashia
+    elseif player:getRace() == 'dwarf' then
+        town = Town(7) -- Kazordoon
+    else
+        town = Town(8) -- Thais
+    end
+
+    player:teleportTo(town:getTemplePosition())
+    player:setTown(town)
+
+end
+
 ----------- HUMAN -----------
 
 function humanStartUp(player)

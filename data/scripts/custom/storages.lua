@@ -1,4 +1,6 @@
 Storage_ = {
+
+	race = 300000000,
 	
 	crit = {
 		bonus = 200000000,

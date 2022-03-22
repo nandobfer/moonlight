@@ -429,9 +429,6 @@ local function creatureSayCallback(npc, creature, type, message)
 						-- Change to new vocation, convert magic level and skills and set proper stats
 						player:changeVocation(value)
 						player:setStorageValue(Storage.Dawnport.DoorVocation, value)
-						if (npcHandler:getTopic(playerId) == 9) or (npcHandler:getTopic(playerId) == 11) then
-							player:setMaxMana(100)
-						else end
 						-- Teleportar para thais --
 						local town = Town(8)
 						if town then

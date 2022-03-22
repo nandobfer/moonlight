@@ -1,6 +1,6 @@
 local assassinDagger = MoveEvent()
 
-local x = 0
+local x = 0 -- pra evitar o bug do .onEquip rodar 3x
 
 function assassinDagger.onEquip(player, item, slot)
     if x == 0 then

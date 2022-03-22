@@ -76,6 +76,9 @@ public:
 	void login(const std::string &name, uint32_t accnumber, OperatingSystem_t operatingSystem);
 	void logout(bool displayEffect, bool forced);
 
+	void spawn();
+	void despawn();
+	
 	void AddItem(NetworkMessage &msg, const Item *item);
 	void AddItem(NetworkMessage &msg, uint16_t id, uint8_t count);
 
@@ -236,7 +239,6 @@ private:
 	void sendChannelsDialog();
 	void sendChannel(uint16_t channelId, const std::string &channelName, const UsersMap *channelUsers, const InvitedMap *invitedUsers);
 	void sendOpenPrivateChannel(const std::string &receiver);
-	void sendExperienceTracker(int64_t rawExp, int64_t finalExp);
 	void sendToChannel(const Creature *creature, SpeakClasses type, const std::string &text, uint16_t channelId);
 	void sendPrivateMessage(const Player *speaker, SpeakClasses type, const std::string &text);
 	void sendIcons(uint32_t icons);
@@ -315,7 +317,7 @@ private:
 	void sendGameNews();
 	void sendResourcesBalance(uint64_t money = 0, uint64_t bank = 0, uint64_t prey = 0);
 	void sendResourceBalance(Resource_t resourceType, uint64_t value);
-	void sendSaleItemList(const std::vector<ShopBlock> &shopVector, const std::map<uint32_t, uint32_t> &inventoryMap);
+	void sendSaleItemList(const ShopInfoMap &shop, const std::map<uint32_t, uint32_t> &inventoryMap);
 	void sendMarketEnter(uint32_t depotId);
 	void updateCoinBalance();
 	void sendMarketLeave();
@@ -434,7 +436,7 @@ private:
 
 	//shop
 	void AddHiddenShopItem(NetworkMessage &msg);
-	void AddShopItem(NetworkMessage &msg, const ShopBlock &shopBlock);
+	void AddShopItem(NetworkMessage &msg, const ShopInfo &item, const std::string &itemName);
 
 	//otclient
 	void parseExtendedOpcode(NetworkMessage &msg);

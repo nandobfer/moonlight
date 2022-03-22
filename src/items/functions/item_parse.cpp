@@ -204,7 +204,7 @@ void ItemParse::parseBlockProjectTile(const std::string& tmpStrValue, pugi::xml_
 
 void ItemParse::parsePickupable(const std::string& tmpStrValue, pugi::xml_attribute valueAttribute, ItemType& itemType) {
 	std::string stringValue = tmpStrValue;
-	if (stringValue == "allowpickupable" || stringValue == "pickupable") {
+	if (stringValue == "pickupable") {
 		itemType.allowPickupable = valueAttribute.as_bool();
 	}
 }

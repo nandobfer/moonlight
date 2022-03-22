@@ -220,34 +220,28 @@ void Npc::onPlayerBuyItem(Player* player, uint16_t serverId,
 		return;
 	}
 
-	uint32_t buyPrice = 0;
 	const ItemType& itemType = Item::items[serverId];
-	const std::vector<ShopBlock> &shopVector = getShopItemVector();
-	for (ShopBlock shopBlock : shopVector)
-	{
-		if (itemType.id == shopBlock.itemId && shopBlock.itemBuyPrice != 0)
-		{
-			buyPrice = shopBlock.itemBuyPrice;
-		}
-	}
 
-	int64_t totalCost = buyPrice * amount;
-	if (getCurrency() == ITEM_GOLD_COIN) {
-		if (!g_game.removeMoney(player, totalCost, 0, true)) {
-			SPDLOG_ERROR("[Npc::onPlayerBuyItem (removeMoney)] - Player {} have a problem for buy item {} on shop for npc {}", player->getName(), serverId, getName());
-			return;
-		}
-	} else if(!player->removeItemOfType(getCurrency(), buyPrice, -1, false)) {
-		SPDLOG_ERROR("[Npc::onPlayerBuyItem (removeItemOfType)] - Player {} have a problem for buy item {} on shop for npc {}", player->getName(), serverId, getName());
+	if (getShopItems().find(itemType.name) == getShopItems().end()) {
 		return;
 	}
 
-	// onPlayerBuyItem(self, player, itemId, subType, amount, ignore inBackpacks)
+	ShopInfo shopInfo = getShopItems()[itemType.name];
+	int64_t totalCost = shopInfo.buyPrice * amount;
+	if (getCurrency() == ITEM_GOLD_COIN) {
+		if (!g_game.removeMoney(player, totalCost, 0, true)) {
+			return;
+		}
+	} else if(!player->removeItemOfType(getCurrency(), shopInfo.buyPrice, -1, false)) {
+		return;
+	}
+
+	// onPlayerBuyItem(self, player, itemId, subType, amount, ignore, inBackpacks)
 	CreatureCallback callback = CreatureCallback(npcType->info.scriptInterface, this);
 	if (callback.startScriptInterface(npcType->info.playerBuyEvent)) {
 		callback.pushSpecificCreature(this);
 		callback.pushCreature(player);
-		callback.pushNumber(itemType.clientId);
+		callback.pushNumber(serverId);
 		callback.pushNumber(subType);
 		callback.pushNumber(amount);
 		callback.pushBoolean(inBackpacks);
@@ -267,23 +261,19 @@ void Npc::onPlayerSellItem(Player* player, uint16_t serverId,
 		return;
 	}
 
-	uint32_t sellPrice = 0;
 	const ItemType& itemType = Item::items[serverId];
-	const std::vector<ShopBlock> &shopVector = getShopItemVector();
-	for (ShopBlock shopBlock : shopVector)
-	{
-		if (itemType.id == shopBlock.itemId && shopBlock.itemSellPrice != 0)
-		{
-			sellPrice = shopBlock.itemSellPrice;
-		}
-	}
 
-	if(!player->removeItemOfType(serverId, amount, -1, false, false)) {
-		SPDLOG_ERROR("[Npc::onPlayerSellItem] - Player {} have a problem for sell item {} on shop for npc {}", player->getName(), serverId, getName());
+	if (getShopItems().find(itemType.name) == getShopItems().end()) {
 		return;
 	}
 
-	int64_t totalCost = sellPrice * amount;
+	ShopInfo shopInfo = getShopItems()[itemType.name];
+
+	if(!player->removeItemOfType(serverId, amount, -1, false, false)) {
+		return;
+	}
+
+	int64_t totalCost = shopInfo.sellPrice * amount;
 	g_game.addMoney(player, totalCost, 0);
 
 	// onPlayerSellItem(self, player, itemId, subType, amount, ignore)

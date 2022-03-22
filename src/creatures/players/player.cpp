@@ -1494,7 +1494,9 @@ void Player::onCreatureAppear(Creature* creature, bool isLogin)
 			bed->wakeUp(this);
 		}
 
-		SPDLOG_INFO("{} has logged in", name);
+		if (isLogin) {
+			SPDLOG_INFO("{} has logged in", name);
+		}
 
 		if (guild) {
 			guild->addMember(this);
@@ -1614,13 +1616,15 @@ void Player::onRemoveCreature(Creature* creature, bool isLogout)
 
 		clearPartyInvitations();
 
-		if (party) {
+		if (party && isLogout) {
 			party->leaveParty(this);
 		}
 
 		g_chat->removeUserFromAllChannels(*this);
 
-		SPDLOG_INFO("{} has logged out", getName());
+		if (isLogout) {
+			SPDLOG_INFO("{} has logged out", getName());
+		}
 
 		if (guild) {
 			guild->removeMember(this);
@@ -1955,7 +1959,7 @@ void Player::onThink(uint32_t interval)
 		idleTime += interval;
 		const int32_t kickAfterMinutes = g_configManager().getNumber(KICK_AFTER_MINUTES);
 		if (idleTime > (kickAfterMinutes * 60000) + 60000) {
-			removePlayer(true);
+			kickPlayer(true);
 		} else if (client && idleTime == 60000 * kickAfterMinutes) {
 			std::ostringstream ss;
 			ss << "There was no variation in your behaviour for " << kickAfterMinutes << " minutes. You will be disconnected in one minute if there is no change in your actions until then.";
@@ -2186,7 +2190,6 @@ void Player::addExperience(Creature* source, uint64_t exp, bool sendText/* = fal
 		levelPercent = 0;
 	}
 	sendStats();
-	sendExperienceTracker(rawExp, exp);
 }
 
 void Player::removeExperience(uint64_t exp, bool sendText/* = false*/)
@@ -2272,7 +2275,6 @@ void Player::removeExperience(uint64_t exp, bool sendText/* = false*/)
 		levelPercent = 0;
 	}
 	sendStats();
-	sendExperienceTracker(0, -static_cast<int64_t>(exp));
 }
 
 double_t Player::getPercentLevel(uint64_t count, uint64_t nextLevelCount)
@@ -2635,6 +2637,91 @@ void Player::death(Creature* lastHitCreature)
 		onIdleStatus();
 		sendStats();
 	}
+	despawn();
+}
+
+bool Player::spawn()
+{
+	setDead(false);
+
+	const Position& pos = getLoginPosition();
+
+	if (!g_game.map.placeCreature(pos, this, false, true)) {
+		return false;
+	}
+
+	SpectatorHashSet spectators;
+	g_game.map.getSpectators(spectators, position, false, true);
+	for (Creature* spectator : spectators) {
+		if (!spectator) {
+			continue;
+		}
+
+		if (Player* tmpPlayer = spectator->getPlayer()) {
+			tmpPlayer->sendCreatureAppear(this, pos, true);
+		}
+
+		spectator->onCreatureAppear(this, false);
+	}
+
+	getParent()->postAddNotification(this, nullptr, 0);
+	g_game.addCreatureCheck(this);
+
+	addList();
+	return true;
+}
+
+void Player::despawn()
+{
+	if (isDead()) {
+		return;
+	}
+
+	listWalkDir.clear();
+	stopEventWalk();
+	onWalkAborted();
+
+	// remove check
+	Game::removeCreatureCheck(this);
+
+	// remove from map
+	Tile* tile = getTile();
+	if (!tile) {
+		return;
+	}
+
+	std::vector<int32_t> oldStackPosVector;
+
+	SpectatorHashSet spectators;
+	g_game.map.getSpectators(spectators, tile->getPosition(), true);
+	size_t i = 0;
+	for (Creature* spectator : spectators) {
+		if (!spectator) {
+			continue;
+		}
+
+		if (const Player* player = spectator->getPlayer()) {
+			oldStackPosVector.push_back(player->canSeeCreature(this) ? tile->getStackposOfCreature(player, this) : -1);
+		}
+		if (Player* player = spectator->getPlayer()) {
+			player->sendRemoveTileThing(tile->getPosition(), oldStackPosVector[i++]);
+		}
+
+		spectator->onRemoveCreature(this, false);
+	}
+
+	tile->removeCreature(this);
+
+	getParent()->postRemoveNotification(this, nullptr, 0);
+
+	g_game.removePlayer(this);
+
+	// show player as pending
+	for (const auto& [key, player] : g_game.getPlayers()) {
+		player->notifyStatusChange(this, VIPSTATUS_PENDING, false);
+	}
+
+	setDead(true);
 }
 
 bool Player::dropCorpse(Creature* lastHitCreature, Creature* mostDamageCreature, bool lastHitUnjustified, bool mostDamageUnjustified)
@@ -2696,11 +2783,11 @@ void Player::addList()
 	g_game.addPlayer(this);
 }
 
-void Player::removePlayer(bool displayEffect, bool forced /*= true*/)
+void Player::kickPlayer(bool displayEffect)
 {
 	g_creatureEvents->playerLogout(this);
 	if (client) {
-		client->logout(displayEffect, forced);
+		client->logout(displayEffect, true);
 	} else {
 		g_game.removeCreature(this);
 	}
@@ -3464,10 +3551,6 @@ void Player::stashContainer(StashContainerList itemDict)
 	}
 
 	retString << "Stowed " << totalStowed << " object" << (totalStowed > 1 ? "s." : ".");
-	if (moved) {
-		retString << " Moved " << movedItems << " object" << (movedItems > 1 ? "s." : ".");
-		movedItems = 0;
-	}
 	sendTextMessage(MESSAGE_STATUS, retString.str());
 }
 
@@ -3799,11 +3882,22 @@ bool Player::hasShopItemForSale(uint16_t itemId, uint8_t subType) const
 		return false;
 	}
 
-	const ItemType& itemType = Item::items[itemId];
-	std::vector<ShopBlock> shoplist = shopOwner->getShopItemVector();
-	return std::any_of(shoplist.begin(), shoplist.end(), [&](const ShopBlock& shopBlock) {
-		return shopBlock.itemId == itemId && shopBlock.itemBuyPrice != 0 && (!itemType.isFluidContainer() || shopBlock.itemSubType == subType);
-	});
+	const ItemType& it = Item::items.getItemIdByClientId(itemId);
+	ShopInfoMap shopItemMap = shopOwner->getShopItems();
+	if (shopItemMap.find(it.name) == shopItemMap.end()) {
+		return false;
+	}
+
+	const ShopInfo& shopInfo = shopItemMap[it.name];
+	if (shopInfo.buyPrice == 0) {
+		return false;
+	}
+
+	if (!it.isFluidContainer()) {
+		return true;
+	}
+
+	return shopInfo.subType == subType;
 }
 
 void Player::internalAddThing(Thing* thing)
@@ -4187,7 +4281,7 @@ void Player::onPlacedCreature()
 {
 	//scripting event - onLogin
 	if (!g_creatureEvents->playerLogin(this)) {
-		removePlayer(true);
+		kickPlayer(true);
 	}
 
 	sendUnjustifiedPoints();
@@ -5599,15 +5693,6 @@ void Player::stowItem(Item* item, uint32_t count, bool allItems) {
 		}
 	} else if (item->getContainer()) {
 		itemDict = item->getContainer()->getStowableItems();
-		for (Item* containerItem : item->getContainer()->getItems(true)) {
-			uint32_t depotChest = g_configManager().getNumber(DEPOTCHEST);
-			bool validDepot = depotChest > 0 && depotChest < 19;
-			if (g_configManager().getBoolean(STASH_MOVING) && containerItem && !containerItem->isStackable() && validDepot) {
-				g_game.internalMoveItem(containerItem->getParent(), getDepotChest(depotChest, true), INDEX_WHEREEVER, containerItem, containerItem->getItemCount(), nullptr);
-				movedItems++;
-				moved = true;
-			}
-		}
 	} else {
 		itemDict.push_back(std::pair<Item*, uint32_t>(item, count));
 	}

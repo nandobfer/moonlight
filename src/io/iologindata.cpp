@@ -522,14 +522,15 @@ bool IOLoginData::loadPlayer(Player* player, DBResult_ptr result)
 	PropStream propBestStream;
 	propBestStream.init(Bestattr, attrBestSize);
 
-  uint16_t raceid_t;
-  while (propBestStream.read<uint16_t>(raceid_t)) {
-    MonsterType* tmp_tt = g_monsters.getMonsterTypeByRaceId(raceid_t);
-    if (tmp_tt) {
-      player->addBestiaryTrackerList(tmp_tt);
-    }
-  }
-
+	for (int i = 0; i <= propBestStream.size(); i++) {
+     uint16_t raceid_t;
+     if (propBestStream.read<uint16_t>(raceid_t)) {
+      MonsterType* tmp_tt = g_monsters.getMonsterTypeByRaceId(raceid_t);
+      if (tmp_tt) {
+       player->addBestiaryTrackerList(tmp_tt);
+      }
+     }
+	}
 
   } else {
 	query.str(std::string());

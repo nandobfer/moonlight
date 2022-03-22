@@ -3,6 +3,8 @@ Storage_ = {
 	crit = {
 		bonus = 200000000,
 		chance = 200000001,
+		equipment_bonus = 200000002,
+		equipment_chance = 200000003,
 	},
 
 	-- Classes --

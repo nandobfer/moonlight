@@ -7,6 +7,11 @@ function Player:setBaseCritical()
 		player:setStorageValue(Storage_.crit.chance, 10)
 		player:setStorageValue(Storage_.crit.bonus, 100)
 	else end
+
+	if player:getStorageValue(Storage_.crit.weapon_chance) < 0 then
+		player:setStorageValue(Storage_.crit.weapon_chance, 0)
+		player:setStorageValue(Storage_.crit.weapon_bonus, 0)
+	end
 	
 	local critical = {
 		chance = player:getStorageValue(Storage_.crit.chance),

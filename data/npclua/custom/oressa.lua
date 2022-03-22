@@ -215,7 +215,7 @@ local function creatureSayCallback(npc, creature, type, message)
 		npcHandler:setTopic(playerId, 0)
 	-- Choosing dialog start
 	elseif MsgContains(message, "choosing") or MsgContains(message, "choose") and npcHandler:getTopic(playerId) == 0 then
-		if player:getLevel() >= 2 then
+		if player:getLevel() >= 8 then
 			npcHandler:say("I'll help you decide. \z
 				Tell me: Do you like to keep your {distance}, or do you like {close} combat?", npc, creature)
 			npcHandler:setTopic(playerId, 2)
@@ -298,7 +298,7 @@ local function creatureSayCallback(npc, creature, type, message)
 				voce deve considerar escolher sorcerer como sua classe."
 		}
 
-		if player:getLevel() >= 2 then
+		if player:getLevel() >= 8 then
 			table.insert(message, "Diga-me: VOCE QUER INICIAR SUA JORNADA COMO UM SORCERER?"..
 									" Responda com um orgulhoso {YES} se essa eh sua escolha!")
 			npcHandler:setTopic(playerId, 8)
@@ -315,7 +315,7 @@ local function creatureSayCallback(npc, creature, type, message)
 				voce deve considerar escolher druid como sua classe"
 		}
 
-		if player:getLevel() >= 2 then
+		if player:getLevel() >= 8 then
 			table.insert(message, "Diga-me: VOCE QUER INICIAR SUA JORNADA COMO UM DRUID?"..
 									" Responda com um orgulhoso {YES} se essa eh sua escolha!")
 			npcHandler:setTopic(playerId, 7)
@@ -334,7 +334,7 @@ local function creatureSayCallback(npc, creature, type, message)
 				voce deve considerar escolher paladin como sua classe."
 		}
 
-		if player:getLevel() >= 2 then
+		if player:getLevel() >= 8 then
 			table.insert(message, "Diga-me: VOCE QUER INICIAR SUA JORNADA COMO UM DRUID?"..
 									" Responda com um orgulhoso {YES} se essa eh sua escolha!")
 			npcHandler:setTopic(playerId, 6)
@@ -352,7 +352,7 @@ local function creatureSayCallback(npc, creature, type, message)
 				voce deve considerar escolher knight como sua classe."
 		}
 
-		if player:getLevel() >= 2 then
+		if player:getLevel() >= 8 then
 			table.insert(message, "Diga-me: VOCE QUER INICIAR SUA JORNADA COMO UM KNIGHT?"..
 									" Responda com um orgulhoso {YES} se essa eh sua escolha!")
 			npcHandler:setTopic(playerId, 5)
@@ -372,7 +372,7 @@ local function creatureSayCallback(npc, creature, type, message)
 				voce deve considerar escolher assassin como sua classe."
 		}
 
-		if player:getLevel() >= 2 then
+		if player:getLevel() >= 8 then
 			table.insert(message, "Diga-me: VOCE QUER INICIAR SUA JORNADA COMO UM ASSASSIN?"..
 									" Responda com um orgulhoso {YES} se essa eh sua escolha!")
 			npcHandler:setTopic(playerId, 9)
@@ -392,7 +392,7 @@ local function creatureSayCallback(npc, creature, type, message)
 				você deve considerar escolher necromancer como sua classe."
 		}
 
-		if player:getLevel() >= 2 then
+		if player:getLevel() >= 8 then
 			table.insert(message, "Diga-me: VOCE QUER INICIAR SUA JORNADA COMO UM NECROMANTE?"..
 									" Responda com um orgulhoso {YES} se essa eh sua escolha!")
 			npcHandler:setTopic(playerId, 10)
@@ -410,7 +410,7 @@ local function creatureSayCallback(npc, creature, type, message)
 				Se voce quiser atacar de longe enquanto seus amigos domesticados fazem a linha de frente, voce deve considerar escolher hunter como sua classe."
 		}
 
-		if player:getLevel() >= 2 then
+		if player:getLevel() >= 8 then
 			table.insert(message, "Diga-me: VOCE QUER INICIAR SUA JORNADA COMO UM HUNTER?"..
 									" Responda com um orgulhoso {YES} se essa eh sua escolha!")
 			npcHandler:setTopic(playerId, 11)
@@ -425,7 +425,7 @@ local function creatureSayCallback(npc, creature, type, message)
 		if MsgContains(message, "yes") then
 			for index, value in pairs(topicTable) do
 				if npcHandler:getTopic(playerId) == index then
-					if player:getStorageValue(Storage.Dawnport.DoorVocation) == -1 then
+					--if player:getStorageValue(Storage.Dawnport.DoorVocation) == -1 then
 						-- Change to new vocation, convert magic level and skills and set proper stats
 						player:changeVocation(value)
 						player:setStorageValue(Storage.Dawnport.DoorVocation, value)
@@ -437,16 +437,17 @@ local function creatureSayCallback(npc, creature, type, message)
 						if town then
 							--player:teleportTo(town:getTemplePosition())
 							raceTown(player)
+							player:setRaceSkin()
 							player:addItem(3059, 1)
 							--player:setTown(town)
 							player:ajustarMana()
 						else
 							player:sendCancelMessage("Town not found.")
 						end -- fim do teleportar para thais
-					else
-						npcHandler:setTopic(playerId, 0)
-						return true
-					end
+					--else
+						--npcHandler:setTopic(playerId, 0)
+						--return true
+					--end
 				end
 			end
 			-- Remove Mainland smuggling items
@@ -484,7 +485,7 @@ local function greetCallback(npc, creature)
 	local player = Player(creature)
 	local playerId = player:getId()
 
-	if player:getLevel() >= 2 then
+	if player:getLevel() >= 8 then
 		npcHandler:setMessage(MESSAGE_GREET, "Bem vindo, aventureiro. Ta pronto pra ir embora? \z
 												voce esta {decidido} da classe que quer?")
 	else

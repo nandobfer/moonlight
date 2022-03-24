@@ -40,6 +40,7 @@ function spellbook.onUse(player, item, fromPosition, target, toPosition, isHotke
 	["Treinamento de assassino IV"] = "'*Diga as palavras magicas uma vez* Voce se torna um dos lideres na ordem dos assassinos e mestre na arte de matar, recebendo um leve aumento na chance de golpear criticamente'" ,
 	["Mutilate"] = "'Acerta com sua arma envenenada, envenando o alvo e gerando um ponto de combo'" ,
 	["Mestre Envenenador"] = "'*Diga as palavras magicas uma vez* Voce domina a manipulacao de venenos, fazendo com que toda vez que um veneno cause dano critico voce recupere energia'" ,
+	["Vanish"] = "'Desaparece e ativa furtividade instantaneamente. Pode ser usado em combate.'" ,
 
 		-- Druid --
 	["Bear Form"] = "'Se transforma em Urso, aumentando consideravelmente sua vitalidade, seu dano desarmado (porque urso tem garra) e regenera vida'" ,

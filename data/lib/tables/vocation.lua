@@ -11,7 +11,10 @@ VOCATION = {
 		ELITE_KNIGHT = 8,
 		ASSASSIN = 9,
 		NECROMANCER = 10,
-		HUNTER = 11
+		HUNTER = 11,
+		EVIL_MAGE = 12,
+		INCENDIARY_MAGE = 13,
+		BARBARIAN = 14
 	},
 	CLIENT_ID = {
 		NONE = 0,
@@ -35,6 +38,11 @@ VOCATION = {
         KNIGHT = 4,
 		ASSASSIN = 5,
 		NECROMANCER = 6,
-		HUNTER = 7
+		HUNTER = 7,
+		EVIL_MAGE = 12,
+        INCENDIARY_MAGE = 13,
+        BARBARIAN = 14,
+        WARRIOR = 15,
+        TANK = 16
     }
 }

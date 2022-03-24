@@ -425,7 +425,7 @@ local function creatureSayCallback(npc, creature, type, message)
 		if MsgContains(message, "yes") then
 			for index, value in pairs(topicTable) do
 				if npcHandler:getTopic(playerId) == index then
-					if player:getStorageValue(Storage.Dawnport.DoorVocation) == -1 then
+					--if player:getStorageValue(Storage.Dawnport.DoorVocation) == -1 then
 						-- Change to new vocation, convert magic level and skills and set proper stats
 						player:changeVocation(value)
 						player:setStorageValue(Storage.Dawnport.DoorVocation, value)
@@ -439,10 +439,10 @@ local function creatureSayCallback(npc, creature, type, message)
 						else
 							player:sendCancelMessage("Town not found.")
 						end -- fim do teleportar para thais
-					else
+					--[[ else
 						npcHandler:setTopic(playerId, 0)
 						return true
-					end
+					end ]]
 				end
 			end
 			-- Remove Mainland smuggling items

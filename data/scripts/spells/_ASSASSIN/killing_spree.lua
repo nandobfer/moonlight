@@ -91,7 +91,7 @@ function spell.onCastSpell(creature, var)
 end
 
 spell:group("attack")
-spell:id(107)
+spell:id(108)
 spell:name("Killing Spree")
 spell:words("exori max sin")
 spell:level(100)

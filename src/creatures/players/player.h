@@ -158,7 +158,11 @@ class Player final : public Creature, public Cylinder
 
 		void removeList() override;
 		void addList() override;
+<<<<<<< HEAD
 		void removePlayer(bool displayEffect, bool forced = true);
+=======
+		void kickPlayer(bool displayEffect);
+>>>>>>> main
 
 		static uint64_t getExpForLevel(int32_t lv) {
 			lv--;
@@ -1299,10 +1303,17 @@ class Player final : public Creature, public Cylinder
 			}
 		}
 		void sendSaleItemList(const std::map<uint32_t, uint32_t>& inventoryMap) const {
+<<<<<<< HEAD
 			if (client && shopOwner) {
 				client->sendSaleItemList(shopOwner->getShopItemVector(), inventoryMap);
 			}
 		}
+=======
+      if (client && shopOwner) {
+        client->sendSaleItemList(shopOwner->getShopItems(), inventoryMap);
+      }
+    }
+>>>>>>> main
 		void sendCloseShop() const {
 			if (client) {
 				client->sendCloseShop();
@@ -1379,11 +1390,14 @@ class Player final : public Creature, public Cylinder
 				client->sendOpenPrivateChannel(receiver);
 			}
 		}
+<<<<<<< HEAD
 		void sendExperienceTracker(int64_t rawExp, int64_t finalExp) const {
 			if (client) {
 				client->sendExperienceTracker(rawExp, finalExp);
 			}
 		}
+=======
+>>>>>>> main
 		void sendOutfitWindow() {
 			if (client) {
 				client->sendOutfitWindow();
@@ -1624,6 +1638,12 @@ class Player final : public Creature, public Cylinder
 		void forgetInstantSpell(const std::string& spellName);
 		bool hasLearnedInstantSpell(const std::string& spellName) const;
 
+<<<<<<< HEAD
+=======
+		int64_t getLastPong() const {
+			return lastPong;
+		}
+>>>>>>> main
 		void updateRegeneration();
 
 		void setScheduledSaleUpdate(bool scheduled) {
@@ -1911,6 +1931,11 @@ class Player final : public Creature, public Cylinder
 		void setNextPotionActionTask(SchedulerTask* task);
 
 		void death(Creature* lastHitCreature) override;
+<<<<<<< HEAD
+=======
+		bool spawn();
+		void despawn();
+>>>>>>> main
 		bool dropCorpse(Creature* lastHitCreature, Creature* mostDamageCreature,
                         bool lastHitUnjustified, bool mostDamageUnjustified) override;
 		Item* getCorpse(Creature* lastHitCreature, Creature* mostDamageCreature) override;
@@ -2083,7 +2108,10 @@ class Player final : public Creature, public Cylinder
 		uint16_t staminaXpBoost = 100;
 		int16_t lastDepotId = -1;
 		StashItemList stashItems; // [ClientID] = amount
+<<<<<<< HEAD
 		uint32_t movedItems = 0;
+=======
+>>>>>>> main
 
 		// Bestiary
 		bool charmExpansion = false;
@@ -2154,7 +2182,11 @@ class Player final : public Creature, public Cylinder
 		bool supplyStash = false; // Menu option 'stow, stow container ...'
 		bool marketMenu = false; // Menu option 'show in market'
 		bool exerciseTraining = false;
+<<<<<<< HEAD
 		bool moved = false;
+=======
+		bool dead = false;
+>>>>>>> main
 
 		static uint32_t playerAutoID;
 
@@ -2193,6 +2225,16 @@ class Player final : public Creature, public Cylinder
 		uint16_t getLookCorpse() const override;
 		void getPathSearchParams(const Creature* creature, FindPathParams& fpp) const override;
 
+<<<<<<< HEAD
+=======
+		void setDead(bool isDead) {
+			dead = isDead;
+		}
+		bool isDead() const {
+			return dead;
+		}
+
+>>>>>>> main
 		friend class Game;
 		friend class Npc;
 		friend class PlayerFunctions;
@@ -2202,7 +2244,10 @@ class Player final : public Creature, public Cylinder
 		friend class IOLoginData;
 		friend class ProtocolGame;
 		friend class MoveEvent;
+<<<<<<< HEAD
 		friend class BedItem;
+=======
+>>>>>>> main
 
   account::Account *account_;
 };

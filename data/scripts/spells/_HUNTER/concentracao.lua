@@ -1,6 +1,6 @@
 local config = {
 	mana = 10,
-	duration = 1000 * 10 -- segundos
+	duration = 1000 * 20 -- segundos
 }
 
 local combat = Combat()

@@ -25,6 +25,10 @@
 #include "creatures/monsters/monster.h"
 #include "game/scheduling/scheduler.h"
 
+<<<<<<< HEAD
+=======
+
+>>>>>>> main
 double Creature::speedA = 857.36;
 double Creature::speedB = 261.29;
 double Creature::speedC = -4795.01;
@@ -649,7 +653,10 @@ void Creature::onDeath()
 					Party* party = attackerPlayer->getParty();
 					if (party && party->getLeader() && party->isSharedExperienceActive() && party->isSharedExperienceEnabled()) {
 						attacker = party->getLeader();
+<<<<<<< HEAD
 						mostDamageCreature = attacker;
+=======
+>>>>>>> main
 					}
 				}
 
@@ -679,12 +686,21 @@ void Creature::onDeath()
 	bool droppedCorpse = dropCorpse(lastHitCreature, mostDamageCreature, lastHitUnjustified, mostDamageUnjustified);
 	death(lastHitCreature);
 
+<<<<<<< HEAD
 	if (master) {
 		setMaster(nullptr);
 	}
 
 	if (droppedCorpse) {
 		g_game.removeCreature(this, false);
+=======
+	if (droppedCorpse && !getPlayer()) {
+		g_game.removeCreature(this, false);
+	}
+
+	if (master) {
+		removeMaster();
+>>>>>>> main
 	}
 }
 
@@ -727,6 +743,7 @@ bool Creature::dropCorpse(Creature* lastHitCreature, Creature* mostDamageCreatur
 			g_game.internalAddItem(tile, corpse, INDEX_WHEREEVER, FLAG_NOLIMIT);
 			dropLoot(corpse->getContainer(), lastHitCreature);
 			corpse->startDecaying();
+<<<<<<< HEAD
 			bool corpses = corpse->isRewardCorpse() && (corpse->getID() == ITEM_MALE_CORPSE || corpse->getID() == ITEM_FEMALE_CORPSE);
 			if (mostDamageCreature && mostDamageCreature->getPlayer() && !corpses) {
 				Player* player = mostDamageCreature->getPlayer();
@@ -756,6 +773,8 @@ bool Creature::dropCorpse(Creature* lastHitCreature, Creature* mostDamageCreatur
 					g_dispatcher.addTask(createTask(std::bind(&Game::playerQuickLoot, &g_game, mostDamageCreature->getID(), this->getPosition(), corpse->getClientID(), pos - 1, nullptr, false, true)));
 				}
 			}
+=======
+>>>>>>> main
 		}
 
 		// Scripting event onDeath
@@ -786,6 +805,10 @@ Item* Creature::getCorpse(Creature*, Creature*)
 void Creature::changeHealth(int32_t healthChange, bool sendHealthChange/* = true*/)
 {
 	int32_t oldHealth = health;
+<<<<<<< HEAD
+=======
+	
+>>>>>>> main
 
 	if (healthChange > 0) {
 		health += std::min<int32_t>(healthChange, getMaxHealth() - health);
@@ -797,7 +820,22 @@ void Creature::changeHealth(int32_t healthChange, bool sendHealthChange/* = true
 		g_game.addCreatureHealth(this);
 	}
 	if (health <= 0) {
+<<<<<<< HEAD
 		g_dispatcher.addTask(createTask(std::bind(&Game::executeDeath, &g_game, getID())));
+=======
+		const int32_t key = 100000025;
+		int32_t value;
+
+				
+		if (getPlayer()&& getPlayer()->getStorageValue(key, value) && value == 1){
+			//SPDLOG_WARN("e... morreu");
+			health = (getPlayer()->getMaxHealth());
+			g_game.internalTeleport(this, getPlayer()->getTemplePosition(), true);
+		}
+		else{
+				g_dispatcher.addTask(createTask(std::bind(&Game::executeDeath, &g_game, getID())));
+		}
+>>>>>>> main
 	}
 }
 

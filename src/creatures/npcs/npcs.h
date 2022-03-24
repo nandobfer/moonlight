@@ -22,6 +22,7 @@
 
 #include "creatures/creature.h"
 
+<<<<<<< HEAD
 class Shop {
 	public:
 		Shop() = default;
@@ -33,6 +34,8 @@ class Shop {
 		ShopBlock shopBlock;
 };
 
+=======
+>>>>>>> main
 class NpcType
 {
 	struct NpcInfo {
@@ -74,7 +77,11 @@ class NpcType
 
 		std::vector<voiceBlock_t> voiceVector;
 		std::vector<std::string> scripts;
+<<<<<<< HEAD
 		std::vector<ShopBlock> shopItemVector;
+=======
+		ShopInfoMap shopItems;
+>>>>>>> main
 
 		NpcsEvent_t eventType = NPCS_EVENT_NONE;
 	};
@@ -91,7 +98,13 @@ class NpcType
 		std::string nameDescription;
 		NpcInfo info;
 
+<<<<<<< HEAD
 		void loadShop(NpcType* npcType, ShopBlock shopBlock);
+=======
+		void addShopItem(const std::string &itemName, const ShopInfo &shopInfo) {
+			info.shopItems[itemName] = shopInfo;
+		}
+>>>>>>> main
 
 		bool loadCallback(LuaScriptInterface* scriptInterface);
 		bool canSpawn(const Position& pos);

@@ -315,9 +315,14 @@ class Game
 		void playerSetFightModes(uint32_t playerId, FightMode_t fightMode, bool chaseMode, bool secureMode);
 		void playerLookAt(uint32_t playerId, const Position& pos, uint8_t stackPos);
 		void playerLookInBattleList(uint32_t playerId, uint32_t creatureId);
+<<<<<<< HEAD
 		void playerQuickLoot(uint32_t playerId, const Position& pos, uint16_t spriteId, uint8_t stackPos,
 								Item* defaultItem = nullptr, bool lootAllCorpses = false, bool autoLoot = false);
 		void playerLootAllCorpses(Player* player, const Position& pos, bool lootAllCorpses);
+=======
+		void playerQuickLoot(uint32_t playerId, const Position& pos,
+								uint16_t spriteId, uint8_t stackPos, Item* defaultItem = nullptr);
+>>>>>>> main
 		void playerSetLootContainer(uint32_t playerId, ObjectCategory_t category,
 								const Position& pos, uint16_t spriteId, uint8_t stackPos);
 		void playerClearLootContainer(uint32_t playerId, ObjectCategory_t category);;
@@ -609,7 +614,10 @@ class Game
 		static constexpr int32_t SUNRISE = 360;
 
 		bool isDay = false;
+<<<<<<< HEAD
 		bool browseField = false;
+=======
+>>>>>>> main
 
 		GameState_t gameState = GAME_STATE_NORMAL;
 		WorldType_t worldType = WORLD_TYPE_PVP;

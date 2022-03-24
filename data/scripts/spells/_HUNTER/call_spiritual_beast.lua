@@ -62,16 +62,16 @@ function spell.onCastSpell(player, variant)
 			summon2:getPosition():sendMagicEffect(CONST_ME_TELEPORT)
 			--Vida e buff de dano pro pet, escalando com o Level do Hunter
 			summon2:addCondition(damage_scaling)
-			summon2:setMaxHealth(player:getMaxHealth())
-			summon2:setHealth(summon2:getMaxHealth())
+			summon2:setMaxHealth(player:getMaxHealth() * 2)
+			summon2:setHealth(summon2:getMaxHealth() * 2)
 		else end
 		if hati == 0 then
 			local summon = Game.createMonster(monsterName, position, true, false, player)
 			summon:getPosition():sendMagicEffect(CONST_ME_TELEPORT)
 			--Vida e buff de dano pro pet, escalando com o Level do Hunter
 			summon:addCondition(damage_scaling)
-			summon:setMaxHealth(player:getMaxHealth()) -- vida do pet = vida do hunter
-			summon:setHealth(summon:getMaxHealth())
+			summon:setMaxHealth(player:getMaxHealth() * 2) -- vida do pet = vida do hunter
+			summon:setHealth(summon:getMaxHealth() * 2)
 		end
 	else end
 	

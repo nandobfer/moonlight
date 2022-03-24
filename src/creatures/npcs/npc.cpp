@@ -220,6 +220,7 @@ void Npc::onPlayerBuyItem(Player* player, uint16_t serverId,
 		return;
 	}
 
+<<<<<<< HEAD
 	uint32_t buyPrice = 0;
 	const ItemType& itemType = Item::items[serverId];
 	const std::vector<ShopBlock> &shopVector = getShopItemVector();
@@ -243,11 +244,34 @@ void Npc::onPlayerBuyItem(Player* player, uint16_t serverId,
 	}
 
 	// onPlayerBuyItem(self, player, itemId, subType, amount, ignore inBackpacks)
+=======
+	const ItemType& itemType = Item::items[serverId];
+
+	if (getShopItems().find(itemType.name) == getShopItems().end()) {
+		return;
+	}
+
+	ShopInfo shopInfo = getShopItems()[itemType.name];
+	int64_t totalCost = shopInfo.buyPrice * amount;
+	if (getCurrency() == ITEM_GOLD_COIN) {
+		if (!g_game.removeMoney(player, totalCost, 0, true)) {
+			return;
+		}
+	} else if(!player->removeItemOfType(getCurrency(), shopInfo.buyPrice, -1, false)) {
+		return;
+	}
+
+	// onPlayerBuyItem(self, player, itemId, subType, amount, ignore, inBackpacks)
+>>>>>>> main
 	CreatureCallback callback = CreatureCallback(npcType->info.scriptInterface, this);
 	if (callback.startScriptInterface(npcType->info.playerBuyEvent)) {
 		callback.pushSpecificCreature(this);
 		callback.pushCreature(player);
+<<<<<<< HEAD
 		callback.pushNumber(itemType.clientId);
+=======
+		callback.pushNumber(serverId);
+>>>>>>> main
 		callback.pushNumber(subType);
 		callback.pushNumber(amount);
 		callback.pushBoolean(inBackpacks);
@@ -267,6 +291,7 @@ void Npc::onPlayerSellItem(Player* player, uint16_t serverId,
 		return;
 	}
 
+<<<<<<< HEAD
 	uint32_t sellPrice = 0;
 	const ItemType& itemType = Item::items[serverId];
 	const std::vector<ShopBlock> &shopVector = getShopItemVector();
@@ -284,6 +309,21 @@ void Npc::onPlayerSellItem(Player* player, uint16_t serverId,
 	}
 
 	int64_t totalCost = sellPrice * amount;
+=======
+	const ItemType& itemType = Item::items[serverId];
+
+	if (getShopItems().find(itemType.name) == getShopItems().end()) {
+		return;
+	}
+
+	ShopInfo shopInfo = getShopItems()[itemType.name];
+
+	if(!player->removeItemOfType(serverId, amount, -1, false, false)) {
+		return;
+	}
+
+	int64_t totalCost = shopInfo.sellPrice * amount;
+>>>>>>> main
 	g_game.addMoney(player, totalCost, 0);
 
 	// onPlayerSellItem(self, player, itemId, subType, amount, ignore)

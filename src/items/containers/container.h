@@ -24,7 +24,10 @@
 
 #include "items/cylinder.h"
 #include "items/item.h"
+<<<<<<< HEAD
 #include "items/tile.h"
+=======
+>>>>>>> main
 
 class Container;
 class DepotChest;
@@ -161,8 +164,11 @@ class Container : public Item, public Cylinder
 		uint32_t getItemTypeCount(uint16_t itemId, int32_t subType = -1) const override final;
 		std::map<uint32_t, uint32_t>& getAllItemTypeCount(std::map<uint32_t, uint32_t>& countMap) const override final;
 		Thing* getThing(size_t index) const override final;
+<<<<<<< HEAD
 		
 		ItemVector getItems(bool recursive = false) const;
+=======
+>>>>>>> main
 
 		void postAddNotification(Thing* thing, const Cylinder* oldParent, int32_t index, CylinderLink_t link = LINK_OWNER) override;
 		void postRemoveNotification(Thing* thing, const Cylinder* newParent, int32_t index, CylinderLink_t link = LINK_OWNER) override;

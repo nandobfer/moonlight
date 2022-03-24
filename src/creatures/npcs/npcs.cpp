@@ -92,6 +92,7 @@ bool NpcType::loadCallback(LuaScriptInterface* scriptInterface)
 	return true;
 }
 
+<<<<<<< HEAD
 void NpcType::loadShop(NpcType* npcType, ShopBlock shopBlock)
 {
 	if (shopBlock.childShop.empty()) {
@@ -107,6 +108,8 @@ void NpcType::loadShop(NpcType* npcType, ShopBlock shopBlock)
 	}
 }
 
+=======
+>>>>>>> main
 NpcType* Npcs::getNpcType(const std::string& name, bool create /* = false*/)
 {
 	std::string key = asLowerCaseString(name);

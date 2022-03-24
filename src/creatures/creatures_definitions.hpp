@@ -536,7 +536,20 @@ enum Vocation_t : uint16_t {
 	VOCATION_ASSASSIN = 9,
 	VOCATION_NECROMANCER = 10,
 	VOCATION_HUNTER = 11,
+<<<<<<< HEAD
 	VOCATION_LAST = VOCATION_HUNTER
+=======
+	VOCATION_EVIL_MAGE = 12,
+	VOCAITION_INCENDIARY_MAGE = 13,
+	VOCATION_BARBARIAN = 14,
+	VOCATION_WARRIOR = 15,
+	VOCATION_TANK = 16,
+	VOCATION_ARCHER = 17,
+	VOCATION_SPEARMAN = 18,
+	VOCATION_ICE_MAGE = 19,
+	VOCATION_EARTH_MAGE = 20,
+	VOCATION_LAST = VOCATION_EARTH_MAGE
+>>>>>>> main
 };
 
 enum FightMode_t : uint8_t {
@@ -709,8 +722,35 @@ struct HistoryMarketOffer {
 	MarketOfferState_t state;
 };
 
+<<<<<<< HEAD
 using MarketOfferList = std::list<MarketOffer>;
 using HistoryMarketOfferList = std::list<HistoryMarketOffer>;
+=======
+struct ShopInfo {
+	uint16_t itemClientId;
+	std::string name;
+	int32_t subType;
+	uint32_t buyPrice;
+	uint32_t sellPrice;
+	int32_t storageKey, storageValue;
+
+	ShopInfo() {
+		itemClientId = 0;
+		subType = 1;
+		buyPrice = 0;
+		sellPrice = 0;
+		storageKey = 0;
+		storageValue = 0;
+	}
+
+	explicit ShopInfo(uint16_t newItemId, int32_t newSubType = 0, uint32_t newBuyPrice = 0, uint32_t newSellPrice = 0, int32_t newStorageKey = 0, int32_t newStorageValue = 0, std::string newName = "")
+		: itemClientId(newItemId), subType(newSubType), buyPrice(newBuyPrice), sellPrice(newSellPrice), storageKey(newStorageKey), storageValue(newStorageValue), name(std::move(newName)) {}
+};
+
+using MarketOfferList = std::list<MarketOffer>;
+using HistoryMarketOfferList = std::list<HistoryMarketOffer>;
+using ShopInfoMap = std::unordered_map<std::string, ShopInfo>;
+>>>>>>> main
 using StashItemList = std::map<uint16_t, uint32_t>;
 
 struct Familiar {
@@ -811,6 +851,7 @@ struct LootBlock {
 	}
 };
 
+<<<<<<< HEAD
 struct ShopBlock {
 	uint16_t itemId;
 	std::string itemName;
@@ -835,6 +876,8 @@ struct ShopBlock {
 		: itemId(newItemId), itemSubType(newSubType), itemBuyPrice(newBuyPrice), itemSellPrice(newSellPrice), itemStorageKey(newStorageKey), itemStorageValue(newStorageValue), itemName(std::move(newName)) {}
 };
 
+=======
+>>>>>>> main
 struct summonBlock_t {
 	std::string name;
 	uint32_t chance;

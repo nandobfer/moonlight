@@ -11862,7 +11862,7 @@ local items = {
 		type = "deequip",
 		slot = "hand"
 	},
-	{
+	--[[ {
 		-- assassin dagger
 		itemid = 7404,
 		type = "equip",
@@ -11873,7 +11873,7 @@ local items = {
 		itemid = 7404,
 		type = "deequip",
 		slot = "hand"
-	},
+	}, ]]
 	{
 		-- berserker
 		itemid = 7403,

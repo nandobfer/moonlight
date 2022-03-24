@@ -75,6 +75,11 @@ end
 function applyDot(player, target, _, mod, duration)
 	local level = player:getLevel()
 	local ml = player:getMagicLevel()
+
+	local crit = {
+		chance = player:getStorageValue(Storage_.crit.chance) + player:getStorageValue(Storage_.crit.equipment_chance),
+		bonus = player:getStorageValue(Storage_.crit.bonus) + player:getStorageValue(Storage_.crit.equipment_bonus)
+	}
 	
 	if target:isNpc() then
 		return false
@@ -106,8 +111,8 @@ function applyDot(player, target, _, mod, duration)
 		else
 			duration = duration -1
 			doTargetCombatHealth(0, Creature(targetid), element, formula, formula, effect)
-			if math.random(1, 100) <= Creature(playerid):getStorageValue(Storage_.crit.chance) then
-				doTargetCombatHealth(0, Creature(targetid), element, formula * (Creature(playerid):getStorageValue(Storage_.crit.bonus) / 100), formula * (Creature(playerid):getStorageValue(Storage_.crit.bonus) / 100), effect)
+			if math.random(1, 100) <= crit.chance then
+				doTargetCombatHealth(0, Creature(targetid), element, formula * crit.bonus / 100, formula * crit.bonus / 100, effect)
 				Creature(targetid):getPosition():sendMagicEffect(CONST_ME_CRITICAL_DAMAGE)
 				masterPoisoner(Creature(playerid))
 			else end

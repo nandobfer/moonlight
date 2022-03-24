@@ -1,30 +1,41 @@
 local assassinDagger = MoveEvent()
 
+local x = 0 -- pra evitar o bug do .onEquip rodar 3x
+
 function assassinDagger.onEquip(player, item, slot)
-    local critical = {
-		chance = player:getStorageValue(Storage_.crit.chance),
-		bonus = player:getStorageValue(Storage_.crit.bonus)
-	}
-	player:setStorageValue(Storage_.crit.bonus, critical.bonus + 50)
-	player:setStorageValue(Storage_.crit.chance, critical.chance + 15)
-    player:say("teste")
+    if x == 0 then
+        local critical = {
+            chance = player:getStorageValue(Storage_.crit.equipment_chance),
+            bonus = player:getStorageValue(Storage_.crit.equipment_bonus)
+        }
+        player:setStorageValue(Storage_.crit.equipment_bonus, critical.bonus + 50)
+        player:setStorageValue(Storage_.crit.equipment_chance, critical.chance + 15)
+        x = x + 1
+        return true
+    end
+    
+    return true
 end
 
 assassinDagger:id(7404)
 assassinDagger:type("equip")
+assassinDagger:slot("hand")
 assassinDagger:register()
 
 assassinDagger = MoveEvent()
 
 function assassinDagger.onDeEquip(player, item, slot)
     local critical = {
-		chance = player:getStorageValue(Storage_.crit.chance),
-		bonus = player:getStorageValue(Storage_.crit.bonus)
+		chance = player:getStorageValue(Storage_.crit.equipment_chance),
+		bonus = player:getStorageValue(Storage_.crit.equipment_bonus)
 	}
-	player:setStorageValue(Storage_.crit.bonus, critical.bonus - 50)
-	player:setStorageValue(Storage_.crit.chance, critical.chance - 15)
+	player:setStorageValue(Storage_.crit.equipment_bonus, critical.bonus - 50)
+	player:setStorageValue(Storage_.crit.equipment_chance, critical.chance - 15)
+    x = 0
+    return true
 end
 
 assassinDagger:id(7404)
 assassinDagger:type("deequip")
+assassinDagger:slot("hand")
 assassinDagger:register()

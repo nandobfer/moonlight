@@ -245,6 +245,7 @@ int ContainerFunctions::luaContainerGetContentDescription(lua_State* L) {
 	return 1;
 }
 
+<<<<<<< HEAD
 int ContainerFunctions::luaContainerGetItems(lua_State* L) {
 	// container:getItems([recursive = false])
 	const Container* container = getUserdata<Container>(L, 1);
@@ -268,6 +269,8 @@ int ContainerFunctions::luaContainerGetItems(lua_State* L) {
 	return 1;
 }
 
+=======
+>>>>>>> main
 int ContainerFunctions::luaContainerRegisterReward(lua_State* L) {
 	// container:registerReward()
 	Container* container = getUserdata<Container>(L, 1);

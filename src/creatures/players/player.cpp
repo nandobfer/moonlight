@@ -1494,13 +1494,9 @@ void Player::onCreatureAppear(Creature* creature, bool isLogin)
 			bed->wakeUp(this);
 		}
 
-<<<<<<< HEAD
-		SPDLOG_INFO("{} has logged in", name);
-=======
 		if (isLogin) {
 			SPDLOG_INFO("{} has logged in", name);
 		}
->>>>>>> main
 
 		if (guild) {
 			guild->addMember(this);
@@ -1620,23 +1616,15 @@ void Player::onRemoveCreature(Creature* creature, bool isLogout)
 
 		clearPartyInvitations();
 
-<<<<<<< HEAD
-		if (party) {
-=======
-		if (party && isLogout) {
->>>>>>> main
+		/* if (party && isLogout) {
 			party->leaveParty(this);
-		}
+		} */
 
 		g_chat->removeUserFromAllChannels(*this);
 
-<<<<<<< HEAD
-		SPDLOG_INFO("{} has logged out", getName());
-=======
 		if (isLogout) {
 			SPDLOG_INFO("{} has logged out", getName());
 		}
->>>>>>> main
 
 		if (guild) {
 			guild->removeMember(this);
@@ -1971,11 +1959,7 @@ void Player::onThink(uint32_t interval)
 		idleTime += interval;
 		const int32_t kickAfterMinutes = g_configManager().getNumber(KICK_AFTER_MINUTES);
 		if (idleTime > (kickAfterMinutes * 60000) + 60000) {
-<<<<<<< HEAD
-			removePlayer(true);
-=======
 			kickPlayer(true);
->>>>>>> main
 		} else if (client && idleTime == 60000 * kickAfterMinutes) {
 			std::ostringstream ss;
 			ss << "There was no variation in your behaviour for " << kickAfterMinutes << " minutes. You will be disconnected in one minute if there is no change in your actions until then.";
@@ -2206,10 +2190,6 @@ void Player::addExperience(Creature* source, uint64_t exp, bool sendText/* = fal
 		levelPercent = 0;
 	}
 	sendStats();
-<<<<<<< HEAD
-	sendExperienceTracker(rawExp, exp);
-=======
->>>>>>> main
 }
 
 void Player::removeExperience(uint64_t exp, bool sendText/* = false*/)
@@ -2295,10 +2275,6 @@ void Player::removeExperience(uint64_t exp, bool sendText/* = false*/)
 		levelPercent = 0;
 	}
 	sendStats();
-<<<<<<< HEAD
-	sendExperienceTracker(0, -static_cast<int64_t>(exp));
-=======
->>>>>>> main
 }
 
 double_t Player::getPercentLevel(uint64_t count, uint64_t nextLevelCount)
@@ -2661,8 +2637,6 @@ void Player::death(Creature* lastHitCreature)
 		onIdleStatus();
 		sendStats();
 	}
-<<<<<<< HEAD
-=======
 	despawn();
 }
 
@@ -2748,7 +2722,6 @@ void Player::despawn()
 	}
 
 	setDead(true);
->>>>>>> main
 }
 
 bool Player::dropCorpse(Creature* lastHitCreature, Creature* mostDamageCreature, bool lastHitUnjustified, bool mostDamageUnjustified)
@@ -2810,19 +2783,11 @@ void Player::addList()
 	g_game.addPlayer(this);
 }
 
-<<<<<<< HEAD
-void Player::removePlayer(bool displayEffect, bool forced /*= true*/)
-{
-	g_creatureEvents->playerLogout(this);
-	if (client) {
-		client->logout(displayEffect, forced);
-=======
 void Player::kickPlayer(bool displayEffect)
 {
 	g_creatureEvents->playerLogout(this);
 	if (client) {
 		client->logout(displayEffect, true);
->>>>>>> main
 	} else {
 		g_game.removeCreature(this);
 	}
@@ -3586,13 +3551,6 @@ void Player::stashContainer(StashContainerList itemDict)
 	}
 
 	retString << "Stowed " << totalStowed << " object" << (totalStowed > 1 ? "s." : ".");
-<<<<<<< HEAD
-	if (moved) {
-		retString << " Moved " << movedItems << " object" << (movedItems > 1 ? "s." : ".");
-		movedItems = 0;
-	}
-=======
->>>>>>> main
 	sendTextMessage(MESSAGE_STATUS, retString.str());
 }
 
@@ -3924,13 +3882,6 @@ bool Player::hasShopItemForSale(uint16_t itemId, uint8_t subType) const
 		return false;
 	}
 
-<<<<<<< HEAD
-	const ItemType& itemType = Item::items[itemId];
-	std::vector<ShopBlock> shoplist = shopOwner->getShopItemVector();
-	return std::any_of(shoplist.begin(), shoplist.end(), [&](const ShopBlock& shopBlock) {
-		return shopBlock.itemId == itemId && shopBlock.itemBuyPrice != 0 && (!itemType.isFluidContainer() || shopBlock.itemSubType == subType);
-	});
-=======
 	const ItemType& it = Item::items.getItemIdByClientId(itemId);
 	ShopInfoMap shopItemMap = shopOwner->getShopItems();
 	if (shopItemMap.find(it.name) == shopItemMap.end()) {
@@ -3947,7 +3898,6 @@ bool Player::hasShopItemForSale(uint16_t itemId, uint8_t subType) const
 	}
 
 	return shopInfo.subType == subType;
->>>>>>> main
 }
 
 void Player::internalAddThing(Thing* thing)
@@ -4331,11 +4281,7 @@ void Player::onPlacedCreature()
 {
 	//scripting event - onLogin
 	if (!g_creatureEvents->playerLogin(this)) {
-<<<<<<< HEAD
-		removePlayer(true);
-=======
 		kickPlayer(true);
->>>>>>> main
 	}
 
 	sendUnjustifiedPoints();
@@ -5747,18 +5693,6 @@ void Player::stowItem(Item* item, uint32_t count, bool allItems) {
 		}
 	} else if (item->getContainer()) {
 		itemDict = item->getContainer()->getStowableItems();
-<<<<<<< HEAD
-		for (Item* containerItem : item->getContainer()->getItems(true)) {
-			uint32_t depotChest = g_configManager().getNumber(DEPOTCHEST);
-			bool validDepot = depotChest > 0 && depotChest < 19;
-			if (g_configManager().getBoolean(STASH_MOVING) && containerItem && !containerItem->isStackable() && validDepot) {
-				g_game.internalMoveItem(containerItem->getParent(), getDepotChest(depotChest, true), INDEX_WHEREEVER, containerItem, containerItem->getItemCount(), nullptr);
-				movedItems++;
-				moved = true;
-			}
-		}
-=======
->>>>>>> main
 	} else {
 		itemDict.push_back(std::pair<Item*, uint32_t>(item, count));
 	}

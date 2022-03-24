@@ -21,7 +21,7 @@ end
 spell:group("attack", "ultimatestrikes")
 spell:id(156)
 spell:name("Ultimate Death Strike")
-spell:words("exori max mort")
+spell:words("exori gran max mort")
 spell:level(100)
 spell:mana(1000)
 spell:isPremium(true)

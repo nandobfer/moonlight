@@ -34,14 +34,21 @@ function spell.onCastSpell(creature, var) -- onCast com verificação de weapon 
 		local position = player:getPosition()
 		local isGhost = not player:isInGhostMode()
 
-		player:setGhostMode(isGhost)
 		if isGhost then
-			player:sendTextMessage(MESSAGE_HOTKEY_PRESSED, "You are now invisible.")
-			player:addCondition(condition)
-			position.x = position.x + 1
-			player:setStorageValue(Storage_.stealth, 1)
-			position:sendMagicEffect(CONST_ME_SMOKE)
+			if not player:getCondition(CONDITION_INFIGHT, CONDITIONID_DEFAULT) or getTilePzInfo(position) then
+				player:setGhostMode(isGhost)
+				player:sendTextMessage(MESSAGE_HOTKEY_PRESSED, "You are now invisible.")
+				player:addCondition(condition)
+				position.x = position.x + 1
+				player:setStorageValue(Storage_.stealth, 1)
+				position:sendMagicEffect(CONST_ME_SMOKE)
+			else
+				player:sendCancelMessage("You can only stealth out of combat!")
+				position:sendMagicEffect(CONST_ME_POFF)
+				return false
+			end
 		else
+			player:setGhostMode(isGhost)
 			player:sendTextMessage(MESSAGE_HOTKEY_PRESSED, "You are visible again.")
 			player:removeCondition(CONDITION_INVISIBLE)
 			position.x = position.x + 1

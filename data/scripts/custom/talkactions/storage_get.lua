@@ -17,7 +17,7 @@ function storageGet.onSay(cid, words, param)
 	end
 
 	local target = Player(split[1])
-	if target == nil then
+	if target == nil and not split[1] == "Game" then
 		player:sendCancelMessage("A player with that name is not online.")
 		return false
 	end
@@ -26,9 +26,14 @@ function storageGet.onSay(cid, words, param)
 	split[2] = split[2]:gsub("^%s*(.-)$", "%1")
 
 	local ch = split[2]
-	sto=getPlayerStorageValue(getPlayerByName(split[1]), tonumber(ch))
-	doPlayerSendTextMessage(cid, MESSAGE_EVENT_ADVANCE, "The storage with id: "..tonumber(ch).." from player "..split[1].." is: "..sto..".")
-	return false
+	if split[1] == "Game" then
+		sto = Game.getStorageValue(tonumber(ch))
+		doPlayerSendTextMessage(cid, MESSAGE_EVENT_ADVANCE, "The storage with id: "..tonumber(ch).." from " ..split[1].." is: "..sto..".")
+	else
+		sto=getPlayerStorageValue(getPlayerByName(split[1]), tonumber(ch))
+		doPlayerSendTextMessage(cid, MESSAGE_EVENT_ADVANCE, "The storage with id: "..tonumber(ch).." from player "..split[1].." is: "..sto..".")
+		return false
+	end
 end
 
 storageGet:separator(" ")

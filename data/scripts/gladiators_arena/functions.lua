@@ -28,7 +28,7 @@ end
 
 --remove player da queue reorganiza queue.
 function removeFila(player)
-    for index in range(#Fila) do
+    for index = 1, #Fila do
         if Game.getStorageValue(Fila[index]) == player:getId() then
             Game.setStorageValue(Fila[index], 0)
                   player:teleportTo(Position(32369, 32241, 7)) --teste de tp.
@@ -169,36 +169,25 @@ end
 
 --função setArenaVocation
 function setArenaVocation(cid, item, position)
-    for index, _ in ipairs(ArenaPlayers) do
+    for index = 1, #ArenaPlayers do
         local cid = Game.getStorageValue(ArenaPlayers[index])
         local player = Player(cid)
 
-        local vocacoes = {
 
-        --Evil Mage
-        [9] = {
-
-        shield = 30,
-        axe = 10,
-        sword = 10,
-        club = 10,
-        distance = 10,
-        magiclevel = 80
-        }
-        }
-        for index2, __ in ipairs(vocacoes) do
-            if vocacoes[index2] == player:getStorageValue(100000002) then
-
+        for index2 = 1, #ArenaVocations do
+            if ArenaVocations[index2] == player:getStorageValue(100000002) then
 
             local skill_bonus = Condition(CONDITION_ATTRIBUTES)
             skill_bonus:setTicks(-1)        
             local axe = player:getSkillLevel(SKILL_AXE)
-            local skill_axe = -(axe- vocacoes[index2].axe)
+            local skill_axe = -(axe- ArenaVocations[index2].axe)
             skill_bonus:setParameter(CONDITION_PARAM_SKILL_AXE, skill_axe)
-            skill_bonus:setParameter(CONDITION_PARAM_STAT_MAGICPOINTS, vocacoes[index2].magiclevel)
+            skill_bonus:setParameter(CONDITION_PARAM_STAT_MAGICPOINTS, ArenaVocations[index2].magiclevel)
             player:addCondition(skill_bonus)
+
             player:teleportTo(Position(32369, 32241, 7))
             end
+            print(ArenaVocations[index2], player:getStorageValue(100000002))
         end
     end
 

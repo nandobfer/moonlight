@@ -174,21 +174,22 @@ function setArenaVocation(cid, item, position)
         local player = Player(cid)
 
 
-        for index2 = 1, #ArenaVocations do
-            if ArenaVocations[index2] == player:getStorageValue(100000002) then
+        --for index2 = 1, #ArenaVocations do
+            --print(ArenaVocations[index2].magiclevel)
+            --player:say("index2: "..ArenaVocations[index2].."")
+            --if ArenaVocations[index2] == player:getStorageValue(100000002) then
 
             local skill_bonus = Condition(CONDITION_ATTRIBUTES)
             skill_bonus:setTicks(-1)        
             local axe = player:getSkillLevel(SKILL_AXE)
-            local skill_axe = -(axe- ArenaVocations[index2].axe)
+            local skill_axe = -(axe- ArenaVocations[player:getStorageValue(100000002)].axe)
             skill_bonus:setParameter(CONDITION_PARAM_SKILL_AXE, skill_axe)
-            skill_bonus:setParameter(CONDITION_PARAM_STAT_MAGICPOINTS, ArenaVocations[index2].magiclevel)
+            skill_bonus:setParameter(CONDITION_PARAM_STAT_MAGICPOINTS, ArenaVocations[player:getStorageValue(100000002)].magiclevel)
             player:addCondition(skill_bonus)
 
             player:teleportTo(Position(32369, 32241, 7))
-            end
-            print(ArenaVocations[index2], player:getStorageValue(100000002))
-        end
+            --end
+        --end
     end
 
 end

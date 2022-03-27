@@ -42,13 +42,13 @@ end
 
 --verifica playerOne & playerTwo da queue & status da arena
 function arenaCheck()
-  if Game.getStorageValue(Fila[1]) ~= 0 and Game.getStorageValue(Fila[2]) ~= 0 then
-    if Game.getStorageValue(ArenaStatus[1]) == 0 then
+  if Game.getStorageValue(Fila[0]) ~= 0 and Game.getStorageValue(Fila[1]) ~= 0 then
+    if Game.getStorageValue(ArenaStatus[0]) == 0 then
+        Game.setStorageValue(ArenaPlayers[0], Game.getStorageValue(Fila[0]))
         Game.setStorageValue(ArenaPlayers[1], Game.getStorageValue(Fila[1]))
-        Game.setStorageValue(ArenaPlayers[2], Game.getStorageValue(Fila[2]))
-        Game.setStorageValue(Fila[1], 0)
+        Game.setStorageValue(Fila[0], 0)
         organizarFila()
-        Game.setStorageValue(Fila[1], 0)
+        Game.setStorageValue(Fila[0], 0)
         organizarFila()
         --startBattle()
         return true

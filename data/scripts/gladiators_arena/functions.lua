@@ -63,39 +63,17 @@ function startBattle(cid, item, position)
         local cid = Game.getStorageValue(ArenaPlayers[index])
         local player = Player(cid)
 
-        --PLayer Storage Stats:
-        player:setStorageValue(Storage.GladiatorArena.Health, player:getMaxHealth()) -- HP
-        player:setStorageValue(Storage.GladiatorArena.Mana, player:getMaxMana()) -- MP
-        player:setStorageValue(Storage.GladiatorArena.Level, player:getLevel()) -- Level
-        player:setStorageValue(Storage.GladiatorArena.Experience, player:getExperience()) --Experience
-        player:setStorageValue(Storage.GladiatorArena.Vocation, player:getVocation():getId()) -- Vocation
-        player:setStorageValue(Storage.GladiatorArena.Looktype, player:getOutfit().lookType) -- Outfit
-        player:setStorageValue(Storage.GladiatorArena.Lookhead, player:getOutfit().lookHead) -- Head color
-        player:setStorageValue(Storage.GladiatorArena.Lookbody, player:getOutfit().lookBody) -- Body color
-        player:setStorageValue(Storage.GladiatorArena.Looklegs, player:getOutfit().lookLegs) -- Legs Color
-        player:setStorageValue(Storage.GladiatorArena.Lookfeet, player:getOutfit().lookFeet) -- Feet Color 
-        player:setStorageValue(Storage.GladiatorArena.Lookaddons, player:getOutfit().lookAddons) -- Addons
-        player:setStorageValue(Storage.GladiatorArena.Shield, player:getSkillLevel(SKILL_SHIELD)) -- Shield
-        player:setStorageValue(Storage.GladiatorArena.Shieldprogress, player:getSkillTries(SKILL_SHIELD)) -- Shield %
-        player:setStorageValue(Storage.GladiatorArena.Axe, player:getSkillLevel(SKILL_AXE)) -- Axe
-        player:setStorageValue(Storage.GladiatorArena.Axeprogress, player:getSkillTries(SKILL_AXE)) -- Axe %
-        player:setStorageValue(Storage.GladiatorArena.Sword, player:getSkillLevel(SKILL_SWORD)) -- Sword 
-        player:setStorageValue(Storage.GladiatorArena.Swordprogress, player:getSkillTries(SKILL_SWORD)) -- Sword %
-        player:setStorageValue(Storage.GladiatorArena.Club, player:getSkillLevel(SKILL_CLUB)) -- Club
-        player:setStorageValue(Storage.GladiatorArena.Clubprogress, player:getSkillTries(SKILL_CLUB)) -- Club %
-        player:setStorageValue(Storage.GladiatorArena.Distance, player:getSkillLevel(SKILL_DISTANCE)) -- Distance
-        player:setStorageValue(Storage.GladiatorArena.Distaceprogress, player:getSkillTries(SKILL_DISTANCE)) -- Distance %
-        player:setStorageValue(Storage.GladiatorArena.Magic, player:getMagicLevel()) -- ML
-        player:setStorageValue(Storage.GladiatorArena.Magicprogress, player:getManaSpent()) -- ML %
     
         --Player Storage Itens:
+        --helmet
         if player:getSlotItem(CONST_SLOT_HEAD) then
         local headItem = player:getSlotItem(CONST_SLOT_HEAD)
         player:setStorageValue(Storage.GladiatorArena.Helmet, headItem.itemid)
         player:removeItem(headItem.itemid, 1)
         else
-        player:setStorageValue(Storage.GladiatorArena.Helmet, 0) 
+        player:setStorageValue(Storage.GladiatorArena.Helmet, 0)
         end
+        player:addItem(ArenaVocations[player:getStorageValue(100000002)].helmet)
         
         --armor
         if player:getSlotItem(CONST_SLOT_ARMOR) then
@@ -105,6 +83,7 @@ function startBattle(cid, item, position)
         else
         player:setStorageValue(Storage.GladiatorArena.Armor, 0)    
         end
+        player:addItem(ArenaVocations[player:getStorageValue(100000002)].armor)
         
         --legs
         if player:getSlotItem(CONST_SLOT_LEGS) then
@@ -114,6 +93,7 @@ function startBattle(cid, item, position)
         else
         player:setStorageValue(Storage.GladiatorArena.Legs, 0)     
         end
+        player:addItem(ArenaVocations[player:getStorageValue(100000002)].legs)
         
         --boots
         if player:getSlotItem(CONST_SLOT_FEET) then
@@ -123,8 +103,9 @@ function startBattle(cid, item, position)
         else
         player:setStorageValue(Storage.GladiatorArena.Boots, 0)     
         end
-        
-        --Wand
+        player:addItem(ArenaVocations[player:getStorageValue(100000002)].boots)
+
+        --Weapon
         if player:getSlotItem(CONST_SLOT_LEFT) then
         local leftItem = player:getSlotItem(CONST_SLOT_LEFT)
         player:setStorageValue(Storage.GladiatorArena.Weapon, leftItem.itemid)
@@ -132,6 +113,7 @@ function startBattle(cid, item, position)
         else
         player:setStorageValue(Storage.GladiatorArena.Weapon, 0)     
         end
+        player:addItem(ArenaVocations[player:getStorageValue(100000002)].leftweapon)
       
         --Shield
         if player:getSlotItem(CONST_SLOT_RIGHT) then
@@ -141,6 +123,7 @@ function startBattle(cid, item, position)
         else
         player:setStorageValue(Storage.GladiatorArena.Shield, 0)     
         end
+        player:addItem(ArenaVocations[player:getStorageValue(100000002)].rightshield)
         
         --Amulet
         if player:getSlotItem(CONST_SLOT_NECKLACE) then
@@ -150,6 +133,7 @@ function startBattle(cid, item, position)
         else
         player:setStorageValue(Storage.GladiatorArena.Amulet, 0)     
         end
+        player:addItem(ArenaVocations[player:getStorageValue(100000002)].amulet)
        
         --Ring
         if player:getSlotItem(CONST_SLOT_RING) then
@@ -159,6 +143,7 @@ function startBattle(cid, item, position)
         else
         player:setStorageValue(Storage.GladiatorArena.Ring, 0)     
         end
+        player:addItem(ArenaVocations[player:getStorageValue(100000002)].ring)
 
         --setArenaVocation()
 
@@ -173,23 +158,82 @@ function setArenaVocation(cid, item, position)
         local cid = Game.getStorageValue(ArenaPlayers[index])
         local player = Player(cid)
 
+        --Player Storage Stats:
+        player:setStorageValue(Storage.GladiatorArena.Level, player:getLevel()) -- Level
+        player:setStorageValue(Storage.GladiatorArena.Experience, player:getExperience()) --Experience
+        player:setStorageValue(Storage.GladiatorArena.Vocation, player:getVocation():getId()) -- Vocation
 
-        --for index2 = 1, #ArenaVocations do
-            --print(ArenaVocations[index2].magiclevel)
-            --player:say("index2: "..ArenaVocations[index2].."")
-            --if ArenaVocations[index2] == player:getStorageValue(100000002) then
 
+            --VOCATION
+            player:setVocation(player:getStorageValue(100000002))
+
+            --LEVEL
+
+            --Função para calculo de exp pro proximo level
+            local function getExpForLevel(level)
+            level = level - 1
+            return ((50 * level * level * level) - (150 * level * level) + (400 * level)) / 3
+            end
+
+            if player:getLevel() < 100 then
+            targetLevel = 100
+            targetExp = getExpForLevel(targetLevel)
+            addExp = targetExp - player:getExperience()
+            player:addExperience(addExp, false)
+            else
+            player:removeExperience(player:getExperience() - getExpForLevel(100), false)
+            end
+
+
+            --SKILL TREE
             local skill_bonus = Condition(CONDITION_ATTRIBUTES)
-            skill_bonus:setTicks(-1)        
-            local axe = player:getSkillLevel(SKILL_AXE)
-            local skill_axe = -(axe- ArenaVocations[player:getStorageValue(100000002)].axe)
+            skill_bonus:setTicks(-1)
+            --Shield
+            local shield = player:getSkillLevel(SKILL_SHIELD) --shield
+            local skill_shield = -(shield- ArenaVocations[player:getStorageValue(100000002)].shield) 
+            skill_bonus:setParameter(CONDITION_PARAM_SKILL_SHIELD, skill_shield)
+            --Axe
+            local axe = player:getSkillLevel(SKILL_AXE) --axe
+            local skill_axe = -(axe- ArenaVocations[player:getStorageValue(100000002)].axe) 
             skill_bonus:setParameter(CONDITION_PARAM_SKILL_AXE, skill_axe)
-            skill_bonus:setParameter(CONDITION_PARAM_STAT_MAGICPOINTS, ArenaVocations[player:getStorageValue(100000002)].magiclevel)
+            --Sword
+            local sword = player:getSkillLevel(SKILL_SWORD) --axe
+            local skill_sword = -(sword- ArenaVocations[player:getStorageValue(100000002)].sword) 
+            skill_bonus:setParameter(CONDITION_PARAM_SKILL_SWORD, skill_sword)
+            --Club
+            local club = player:getSkillLevel(SKILL_CLUB) --axe
+            local skill_club = -(club- ArenaVocations[player:getStorageValue(100000002)].club) 
+            skill_bonus:setParameter(CONDITION_PARAM_SKILL_CLUB, skill_club)
+            --Distance
+            local distance = player:getSkillLevel(SKILL_DISTANCE) --axe
+            local skill_distance = -(distance- ArenaVocations[player:getStorageValue(100000002)].distance) 
+            skill_bonus:setParameter(CONDITION_PARAM_SKILL_DISTANCE, skill_distance)
+            --Magic Level
+            local ml = player:getMagicLevel()
+            local magic_level = -(ml - ArenaVocations[player:getStorageValue(100000002)].magiclevel)
+            skill_bonus:setParameter(CONDITION_PARAM_STAT_MAGICPOINTS, magic_level)
+            
+            --OUTFIT
+            local condition = Condition(CONDITION_OUTFIT)
+            condition:setTicks(-1)
+            condition:setOutfit(ArenaVocations[player:getStorageValue(100000002)].outfit) --aqui vc coloca o outfit
+            player:addCondition(condition)    
+
+            --HP
+            local playerhp = player:getMaxHealth()
+            local new_hp = -(playerhp- ArenaVocations[player:getStorageValue(100000002)].health)
+            skill_bonus:setParameter(CONDITION_PARAM_STAT_MAXHITPOINTS, new_hp)
+
+            --MP
+            local playermp = player:getMaxMana()
+            local new_mp = -(playermp- ArenaVocations[player:getStorageValue(100000002)].mana)
+            skill_bonus:setParameter(CONDITION_PARAM_STAT_MAXMANAPOINTS, new_mp)
+
             player:addCondition(skill_bonus)
+            player:addHealth(player:getMaxHealth())
+            player:addMana(player:getMaxMana())
 
             player:teleportTo(Position(32369, 32241, 7))
-            --end
-        --end
     end
 
 end

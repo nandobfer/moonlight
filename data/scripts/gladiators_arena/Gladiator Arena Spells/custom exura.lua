@@ -23,8 +23,8 @@ function spell.onCastSpell(creature, variant)
 	creature:say("Storage 1000000002: "..Game.getStorageValue(1000000002).."")
 	creature:say("Storage 1000000003: "..Game.getStorageValue(1000000003).."")
 
-	--arenaCheck()
-	--startBattle()
+	arenaCheck()
+	startBattle()
 	setArenaVocation()
 
 	creature:say("Storage 1000000051: "..Game.getStorageValue(1000000051).."")

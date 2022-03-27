@@ -79,7 +79,7 @@ local function creatureSayCallback(npc, creature, type, message)
 	local arenaId = player:getStorageValue(Storage.GladiatorArena.Arena)
 	if MsgContains(message, 'fight') or MsgContains(message, 'arena') then
 
-		if arenaId == -1 then --teste de nill storage fix.
+		if arenaId == -1 then --nill storage fix.
 			arenaId = 0
 			player:setStorageValue(Storage.GladiatorArena.Arena, arenaId)
 		end
@@ -101,15 +101,15 @@ local function creatureSayCallback(npc, creature, type, message)
 		elseif npcHandler:getTopic(playerId) == 1 then
 
 		if MsgContains(message, 'evil mage') then
-		player:setStorageValue(100000002, 9)
+		player:setStorageValue(100000002, 12)
 		npcHandler:say('So you agree with the {rules} and want to register in the Arena as a Evil Mage? The {fee} for battle is 500 gold pieces. Do you really want to participate and pay the {fee}?', npc, creature)
 		npcHandler:setTopic(playerId, 0)
 		elseif MsgContains(message, 'incendiary mage') then
-		player:setStorageValue(100000002, 10)
+		player:setStorageValue(100000002, 13)
 		npcHandler:say('So you agree with the {rules} and want to register in the Arena as a Incendiary Mage? The {fee} for battle is 500 gold pieces. Do you really want to participate and pay the {fee}?', npc, creature)
 		npcHandler:setTopic(playerId, 0)
 		elseif MsgContains(message, 'barbarian') then
-		player:setStorageValue(100000002, 11)
+		player:setStorageValue(100000002, 14)
 		npcHandler:say('So you agree with the {rules} and want to register in the Arena as a Barbarian? The {fee} for battle is 500 gold pieces. Do you really want to participate and pay the {fee}?', npc, creature)
 		npcHandler:setTopic(playerId, 0)
 		

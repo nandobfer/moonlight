@@ -50,15 +50,15 @@ function arenaCheck()
         organizarFila()
         Game.setStorageValue(Fila[1], 0)
         organizarFila()
-        --startBattle()
+        setArenaVocation()
         return true
     end
  end 
 end
 
 
---leva players para arena, e chama função setArenaVocation
-function startBattle(cid, item, position)
+--Seta os Itens de acordo com a table de vocações em fila.lua
+function setArenaItem(cid, item, position)
     for index, _ in ipairs(ArenaPlayers) do
         local cid = Game.getStorageValue(ArenaPlayers[index])
         local player = Player(cid)
@@ -145,11 +145,25 @@ function startBattle(cid, item, position)
         end
         player:addItem(ArenaVocations[player:getStorageValue(100000002)].ring)
 
-        --setArenaVocation()
+        startBattle()
 
-        player:teleportTo(Position(32369, 32241, 7))
     end
+end
 
+function startBattle(cid, item, position)
+    for index = 1, #ArenaPlayers do
+        local cid = Game.getStorageValue(ArenaPlayers[index])
+        local player = Player(cid)
+
+        if player:getId() == Game.getStorageValue(ArenaPlayers[1]) then
+        player:teleportTo(Position(32087, 32339, 7))
+        else
+        player:teleportTo(Position(32087, 32341, 7))
+        end
+
+        Game.setStorageValue(ArenaStatus[index], 1)
+
+    end
 end
 
 --função setArenaVocation
@@ -233,7 +247,8 @@ function setArenaVocation(cid, item, position)
             player:addHealth(player:getMaxHealth())
             player:addMana(player:getMaxMana())
 
-            player:teleportTo(Position(32369, 32241, 7))
+            setArenaItem()
+        
     end
 
 end

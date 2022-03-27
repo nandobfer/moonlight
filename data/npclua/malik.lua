@@ -121,7 +121,8 @@ local function creatureSayCallback(npc, creature, type, message)
 
 			if player:removeMoneyBank(500) then
 				player:setStorageValue(Storage.GladiatorArena.Arena, 1)
-				addFila(player)			
+				addFila(player)
+				arenaCheck()	
 			else
 				npcHandler:say('You do not have enough money.', npc, creature)
 			end

@@ -1,25 +1,25 @@
 Storage_ = {
 	
 	crit = {
-		bonus = 200000000,
-		chance = 200000001,
-		equipment_bonus = 200000002,
-		equipment_chance = 200000003,
+		bonus = 20000000000,
+		chance = 20000000001,
+		equipment_bonus = 20000000002,
+		equipment_chance = 20000000003,
 	},
 
 	-- Classes --
 		--Druid
-	metamorfose = 100000000,
-	bear_bonus_life = 100000001,
-	max_mana = 100000002,
-	bear_form = 100000003,
-	recover_mana = 100000004,
-	recover_life = 100000005,
-	feral_form = 100000006,
-	plant_form = 100000007,
-	feral_animal_skin = 100000008,
-	manticore_form = 100000009,
-	leveledup = 1000000010,
+	metamorfose = 10000000000,
+	bear_bonus_life = 10000000001,
+	max_mana = 10000000002,
+	bear_form = 10000000003,
+	recover_mana = 10000000004,
+	recover_life = 10000000005,
+	feral_form = 10000000006,
+	plant_form = 10000000007,
+	feral_animal_skin = 10000000008,
+	manticore_form = 10000000009,
+	leveledup = 100000000010,
 	
 		--Assassin
 	combo_points = 100000010,

@@ -1441,42 +1441,22 @@ Storage = {
 	
 	GladiatorArena = {
 		Arena = 100000001,
-		Vocation = 100000002,
-		Index = 100000003,
+		NewVocation = 100000002,
+		OldVocation = 100000003,
 		Position = 100000004,
 		Death = 100000025, --(reservado para condição de ressuceição no cpp.)
 		--playerstorages
 		Health = 100000005,
 		Mana = 100000006,
 		Vocation = 100000007,
-		Looktype = 100000008,
-		Lookhead = 100000009,
-		lookbody = 100000010,
-		Looklegs = 100000011,
-		Lookfeet = 100000012,
-		Lookaddons = 100000013,
 		Shield = 100000014,
-		Shieldprogress = 100000015,
 		Axe = 100000016,
-		Axeprogress = 100000017,
 		Sword = 100000018,
-		Swordprogress = 100000019,
 		Club = 100000020,
-		Clubprogress = 100000021,
 		Distance = 100000022,
-		Distanceprogress = 100000023,
 		Magic = 100000024,
-		Magicprogress = 100000026,
 		Level = 100000027,
-		Experience = 100000028,
-		Helmet = 100000029,
-		Armor = 100000030,
-		Legs = 100000031,
-		Boots = 100000032,
-		Weapon = 100000033,
-		Shield = 100000034,
-		Amulet = 100000035,
-		Ring = 100000036
+		Experience = 100000028
 
 	},
 	QuestChests = {

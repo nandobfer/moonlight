@@ -53,6 +53,7 @@ ArenaVocations = {
     --Evil Mage
     [12] = {
 
+        lvl = 100,
         shield = 30,
         axe = 10,
         sword = 10,
@@ -69,12 +70,14 @@ ArenaVocations = {
         rightshield = 8090, --spellbook of Dark Mysteries
         amulet = 3055, -- Platinum Amulet
         ring = 3053, --Time Ring
+        spells = 'You became an Evil Mage, your new spells are: "Exuras", "Utani Hurs", "Exori Morts", "Exevo Mort Hur", "Exori Max Mort".',
         outfit = {lookType = 130, lookHead = 0, lookBody = 114, lookLegs = 114, lookFeet = 114, lookAddons = 3}
 
     },
     --Incendiary Mage
     [13] = {
 
+        lvl = 100,
         shield = 30,
         axe = 10,
         sword = 10,
@@ -91,11 +94,13 @@ ArenaVocations = {
         rightshield = 8090, --spellbook of Dark Mysteries
         amulet = 3055, -- Platinum Amulet
         ring = 3053, --Time Ring
+        spells = 'You became an Incendiary Mage, your new spells are: "Exuras", "Utani hurs", "Exori Flams", "Exevo Flam Hurs", "Exevo Gran Mas Flams".',
         outfit = {lookType = 130, lookHead = 0, lookBody = 94, lookLegs = 94, lookFeet = 94, lookAddons = 3}    
     },
     --Barbarian
     [14] = {
 
+        lvl = 100,
         shield = 60,
         axe = 100,
         sword = 10,
@@ -112,6 +117,7 @@ ArenaVocations = {
         rightshield = 0, --no shield
         amulet = 3055, -- Platinum Amulet
         ring = 3053, --Time Ring
+        spells = 'You became an Barbarian, your new spells are: "Exura Icos", "Utani hurs", "Exori Icos", "Jump", "Exori Gran Icos".',
         outfit = {lookType = 143, lookHead = 97, lookBody = 76, lookLegs = 76, lookFeet = 76, lookAddons = 3}       
     }
 

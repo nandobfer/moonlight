@@ -24,16 +24,10 @@ function spell.onCastSpell(creature, variant)
 	creature:say("Storage 1000000003: "..Game.getStorageValue(1000000003).."")
 
 	--arenaCheck()
-	startBattle()
 	--setArenaVocation()
-
-	creature:say("Storage 1000000051: "..Game.getStorageValue(1000000051).."")
-	creature:say("Storage 1000000052: "..Game.getStorageValue(1000000052).."")
-	creature:say("Storage 1000000001: "..Game.getStorageValue(1000000001).."")
-	creature:say("Storage 1000000002: "..Game.getStorageValue(1000000002).."")
-
-
-    
+	--startBattle()
+	--resetItem()
+	
 	return combat:execute(creature, variant)
 	else
     creature:sendCancelMessage("You are Still Silenced.")
@@ -43,12 +37,12 @@ end
 spell:name("Light Healing")
 spell:words("exuras")
 spell:group("healing")
-spell:vocation("evil mage;true", "incendiary mage;true")
+spell:vocation()
 spell:id(8703)
 spell:cooldown(1000)
 spell:groupCooldown(1000)
 spell:level(8)
-spell:mana(20)
+spell:mana(0)
 spell:isSelfTarget(true)
 spell:isAggressive(false)
 spell:needLearn(false)

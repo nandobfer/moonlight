@@ -20,7 +20,7 @@ function addFila(player)
                   player:teleportTo(Position(32369, 32241, 7)) --teste de tp.
                   player:openChannel(12) -- Open Arena Channel
                   player:sendTextMessage(MESSAGE_STATUS, "sucessfully registered!")
-                  --arenaCheck()
+                  arenaCheck()
             return true
         else end
     end
@@ -42,128 +42,18 @@ end
 
 --verifica playerOne & playerTwo da queue & status da arena
 function arenaCheck()
-  if Game.getStorageValue(Fila[0]) ~= 0 and Game.getStorageValue(Fila[1]) ~= 0 then
-    if Game.getStorageValue(ArenaStatus[0]) == 0 then
-        Game.setStorageValue(ArenaPlayers[0], Game.getStorageValue(Fila[0]))
+  if Game.getStorageValue(Fila[1]) ~= 0 and Game.getStorageValue(Fila[2]) ~= 0 then
+    if Game.getStorageValue(ArenaStatus[1]) == 0 then
         Game.setStorageValue(ArenaPlayers[1], Game.getStorageValue(Fila[1]))
-        Game.setStorageValue(Fila[0], 0)
+        Game.setStorageValue(ArenaPlayers[2], Game.getStorageValue(Fila[2]))
+        Game.setStorageValue(Fila[1], 0)
         organizarFila()
-        Game.setStorageValue(Fila[0], 0)
+        Game.setStorageValue(Fila[1], 0)
         organizarFila()
         setArenaVocation()
         return true
     end
  end 
-end
-
-
---Seta os Itens de acordo com a table de vocações em fila.lua
-function setArenaItem(cid, item, position)
-    for index, _ in ipairs(ArenaPlayers) do
-        local cid = Game.getStorageValue(ArenaPlayers[index])
-        local player = Player(cid)
-
-    
-        --Player Storage Itens:
-        --helmet
-        if player:getSlotItem(CONST_SLOT_HEAD) then
-        local headItem = player:getSlotItem(CONST_SLOT_HEAD)
-        player:setStorageValue(Storage.GladiatorArena.Helmet, headItem.itemid)
-        player:removeItem(headItem.itemid, 1)
-        else
-        player:setStorageValue(Storage.GladiatorArena.Helmet, 0)
-        end
-        player:addItem(ArenaVocations[player:getStorageValue(100000002)].helmet)
-        
-        --armor
-        if player:getSlotItem(CONST_SLOT_ARMOR) then
-        local armorItem = player:getSlotItem(CONST_SLOT_ARMOR)
-        player:setStorageValue(Storage.GladiatorArena.Armor, armorItem.itemid)
-        player:removeItem(armorItem.itemid, 1)
-        else
-        player:setStorageValue(Storage.GladiatorArena.Armor, 0)    
-        end
-        player:addItem(ArenaVocations[player:getStorageValue(100000002)].armor)
-        
-        --legs
-        if player:getSlotItem(CONST_SLOT_LEGS) then
-        local legsItem = player:getSlotItem(CONST_SLOT_LEGS)
-        player:setStorageValue(Storage.GladiatorArena.Legs, legsItem.itemid)
-        player:removeItem(legsItem.itemid, 1)
-        else
-        player:setStorageValue(Storage.GladiatorArena.Legs, 0)     
-        end
-        player:addItem(ArenaVocations[player:getStorageValue(100000002)].legs)
-        
-        --boots
-        if player:getSlotItem(CONST_SLOT_FEET) then
-        local feetItem = player:getSlotItem(CONST_SLOT_FEET)
-        player:setStorageValue(Storage.GladiatorArena.Boots, feetItem.itemid)
-        player:removeItem(feetItem.itemid, 1)
-        else
-        player:setStorageValue(Storage.GladiatorArena.Boots, 0)     
-        end
-        player:addItem(ArenaVocations[player:getStorageValue(100000002)].boots)
-
-        --Weapon
-        if player:getSlotItem(CONST_SLOT_LEFT) then
-        local leftItem = player:getSlotItem(CONST_SLOT_LEFT)
-        player:setStorageValue(Storage.GladiatorArena.Weapon, leftItem.itemid)
-        player:removeItem(leftItem.itemid, 1)
-        else
-        player:setStorageValue(Storage.GladiatorArena.Weapon, 0)     
-        end
-        player:addItem(ArenaVocations[player:getStorageValue(100000002)].leftweapon)
-      
-        --Shield
-        if player:getSlotItem(CONST_SLOT_RIGHT) then
-        local shieldItem = player:getSlotItem(CONST_SLOT_RIGHT)
-        player:setStorageValue(Storage.GladiatorArena.Shield, shieldItem.itemid)
-        player:removeItem(shieldItem.itemid, 1)
-        else
-        player:setStorageValue(Storage.GladiatorArena.Shield, 0)     
-        end
-        player:addItem(ArenaVocations[player:getStorageValue(100000002)].rightshield)
-        
-        --Amulet
-        if player:getSlotItem(CONST_SLOT_NECKLACE) then
-        local amuletItem = player:getSlotItem(CONST_SLOT_NECKLACE)
-        player:setStorageValue(Storage.GladiatorArena.Amulet, amuletItem.itemid)
-        player:removeItem(amuletItem.itemid, 1)
-        else
-        player:setStorageValue(Storage.GladiatorArena.Amulet, 0)     
-        end
-        player:addItem(ArenaVocations[player:getStorageValue(100000002)].amulet)
-       
-        --Ring
-        if player:getSlotItem(CONST_SLOT_RING) then
-        local ringItem = player:getSlotItem(CONST_SLOT_RING)
-        player:setStorageValue(Storage.GladiatorArena.Ring, ringItem.itemid)
-        player:removeItem(ringItem.itemid, 1)
-        else
-        player:setStorageValue(Storage.GladiatorArena.Ring, 0)     
-        end
-        player:addItem(ArenaVocations[player:getStorageValue(100000002)].ring)
-
-        startBattle()
-
-    end
-end
-
-function startBattle(cid, item, position)
-    for index = 1, #ArenaPlayers do
-        local cid = Game.getStorageValue(ArenaPlayers[index])
-        local player = Player(cid)
-
-        if player:getId() == Game.getStorageValue(ArenaPlayers[1]) then
-        player:teleportTo(Position(32087, 32339, 7))
-        else
-        player:teleportTo(Position(32087, 32341, 7))
-        end
-
-        Game.setStorageValue(ArenaStatus[index], 1)
-
-    end
 end
 
 --função setArenaVocation
@@ -175,11 +65,7 @@ function setArenaVocation(cid, item, position)
         --Player Storage Stats:
         player:setStorageValue(Storage.GladiatorArena.Level, player:getLevel()) -- Level
         player:setStorageValue(Storage.GladiatorArena.Experience, player:getExperience()) --Experience
-        player:setStorageValue(Storage.GladiatorArena.Vocation, player:getVocation():getId()) -- Vocation
-
-
-            --VOCATION
-            player:setVocation(player:getStorageValue(100000002))
+        player:setStorageValue(Storage.GladiatorArena.OldVocation, player:getVocation():getId()) -- Vocation
 
             --LEVEL
 
@@ -189,69 +75,185 @@ function setArenaVocation(cid, item, position)
             return ((50 * level * level * level) - (150 * level * level) + (400 * level)) / 3
             end
 
-            if player:getLevel() < 100 then
-            targetLevel = 100
+            targetLevel = ArenaVocations[player:getStorageValue(Storage.GladiatorArena.NewVocation)].lvl
+            if player:getLevel() < targetLevel then
             targetExp = getExpForLevel(targetLevel)
             addExp = targetExp - player:getExperience()
             player:addExperience(addExp, false)
             else
-            player:removeExperience(player:getExperience() - getExpForLevel(100), false)
+            player:removeExperience(player:getExperience() - getExpForLevel(targetLevel), false)
             end
 
+            --VOCATION
+            player:setVocation(player:getStorageValue(Storage.GladiatorArena.NewVocation))
 
             --SKILL TREE
             local skill_bonus = Condition(CONDITION_ATTRIBUTES)
             skill_bonus:setTicks(-1)
             --Shield
             local shield = player:getSkillLevel(SKILL_SHIELD) --shield
-            local skill_shield = -(shield- ArenaVocations[player:getStorageValue(100000002)].shield) 
+            local skill_shield = -(shield- ArenaVocations[player:getStorageValue(Storage.GladiatorArena.NewVocation)].shield) 
             skill_bonus:setParameter(CONDITION_PARAM_SKILL_SHIELD, skill_shield)
             --Axe
             local axe = player:getSkillLevel(SKILL_AXE) --axe
-            local skill_axe = -(axe- ArenaVocations[player:getStorageValue(100000002)].axe) 
+            local skill_axe = -(axe- ArenaVocations[player:getStorageValue(Storage.GladiatorArena.NewVocation)].axe) 
             skill_bonus:setParameter(CONDITION_PARAM_SKILL_AXE, skill_axe)
             --Sword
             local sword = player:getSkillLevel(SKILL_SWORD) --axe
-            local skill_sword = -(sword- ArenaVocations[player:getStorageValue(100000002)].sword) 
+            local skill_sword = -(sword- ArenaVocations[player:getStorageValue(Storage.GladiatorArena.NewVocation)].sword) 
             skill_bonus:setParameter(CONDITION_PARAM_SKILL_SWORD, skill_sword)
             --Club
             local club = player:getSkillLevel(SKILL_CLUB) --axe
-            local skill_club = -(club- ArenaVocations[player:getStorageValue(100000002)].club) 
+            local skill_club = -(club- ArenaVocations[player:getStorageValue(Storage.GladiatorArena.NewVocation)].club) 
             skill_bonus:setParameter(CONDITION_PARAM_SKILL_CLUB, skill_club)
             --Distance
             local distance = player:getSkillLevel(SKILL_DISTANCE) --axe
-            local skill_distance = -(distance- ArenaVocations[player:getStorageValue(100000002)].distance) 
+            local skill_distance = -(distance- ArenaVocations[player:getStorageValue(Storage.GladiatorArena.NewVocation)].distance) 
             skill_bonus:setParameter(CONDITION_PARAM_SKILL_DISTANCE, skill_distance)
             --Magic Level
             local ml = player:getMagicLevel()
-            local magic_level = -(ml - ArenaVocations[player:getStorageValue(100000002)].magiclevel)
+            local magic_level = -(ml - ArenaVocations[player:getStorageValue(Storage.GladiatorArena.NewVocation)].magiclevel)
             skill_bonus:setParameter(CONDITION_PARAM_STAT_MAGICPOINTS, magic_level)
-            
-            --OUTFIT
-            local condition = Condition(CONDITION_OUTFIT)
-            condition:setTicks(-1)
-            condition:setOutfit(ArenaVocations[player:getStorageValue(100000002)].outfit) --aqui vc coloca o outfit
-            player:addCondition(condition)    
 
             --HP
             local playerhp = player:getMaxHealth()
-            local new_hp = -(playerhp- ArenaVocations[player:getStorageValue(100000002)].health)
+            local new_hp = -(playerhp- ArenaVocations[player:getStorageValue(Storage.GladiatorArena.NewVocation)].health)
             skill_bonus:setParameter(CONDITION_PARAM_STAT_MAXHITPOINTS, new_hp)
 
             --MP
             local playermp = player:getMaxMana()
-            local new_mp = -(playermp- ArenaVocations[player:getStorageValue(100000002)].mana)
+            local new_mp = -(playermp- ArenaVocations[player:getStorageValue(Storage.GladiatorArena.NewVocation)].mana)
             skill_bonus:setParameter(CONDITION_PARAM_STAT_MAXMANAPOINTS, new_mp)
+            
+            --OUTFIT
+            local condition = Condition(CONDITION_OUTFIT)
+            condition:setTicks(-1)
+            condition:setOutfit(ArenaVocations[player:getStorageValue(Storage.GladiatorArena.NewVocation)].outfit) --aqui vc coloca o outfit
+            player:addCondition(condition)    
 
             player:addCondition(skill_bonus)
             player:addHealth(player:getMaxHealth())
             player:addMana(player:getMaxMana())
+
+            player:sendTextMessage(MESSAGE_EVENT_ADVANCE, ArenaVocations[player:getStorageValue(Storage.GladiatorArena.NewVocation)].spells)
+
 
             setArenaItem()
         
     end
 
 end
+
+--Seta os Itens de acordo com a table de vocações em fila.lua
+function setArenaItem(cid, item, position)
+    for index = 1, #ArenaPlayers do
+    local cid = Game.getStorageValue(ArenaPlayers[index])
+    local player = Player(cid)
+
+
+    local ItemSlot = {
+    CONST_SLOT_HEAD,
+    CONST_SLOT_ARMOR,
+    CONST_SLOT_LEGS,
+    CONST_SLOT_FEET,
+    CONST_SLOT_LEFT,
+    CONST_SLOT_RIGHT,
+    CONST_SLOT_NECKLACE,
+    CONST_SLOT_RING
+    }
+
+    local vocacoes = {
+    --Evil Mage
+    [12] = {
+        3573, --magician hat
+        3567, --blue robe
+        645, -- blue legs
+        3079, --Boh
+        8094, --Wand of Voodoo
+        8090, --spellbook of Dark Mysteries
+        3055, -- Platinum Amulet
+        3053 --Time Ring     
+    },
+    --Incendiary Mage
+    [13] = {
+        3573, --magician hat
+        3567, --blue robe
+        645, -- blue legs
+        3079, --Boh
+        16115, --Wand of Everblazing
+        8090, --spellbook of Dark Mysteries
+        3055, -- Platinum Amulet
+        3053 --Time Ring  
+    },
+    --Barbarian
+    [14] = { 
+        3387, --demon helmet
+        3366, --magic plate armor
+        10387, -- zaoan legs
+        3079, --Boh
+        8098, --demonwing axe
+        0, --no shield
+        3055, -- Platinum Amulet
+        3053 --Time Ring      
+    }
+}
+
+local storageIndex = {
+        100000029,
+        100000030,
+        100000031,
+        100000032,
+        100000033,
+        100000034,
+        100000035,
+        100000036
+}
+
+    for index2 = 1, #ItemSlot do
+    local voc = player:getStorageValue(Storage.GladiatorArena.NewVocation)
+    local newItem = vocacoes[voc][index2]
+        
+        if player:getSlotItem(ItemSlot[index2]) ~= nill and player:getSlotItem(ItemSlot[index2]) ~= 0 then
+            local item_id = player:getSlotItem(ItemSlot[index2]).itemid
+            player:setStorageValue(storageIndex[index2], item_id)
+            player:removeItem(item_id, 1)
+            player:addItem(newItem)
+            
+        else
+            player:setStorageValue(storageIndex[index2], 0)
+            player:addItem(newItem)
+        end
+
+    end
+
+    end
+    
+    startBattle()
+
+end
+
+function startBattle(cid, item, position)
+    for index = 1, #ArenaPlayers do
+        local cid = Game.getStorageValue(ArenaPlayers[index])
+        local player = Player(cid)
+
+        if player:getId() == Game.getStorageValue(ArenaPlayers[1]) then
+        player:teleportTo(Position(32087, 32339, 7))
+        else
+        player:teleportTo(Position(32087, 32341, 7))
+        Game.setStorageValue(ArenaStatus[1], 1)
+        end
+
+        player:setStorageValue(Storage.GladiatorArena.Death, 1)
+
+        player:getPosition():sendMagicEffect(CONST_ME_TELEPORT)
+        
+    end
+end
+
+
+
 --função addEvent para timer da arena.
 
 --função arenaClear
+

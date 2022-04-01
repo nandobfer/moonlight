@@ -217,12 +217,11 @@ local storageIndex = {
             local item_id = player:getSlotItem(ItemSlot[index2]).itemid
             player:setStorageValue(storageIndex[index2], item_id)
             player:removeItem(item_id, 1)
-            player:addItem(newItem)
-            
+                        
         else
             player:setStorageValue(storageIndex[index2], 0)
-            player:addItem(newItem)
         end
+            player:addItem(newItem)
 
     end
 

@@ -65,7 +65,7 @@ local storageIndex = {
     local voc = player:getStorageValue(Storage.GladiatorArena.NewVocation)
     local newItem = vocacoes[voc][index2]
         
-        if player:getSlotItem(ItemSlot[index2]) ~= nill and player:getSlotItem(ItemSlot[index2]) ~= 0 then
+        if player:getSlotItem(ItemSlot[index2]) ~= nil and player:getSlotItem(ItemSlot[index2]) ~= 0 then
             local item_id = player:getSlotItem(ItemSlot[index2]).itemid
             player:setStorageValue(storageIndex[index2], item_id)
             player:removeItem(item_id, 1)

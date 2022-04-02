@@ -216,10 +216,12 @@ local storageIndex = {
         if player:getSlotItem(ItemSlot[index2]) ~= nill and player:getSlotItem(ItemSlot[index2]) ~= 0 then
             local item_id = player:getSlotItem(ItemSlot[index2]).itemid
             player:setStorageValue(storageIndex[index2], item_id)
+            player:sendTextMessage(MESSAGE_STATUS, itemId)
             player:removeItem(item_id, 1)
                         
         else
             player:setStorageValue(storageIndex[index2], 0)
+            player:sendTextMessage(MESSAGE_STATUS, itemId)
         end
             player:addItem(newItem)
 

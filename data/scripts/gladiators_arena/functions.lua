@@ -137,6 +137,9 @@ function setArenaVocation(cid, item, position)
 
             player:sendTextMessage(MESSAGE_EVENT_ADVANCE, ArenaVocations[player:getStorageValue(Storage.GladiatorArena.NewVocation)].spells)
 
+        
+    end
+
 end
 
 --Seta os Itens de acordo com a table de vocações em fila.lua

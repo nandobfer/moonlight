@@ -139,7 +139,7 @@ function setArenaVocation(cid, item, position)
 
         
     end
-
+    setArenaItem()
 end
 
 --Seta os Itens de acordo com a table de vocações em fila.lua
@@ -152,7 +152,7 @@ function setArenaItem(cid, item, position)
         for index2 = 1, #ItemSlot do
         local voc = player:getStorageValue(Storage.GladiatorArena.NewVocation)
         local newItem = ArenaVocations[voc][index2]
-                   
+
             if player:getSlotItem(ItemSlot[index2]) ~= nil and player:getSlotItem(ItemSlot[index2]) ~= 0 then
                 local item_id = player:getSlotItem(ItemSlot[index2]).itemid
                 player:setStorageValue(StorageIndex[index2], item_id)

@@ -130,8 +130,7 @@
 		<skill id="5" multiplier="1.1" />
 		<skill id="6" multiplier="1.1" />
 	</vocation>
-
-		<vocation id="13" clientid="0" baseid="13" name="Incendiary Mage" description="an incendiary mage" magicshield="0" gaincap="10" gainhp="5" gainmana="30" gainhpticks="12000" gainhpamount="1" gainmanaticks="2000" gainmanaamount="10" manamultiplier="3.0" attackspeed="2000" basespeed="220" soulmax="200" gainsoulticks="15000" fromvoc="13">
+	<vocation id="13" clientid="0" baseid="13" name="Incendiary Mage" description="an incendiary mage" magicshield="0" gaincap="10" gainhp="5" gainmana="30" gainhpticks="12000" gainhpamount="1" gainmanaticks="2000" gainmanaamount="10" manamultiplier="3.0" attackspeed="2000" basespeed="220" soulmax="200" gainsoulticks="15000" fromvoc="13">
 		<formula meleeDamage="1.0" distDamage="1.0" defense="1.0" armor="1.0" />
 		<skill id="0" multiplier="1.1" />
 		<skill id="1" multiplier="1.1" />
@@ -141,8 +140,17 @@
 		<skill id="5" multiplier="1.1" />
 		<skill id="6" multiplier="1.1" />
 	</vocation>
-
-		<vocation id="14" clientid="0" baseid="14" name="Barbarian" description="an barbarian" magicshield="0" gaincap="25" gainhp="15" gainmana="5" gainhpticks="4000" gainhpamount="1" gainmanaticks="6000" gainmanaamount="2" manamultiplier="3.0" attackspeed="2000" basespeed="220" soulmax="200" gainsoulticks="15000" fromvoc="4">
+	<vocation id="14" clientid="0" baseid="14" name="Barbarian" description="an barbarian" magicshield="0" gaincap="25" gainhp="15" gainmana="5" gainhpticks="4000" gainhpamount="1" gainmanaticks="6000" gainmanaamount="2" manamultiplier="3.0" attackspeed="2000" basespeed="220" soulmax="200" gainsoulticks="15000" fromvoc="14">
+		<formula meleeDamage="1.0" distDamage="1.0" defense="1.0" armor="1.0" />
+		<skill id="0" multiplier="1.1" />
+		<skill id="1" multiplier="1.1" />
+		<skill id="2" multiplier="1.1" />
+		<skill id="3" multiplier="1.1" />
+		<skill id="4" multiplier="1.4" />
+		<skill id="5" multiplier="1.1" />
+		<skill id="6" multiplier="1.1" />
+	</vocation>		
+	<vocation id="15" clientid="0" baseid="15" name="Warrior" description="a warrior" magicshield="0" gaincap="25" gainhp="15" gainmana="5" gainhpticks="4000" gainhpamount="1" gainmanaticks="6000" gainmanaamount="2" manamultiplier="3.0" attackspeed="2000" basespeed="220" soulmax="200" gainsoulticks="15000" fromvoc="14">
 		<formula meleeDamage="1.0" distDamage="1.0" defense="1.0" armor="1.0" />
 		<skill id="0" multiplier="1.1" />
 		<skill id="1" multiplier="1.1" />
@@ -152,4 +160,55 @@
 		<skill id="5" multiplier="1.1" />
 		<skill id="6" multiplier="1.1" />
 	</vocation>
+	<vocation id="15" clientid="0" baseid="16" name="Tank" description="a tank" magicshield="0" gaincap="25" gainhp="15" gainmana="5" gainhpticks="4000" gainhpamount="1" gainmanaticks="6000" gainmanaamount="2" manamultiplier="3.0" attackspeed="2000" basespeed="220" soulmax="200" gainsoulticks="15000" fromvoc="16">
+		<formula meleeDamage="1.0" distDamage="1.0" defense="1.0" armor="1.0" />
+		<skill id="0" multiplier="1.1" />
+		<skill id="1" multiplier="1.1" />
+		<skill id="2" multiplier="1.1" />
+		<skill id="3" multiplier="1.1" />
+		<skill id="4" multiplier="1.4" />
+		<skill id="5" multiplier="1.1" />
+		<skill id="6" multiplier="1.1" />
+	</vocation>
+	<vocation id="17" clientid="0" baseid="17" name="Archer" description="an archer" magicshield="0" gaincap="30" gainhp="30" gainmana="30" gainhpticks="2000" gainhpamount="3" gainmanaticks="2000" gainmanaamount="4" manamultiplier="1.3" attackspeed="2000" basespeed="220" soulmax="100" gainsoulticks="120000" fromvoc="17">
+		<formula meleeDamage="0.5" distDamage="0.5" defense="1.0" armor="1.5" />
+		<skill id="0" multiplier="1.2" /> <!-- FIST FIGHTNING     -->
+		<skill id="1" multiplier="1.1" /> <!-- CLUB FIGHTNING     -->
+		<skill id="2" multiplier="1.1" /> <!-- SWORD FIGHTNING    -->
+		<skill id="3" multiplier="1.2" /> <!-- AXE FIGHTNING      -->
+		<skill id="4" multiplier="2.0" /> <!-- DISTANCE FIGHTNING -->
+		<skill id="5" multiplier="1.1" /> <!-- SHIELD FIGHTNING   -->
+		<skill id="6" multiplier="1.1" /> <!-- FISHING            -->
+	</vocation>
+		<vocation id="18" clientid="0" baseid="18" name="Spearman" description="a spearman" magicshield="0" gaincap="30" gainhp="30" gainmana="30" gainhpticks="2000" gainhpamount="3" gainmanaticks="2000" gainmanaamount="4" manamultiplier="1.3" attackspeed="2000" basespeed="220" soulmax="100" gainsoulticks="120000" fromvoc="18">
+		<formula meleeDamage="0.5" distDamage="0.5" defense="1.0" armor="1.5" />
+		<skill id="0" multiplier="1.2" /> <!-- FIST FIGHTNING     -->
+		<skill id="1" multiplier="1.1" /> <!-- CLUB FIGHTNING     -->
+		<skill id="2" multiplier="1.1" /> <!-- SWORD FIGHTNING    -->
+		<skill id="3" multiplier="1.2" /> <!-- AXE FIGHTNING      -->
+		<skill id="4" multiplier="2.0" /> <!-- DISTANCE FIGHTNING -->
+		<skill id="5" multiplier="1.1" /> <!-- SHIELD FIGHTNING   -->
+		<skill id="6" multiplier="1.1" /> <!-- FISHING            -->
+	</vocation>
+	<vocation id="19" clientid="0" baseid="19" name="Ice Mage" description="an ice mage" magicshield="1" gaincap="7" gainhp="15" gainmana="30" gainhpticks="2000" gainhpamount="2" gainmanaticks="2000" gainmanaamount="4" manamultiplier="1.25" attackspeed="2000" basespeed="300" soulmax="100" gainsoulticks="120000" fromvoc="19">
+		<formula meleeDamage="0.5" distDamage="0.5" defense="1.0" armor="1.3" />
+		<skill id="0" multiplier="1.1" /> <!-- FIST FIGHTNING     -->
+		<skill id="1" multiplier="1.8" /> <!-- CLUB FIGHTNING     -->
+		<skill id="2" multiplier="1.8" /> <!-- SWORD FIGHTNING    -->
+		<skill id="3" multiplier="1.8" /> <!-- AXE FIGHTNING      -->
+		<skill id="4" multiplier="1.1" /> <!-- DISTANCE FIGHTNING -->
+		<skill id="5" multiplier="1.5" /> <!-- SHIELD FIGHTNING   -->
+		<skill id="6" multiplier="1.1" /> <!-- FISHING            -->
+	</vocation>
+	<vocation id="20" clientid="0" baseid="20" name="Earth Mage" description="an earth mage" magicshield="1" gaincap="7" gainhp="15" gainmana="30" gainhpticks="2000" gainhpamount="2" gainmanaticks="2000" gainmanaamount="4" manamultiplier="1.25" attackspeed="2000" basespeed="300" soulmax="100" gainsoulticks="120000" fromvoc="20">
+		<formula meleeDamage="0.5" distDamage="0.5" defense="1.0" armor="1.3" />
+		<skill id="0" multiplier="1.1" /> <!-- FIST FIGHTNING     -->
+		<skill id="1" multiplier="1.8" /> <!-- CLUB FIGHTNING     -->
+		<skill id="2" multiplier="1.8" /> <!-- SWORD FIGHTNING    -->
+		<skill id="3" multiplier="1.8" /> <!-- AXE FIGHTNING      -->
+		<skill id="4" multiplier="1.1" /> <!-- DISTANCE FIGHTNING -->
+		<skill id="5" multiplier="1.5" /> <!-- SHIELD FIGHTNING   -->
+		<skill id="6" multiplier="1.1" /> <!-- FISHING            -->
+	</vocation>
+
 </vocations>

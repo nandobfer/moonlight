@@ -66,7 +66,7 @@ keywordHandler:addKeyword({'Tanks'}, StdModule.say, {npcHandler = npcHandler, te
 keywordHandler:addKeyword({'Warriors'}, StdModule.say, {npcHandler = npcHandler, text = ""})
 keywordHandler:addKeyword({'Barbarians'}, StdModule.say, {npcHandler = npcHandler, text = ""})
 keywordHandler:addKeyword({'Spells'}, StdModule.say, {npcHandler = npcHandler, text = ""})
---keywordHandler:addKeyword({'mission'}, StdModule.say, {npcHandler = npcHandler, text = 'Well I would rather call it an {Ultimate Challenge} than a mission.'})
+
 
 local function creatureSayCallback(npc, creature, type, message)
 	local player = Player(creature)
@@ -94,7 +94,7 @@ local function creatureSayCallback(npc, creature, type, message)
 
 
 		if arenaId == 0 then
-			npcHandler:say('So What vocation do you choose to battle with? {evil mage}, {incendiary mage}, {earth mage}, {ice mage}, {archer}, {aspearman}, {tank}, {warrior} or {barbarian}', npc, creature)
+			npcHandler:say('So What vocation do you choose to battle with? {evil mage}, {incendiary mage}, {earth mage}, {ice mage}, {archer}, {spearman}, {tank}, {warrior} or {barbarian}', npc, creature)
 		npcHandler:setTopic(playerId, 1)
 		end
 		
@@ -112,7 +112,30 @@ local function creatureSayCallback(npc, creature, type, message)
 		player:setStorageValue(Storage.GladiatorArena.NewVocation, 14)
 		npcHandler:say('So you agree with the {rules} and want to register in the Arena as a Barbarian? The {fee} for battle is 500 gold pieces. Do you really want to participate and pay the {fee}?', npc, creature)
 		npcHandler:setTopic(playerId, 0)
-		
+		elseif MsgContains(message, 'warrior') then
+		player:setStorageValue(Storage.GladiatorArena.NewVocation, 15)
+		npcHandler:say('So you agree with the {rules} and want to register in the Arena as a Barbarian? The {fee} for battle is 500 gold pieces. Do you really want to participate and pay the {fee}?', npc, creature)
+		npcHandler:setTopic(playerId, 0)		
+		elseif MsgContains(message, 'tank') then
+		player:setStorageValue(Storage.GladiatorArena.NewVocation, 16)
+		npcHandler:say('So you agree with the {rules} and want to register in the Arena as a Barbarian? The {fee} for battle is 500 gold pieces. Do you really want to participate and pay the {fee}?', npc, creature)
+		npcHandler:setTopic(playerId, 0)
+		elseif MsgContains(message, 'archer') then
+		player:setStorageValue(Storage.GladiatorArena.NewVocation, 17)
+		npcHandler:say('So you agree with the {rules} and want to register in the Arena as a Barbarian? The {fee} for battle is 500 gold pieces. Do you really want to participate and pay the {fee}?', npc, creature)
+		npcHandler:setTopic(playerId, 0)
+		elseif MsgContains(message, 'spearman') then
+		player:setStorageValue(Storage.GladiatorArena.NewVocation, 18)
+		npcHandler:say('So you agree with the {rules} and want to register in the Arena as a Barbarian? The {fee} for battle is 500 gold pieces. Do you really want to participate and pay the {fee}?', npc, creature)
+		npcHandler:setTopic(playerId, 0)
+		elseif MsgContains(message, 'ice mage') then
+		player:setStorageValue(Storage.GladiatorArena.NewVocation, 19)
+		npcHandler:say('So you agree with the {rules} and want to register in the Arena as a Barbarian? The {fee} for battle is 500 gold pieces. Do you really want to participate and pay the {fee}?', npc, creature)
+		npcHandler:setTopic(playerId, 0)
+		elseif MsgContains(message, 'earth mage') then
+		player:setStorageValue(Storage.GladiatorArena.NewVocation, 20)
+		npcHandler:say('So you agree with the {rules} and want to register in the Arena as a Barbarian? The {fee} for battle is 500 gold pieces. Do you really want to participate and pay the {fee}?', npc, creature)
+		npcHandler:setTopic(playerId, 0)
 		end
 
 	elseif npcHandler:getTopic(playerId) == 0 then

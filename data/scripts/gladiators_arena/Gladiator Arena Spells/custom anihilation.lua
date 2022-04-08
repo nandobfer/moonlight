@@ -20,7 +20,7 @@ mute:setParameter(CONDITION_PARAM_TICKS, 4000)
 function spell.onCastSpell(creature, var)
 	if not creature:getCondition(CONDITION_MUTED) then
 	return combat:execute(creature, var)
-				else
+	else
     creature:sendCancelMessage("You are Still Silenced.")
     end
 end

@@ -12,6 +12,7 @@ end
 combat:setCallback(CALLBACK_PARAM_LEVELMAGICVALUE, "onGetFormulaValues")
 
 local spell = Spell("instant")
+local mute = Condition(CONDITION_MUTED)
 
 function spell.onCastSpell(creature, var)
 	if not creature:getCondition(CONDITION_MUTED) then

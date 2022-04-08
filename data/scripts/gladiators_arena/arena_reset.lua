@@ -19,6 +19,7 @@ if player:getStorageValue(100000025) ~= nill and player:getStorageValue(10000002
 
 --Cure Burning
 player:removeCondition(CONDITION_FIRE)
+player:removeCondition(CONDITION_POISON)
 
     --Remove Skill Condition
     player:removeCondition(CONDITION_ATTRIBUTES)

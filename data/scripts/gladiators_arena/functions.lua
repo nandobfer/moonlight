@@ -161,7 +161,10 @@ function setArenaItem(cid, item, position)
                 player:setStorageValue(StorageIndex[index2], 0)
             end
                 player:addItem(newItem)
-        end  
+        end 
+        if player:getStorageValue(Storage.GladiatorArena.NewVocation) == 17 then
+        player:addItem(15793, 200)
+        end 
     end
     startBattle()
 end

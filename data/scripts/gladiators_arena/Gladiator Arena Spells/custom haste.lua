@@ -37,7 +37,7 @@ end
 spell:name("Haste")
 spell:words("utani hurs")
 spell:group("support")
-spell:vocation("evil mage;true", "incendiary mage;true", "barbarian")
+spell:vocation("evil mage;true", "incendiary mage;true", "barbarian;true", "tank;true", "archer;true", "spearman;true")
 spell:id(8704)
 spell:cooldown(2 * 1000)
 spell:groupCooldown(2 * 1000)

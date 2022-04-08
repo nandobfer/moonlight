@@ -13,13 +13,12 @@ end
 combat:setCallback(CALLBACK_PARAM_LEVELMAGICVALUE, "onGetFormulaValues")
 
 local spell = Spell("instant")
-local mute = Condition(CONDITION_MUTED)
-mute:setParameter(CONDITION_PARAM_TICKS, 4000)
 
 function spell.onCastSpell(creature, variant)
+	local mute = Condition(CONDITION_MUTED)
 	if not creature:getCondition(CONDITION_MUTED) then
 	return combat:execute(creature, variant)
-			else
+	else
     creature:sendCancelMessage("You are Still Silenced.")
     end
 end
@@ -27,7 +26,7 @@ end
 spell:name("Wound Cleansing")
 spell:words("exura icos")
 spell:group("healing")
-spell:vocation("barbarian;true")
+spell:vocation("barbarian;true", "warrior;true", "tank;true")
 spell:id(8708)
 spell:cooldown(1 * 1000)
 spell:groupCooldown(1 * 1000)

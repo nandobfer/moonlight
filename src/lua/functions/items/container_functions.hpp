@@ -36,10 +36,7 @@ class ContainerFunctions final : LuaScriptInterface {
 				registerMethod(L, "Container", "getCapacity", ContainerFunctions::luaContainerGetCapacity);
 				registerMethod(L, "Container", "getEmptySlots", ContainerFunctions::luaContainerGetEmptySlots);
 				registerMethod(L, "Container", "getContentDescription", ContainerFunctions::luaContainerGetContentDescription);
-<<<<<<< HEAD
 				registerMethod(L, "Container", "getItems", ContainerFunctions::luaContainerGetItems);
-=======
->>>>>>> main
 				registerMethod(L, "Container", "getItemHoldingCount", ContainerFunctions::luaContainerGetItemHoldingCount);
 				registerMethod(L, "Container", "getItemCountById", ContainerFunctions::luaContainerGetItemCountById);
 
@@ -58,10 +55,7 @@ class ContainerFunctions final : LuaScriptInterface {
 		static int luaContainerGetEmptySlots(lua_State* L);
 
 		static int luaContainerGetContentDescription(lua_State* L);
-<<<<<<< HEAD
 		static int luaContainerGetItems(lua_State* L);
-=======
->>>>>>> main
 		static int luaContainerGetItemHoldingCount(lua_State* L);
 		static int luaContainerGetItemCountById(lua_State* L);
 

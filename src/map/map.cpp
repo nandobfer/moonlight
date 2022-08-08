@@ -20,7 +20,8 @@
 #include "otpch.h"
 
 #include <boost/filesystem.hpp>
-#include "libzippp.h"
+#include <fstream>
+#include <curl/curl.h>
 
 #include "io/iomap.h"
 #include "io/iomapserialize.h"
@@ -29,48 +30,56 @@
 #include "game/game.h"
 #include "creatures/monsters/monster.h"
 #include "creatures/npcs/npc.h"
-#include "utils/tools.h"
-
-extern Game g_game;
 
 bool Map::load(const std::string& identifier) {
-	IOMap loader;
-	if (!loader.loadMap(this, identifier)) {
-		SPDLOG_ERROR("[Map::load] - {}", loader.getLastErrorString());
+	try {
+		IOMap loader;
+		if (!loader.loadMap(this, identifier)) {
+			SPDLOG_ERROR("[Map::load] - {}", loader.getLastErrorString());
+			return false;
+		}
+	}
+	catch(const std::exception) {
+		SPDLOG_ERROR("[Map::load] - The map in folder {} is missing or corrupted", identifier);
 		return false;
 	}
 	return true;
 }
 
-bool Map::extractMap(const std::string& identifier) const {
-	if (boost::filesystem::exists(identifier)) {
-		return true;
-	}
-	
-	using namespace libzippp;
-	std::string mapName = g_configManager().getString(MAP_NAME) + ".otbm";
-	SPDLOG_INFO("Unzipping " + mapName + " to world folder");
-	ZipArchive zf("data/world/world.zip");
-
-	if (!zf.open(ZipArchive::ReadOnly)) {
-		SPDLOG_ERROR("[Map::extractMap] - Failed to unzip world.zip, file doesn't exist");
-		consoleHandlerExit();
-		return false;
-	}
-
-	std::ofstream unzippedFile("data/world/" + mapName, std::ofstream::binary);
-	zf.getEntry(mapName).readContent(unzippedFile, ZipArchive::Current);
-	zf.close();
-	return true;
-}
-
-bool Map::loadMap(const std::string& identifier, bool loadHouses, bool loadMonsters, bool loadNpcs)
+bool Map::loadMap(const std::string& identifier,
+	bool mainMap /*= false*/,bool loadHouses /*= false*/,
+	bool loadMonsters /*= false*/, bool loadNpcs /*= false*/)
 {
-	// Extract the map
-	this->extractMap(identifier);
+	// Only download map if is loading the main map and it is not already downloaded
+	if (mainMap && g_configManager().getBoolean(TOGGLE_DOWNLOAD_MAP) && !boost::filesystem::exists(identifier)) {
+		const auto mapDownloadUrl = g_configManager().getString(MAP_DOWNLOAD_URL);
+		if (mapDownloadUrl.empty()) {
+			SPDLOG_WARN("Map download URL in config.lua is empty, download disabled");
+		}
+
+		if (CURL *curl = curl_easy_init(); curl && !mapDownloadUrl.empty()) {
+			SPDLOG_INFO("Downloading " + g_configManager().getString(MAP_NAME) + ".otbm to world folder");
+			FILE *otbm = fopen(identifier.c_str(), "wb");
+			curl_easy_setopt(curl, CURLOPT_FOLLOWLOCATION, 1L);
+			curl_easy_setopt(curl, CURLOPT_URL, mapDownloadUrl.c_str());
+			curl_easy_setopt(curl, CURLOPT_WRITEDATA, otbm);
+			curl_easy_setopt(curl, CURLOPT_SSLVERSION, CURL_SSLVERSION_TLSv1_2);
+			curl_easy_perform(curl);
+			curl_easy_cleanup(curl);
+			fclose(otbm);
+		}
+	}
 
 	// Load the map
 	this->load(identifier);
+
+	// Only create items from lua functions if is loading main map
+	// It needs to be after the load map to ensure the map already exists before creating the items
+	if (mainMap) {
+		// Create items from lua scripts per position
+		// Example: ActionFunctions::luaActionPosition
+		g_game().createLuaItemsOnMap();
+	}
 
 	if (loadMonsters) {
 		if (!IOMap::loadMonsters(this)) {
@@ -1235,12 +1244,12 @@ uint32_t Map::clean() const
 	uint64_t start = OTSYS_TIME();
 	size_t tiles = 0;
 
-	if (g_game.getGameState() == GAME_STATE_NORMAL) {
-		g_game.setGameState(GAME_STATE_MAINTAIN);
+	if (g_game().getGameState() == GAME_STATE_NORMAL) {
+		g_game().setGameState(GAME_STATE_MAINTAIN);
 	}
 
 	std::vector<Item*> toRemove;
-	for (auto tile : g_game.getTilesToClean()) {
+	for (auto tile : g_game().getTilesToClean()) {
     if (!tile) {
       continue;
     }
@@ -1255,14 +1264,14 @@ uint32_t Map::clean() const
 	}
 
   for (auto item : toRemove) {
-		g_game.internalRemoveItem(item, -1);
+		g_game().internalRemoveItem(item, -1);
 	}
 
 	size_t count = toRemove.size();
-	g_game.clearTilesToClean();
+	g_game().clearTilesToClean();
 
-	if (g_game.getGameState() == GAME_STATE_MAINTAIN) {
-		g_game.setGameState(GAME_STATE_NORMAL);
+	if (g_game().getGameState() == GAME_STATE_MAINTAIN) {
+		g_game().setGameState(GAME_STATE_NORMAL);
 	}
 
 	SPDLOG_INFO("CLEAN: Removed {} item{} from {} tile{} in {} seconds",

@@ -27,10 +27,6 @@
 #include "creatures/combat/spells.h"
 #include "lua/creature/events.h"
 
-extern Game g_game;
-extern Npcs g_npcs;
-extern Events* g_events;
-
 int32_t Npc::despawnRange;
 int32_t Npc::despawnRadius;
 
@@ -38,7 +34,7 @@ uint32_t Npc::npcAutoID = 0x80000000;
 
 Npc* Npc::createNpc(const std::string& name)
 {
-	NpcType* npcType = g_npcs.getNpcType(name);
+	NpcType* npcType = g_npcs().getNpcType(name);
 	if (!npcType) {
 		return nullptr;
 	}
@@ -70,14 +66,24 @@ Npc::Npc(NpcType* npcType) :
 Npc::~Npc() {
 }
 
+void Npc::reset() const
+{
+	g_npcs().reset();
+	// Close shop window from all npcs and reset the shopPlayerSet
+	for (const auto& [npcId, npc] : g_game().getNpcs()) {
+		npc->closeAllShopWindows();
+		npc->resetPlayerInteractions();
+	}
+}
+
 void Npc::addList()
 {
-	g_game.addNpc(this);
+	g_game().addNpc(this);
 }
 
 void Npc::removeList()
 {
-	g_game.removeNpc(this);
+	g_game().removeNpc(this);
 }
 
 bool Npc::canSee(const Position& pos) const
@@ -200,11 +206,11 @@ void Npc::onThink(uint32_t interval)
 	}
 
 	if (!npcType->canSpawn(position)) {
-		g_game.removeCreature(this);
+		g_game().removeCreature(this);
 	}
 
 	if (!isInSpawnRange(position)) {
-		g_game.internalTeleport(this, masterPos);
+		g_game().internalTeleport(this, masterPos);
 		resetPlayerInteractions();
 		closeAllShopWindows();
 	}
@@ -213,16 +219,21 @@ void Npc::onThink(uint32_t interval)
 	onThinkWalk(interval);
 }
 
-void Npc::onPlayerBuyItem(Player* player, uint16_t serverId,
+void Npc::onPlayerBuyItem(Player* player, uint16_t itemId,
                           uint8_t subType, uint8_t amount, bool ignore, bool inBackpacks)
 {
-	if (!player) {
+	if (player == nullptr) {
+		SPDLOG_ERROR("[Npc::onPlayerBuyItem] - Player is nullptr");
 		return;
 	}
 
-<<<<<<< HEAD
+	const ItemType& itemType = Item::items[itemId];
+	if (!itemType.stackable && player->getFreeBackpackSlots() < amount || player->getFreeBackpackSlots() == 0) {
+		player->sendCancelMessage(RETURNVALUE_NOTENOUGHROOM);
+		return;
+	}
+
 	uint32_t buyPrice = 0;
-	const ItemType& itemType = Item::items[serverId];
 	const std::vector<ShopBlock> &shopVector = getShopItemVector();
 	for (ShopBlock shopBlock : shopVector)
 	{
@@ -232,46 +243,25 @@ void Npc::onPlayerBuyItem(Player* player, uint16_t serverId,
 		}
 	}
 
-	int64_t totalCost = buyPrice * amount;
+	uint32_t totalCost = buyPrice * amount;
 	if (getCurrency() == ITEM_GOLD_COIN) {
-		if (!g_game.removeMoney(player, totalCost, 0, true)) {
-			SPDLOG_ERROR("[Npc::onPlayerBuyItem (removeMoney)] - Player {} have a problem for buy item {} on shop for npc {}", player->getName(), serverId, getName());
+		if (!g_game().removeMoney(player, totalCost, 0, true)) {
+			SPDLOG_ERROR("[Npc::onPlayerBuyItem (removeMoney)] - Player {} have a problem for buy item {} on shop for npc {}", player->getName(), itemId, getName());
+			SPDLOG_DEBUG("[Information] Player {} buyed item {} on shop for npc {}, at position {}", player->getName(), itemId, getName(), player->getPosition().toString());
 			return;
 		}
-	} else if(!player->removeItemOfType(getCurrency(), buyPrice, -1, false)) {
-		SPDLOG_ERROR("[Npc::onPlayerBuyItem (removeItemOfType)] - Player {} have a problem for buy item {} on shop for npc {}", player->getName(), serverId, getName());
+	} else if(!player->removeItemOfType(getCurrency(), totalCost, -1, false)) {
+		SPDLOG_ERROR("[Npc::onPlayerBuyItem (removeItemOfType)] - Player {} have a problem for buy item {} on shop for npc {}", player->getName(), itemId, getName());
+		SPDLOG_DEBUG("[Information] Player {} buyed item {} on shop for npc {}, at position {}", player->getName(), itemId, getName(), player->getPosition().toString());
 		return;
 	}
 
 	// onPlayerBuyItem(self, player, itemId, subType, amount, ignore inBackpacks)
-=======
-	const ItemType& itemType = Item::items[serverId];
-
-	if (getShopItems().find(itemType.name) == getShopItems().end()) {
-		return;
-	}
-
-	ShopInfo shopInfo = getShopItems()[itemType.name];
-	int64_t totalCost = shopInfo.buyPrice * amount;
-	if (getCurrency() == ITEM_GOLD_COIN) {
-		if (!g_game.removeMoney(player, totalCost, 0, true)) {
-			return;
-		}
-	} else if(!player->removeItemOfType(getCurrency(), shopInfo.buyPrice, -1, false)) {
-		return;
-	}
-
-	// onPlayerBuyItem(self, player, itemId, subType, amount, ignore, inBackpacks)
->>>>>>> main
 	CreatureCallback callback = CreatureCallback(npcType->info.scriptInterface, this);
 	if (callback.startScriptInterface(npcType->info.playerBuyEvent)) {
 		callback.pushSpecificCreature(this);
 		callback.pushCreature(player);
-<<<<<<< HEAD
-		callback.pushNumber(itemType.clientId);
-=======
-		callback.pushNumber(serverId);
->>>>>>> main
+		callback.pushNumber(itemId);
 		callback.pushNumber(subType);
 		callback.pushNumber(amount);
 		callback.pushBoolean(inBackpacks);
@@ -284,16 +274,15 @@ void Npc::onPlayerBuyItem(Player* player, uint16_t serverId,
 	}
 }
 
-void Npc::onPlayerSellItem(Player* player, uint16_t serverId,
+void Npc::onPlayerSellItem(Player* player, uint16_t itemId,
                           uint8_t subType, uint8_t amount, bool ignore)
 {
 	if (!player) {
 		return;
 	}
 
-<<<<<<< HEAD
 	uint32_t sellPrice = 0;
-	const ItemType& itemType = Item::items[serverId];
+	const ItemType& itemType = Item::items[itemId];
 	const std::vector<ShopBlock> &shopVector = getShopItemVector();
 	for (ShopBlock shopBlock : shopVector)
 	{
@@ -303,35 +292,20 @@ void Npc::onPlayerSellItem(Player* player, uint16_t serverId,
 		}
 	}
 
-	if(!player->removeItemOfType(serverId, amount, -1, false, false)) {
-		SPDLOG_ERROR("[Npc::onPlayerSellItem] - Player {} have a problem for sell item {} on shop for npc {}", player->getName(), serverId, getName());
+	if(!player->removeItemOfType(itemId, amount, -1, false, false)) {
+		SPDLOG_ERROR("[Npc::onPlayerSellItem] - Player {} have a problem for sell item {} on shop for npc {}", player->getName(), itemId, getName());
 		return;
 	}
 
 	int64_t totalCost = sellPrice * amount;
-=======
-	const ItemType& itemType = Item::items[serverId];
-
-	if (getShopItems().find(itemType.name) == getShopItems().end()) {
-		return;
-	}
-
-	ShopInfo shopInfo = getShopItems()[itemType.name];
-
-	if(!player->removeItemOfType(serverId, amount, -1, false, false)) {
-		return;
-	}
-
-	int64_t totalCost = shopInfo.sellPrice * amount;
->>>>>>> main
-	g_game.addMoney(player, totalCost, 0);
+	g_game().addMoney(player, totalCost, 0);
 
 	// onPlayerSellItem(self, player, itemId, subType, amount, ignore)
 	CreatureCallback callback = CreatureCallback(npcType->info.scriptInterface, this);
 	if (callback.startScriptInterface(npcType->info.playerSellEvent)) {
 		callback.pushSpecificCreature(this);
 		callback.pushCreature(player);
-		callback.pushNumber(itemType.clientId);
+		callback.pushNumber(itemType.id);
 		callback.pushNumber(subType);
 		callback.pushNumber(amount);
 		callback.pushString(itemType.name);
@@ -343,20 +317,20 @@ void Npc::onPlayerSellItem(Player* player, uint16_t serverId,
 	}
 }
 
-void Npc::onPlayerCheckItem(Player* player, uint16_t serverId,
+void Npc::onPlayerCheckItem(Player* player, uint16_t itemId,
                           uint8_t subType)
 {
 	if (!player) {
 		return;
 	}
 
-	const ItemType& itemType = Item::items[serverId];
-	// onPlayerCheckItem(self, player, clientId, subType)
+	const ItemType& itemType = Item::items[itemId];
+	// onPlayerCheckItem(self, player, itemId, subType)
 	CreatureCallback callback = CreatureCallback(npcType->info.scriptInterface, this);
 	if (callback.startScriptInterface(npcType->info.playerLookEvent)) {
 		callback.pushSpecificCreature(this);
 		callback.pushCreature(player);
-		callback.pushNumber(serverId);
+		callback.pushNumber(itemId);
 		callback.pushNumber(subType);
 	}
 
@@ -402,9 +376,9 @@ void Npc::onThinkYell(uint32_t interval)
 			const voiceBlock_t& vb = npcType->info.voiceVector[index];
 
 			if (vb.yellText) {
-				g_game.internalCreatureSay(this, TALKTYPE_YELL, vb.text, false);
+				g_game().internalCreatureSay(this, TALKTYPE_YELL, vb.text, false);
 			} else {
-				g_game.internalCreatureSay(this, TALKTYPE_SAY, vb.text, false);
+				g_game().internalCreatureSay(this, TALKTYPE_SAY, vb.text, false);
 			}
 		}
 	}
@@ -468,7 +442,7 @@ bool Npc::isInSpawnRange(const Position& pos) const
 }
 
 void Npc::setPlayerInteraction(uint32_t playerId, uint16_t topicId /*= 0*/) {
-	Creature* creature = g_game.getCreatureByID(playerId);
+	Creature* creature = g_game().getCreatureByID(playerId);
 	if (!creature) {
 		return;
 	}
@@ -505,7 +479,7 @@ bool Npc::canWalkTo(const Position& fromPos, Direction dir) const
 		return false;
 	}
 
-	Tile* toTile = g_game.map.getTile(toPos);
+	const Tile* toTile = g_game().map.getTile(toPos);
 	if (!toTile || toTile->queryAdd(0, *this, 1, 0) != RETURNVALUE_NOERROR) {
 		return false;
 	}

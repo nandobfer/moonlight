@@ -367,7 +367,9 @@ TODO
 
 ## CUSTOM
 # Files
-config.lua
+# config.lua
+canary
+canary.old
 client_assertions.txt
 # Extensions
 *.ini

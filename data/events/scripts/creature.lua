@@ -1,4 +1,3 @@
--- Functions from The Forgotten Server
 function Creature:onChangeOutfit(outfit)
 	if self:isPlayer() then
 		local familiarLookType = self:getFamiliarLooktype()
@@ -19,7 +18,6 @@ end
 function Creature:onHear(speaker, words, type)
 end
 
--- Functions from OTServBR-Global
 function Creature:onAreaCombat(tile, isAggressive)
 	return true
 end
@@ -39,14 +37,14 @@ local function removeCombatProtection(cid)
 		time = 30
 	end
 
-	player:setStorageValue(Storage.combatProtectionStorage, 2)
+	player:setStorageValue(Global.Storage.combatProtectionStorage, 2)
 	addEvent(function(cid)
 		local player = Player(cid)
 		if not player then
 			return
 		end
 
-		player:setStorageValue(Storage.combatProtectionStorage, 0)
+		player:setStorageValue(Global.Storage.combatProtectionStorage, 0)
 		player:remove()
 	end, time * 1000, cid)
 end
@@ -66,13 +64,13 @@ function Creature:onTargetCombat(target)
 
 	if target:isPlayer() then
 		if self:isMonster() then
-			local protectionStorage = target:getStorageValue(Storage.combatProtectionStorage)
+			local protectionStorage = target:getStorageValue(Global.Storage.combatProtectionStorage)
 
 			if target:getIp() == 0 then -- If player is disconnected, monster shall ignore to attack the player
 				if target:isPzLocked() then return true end
 				if protectionStorage <= 0 then
 					addEvent(removeCombatProtection, 30 * 1000, target.uid)
-					target:setStorageValue(Storage.combatProtectionStorage, 1)
+					target:setStorageValue(Global.Storage.combatProtectionStorage, 1)
 				elseif protectionStorage == 1 then
 					self:searchTarget()
 					return RETURNVALUE_YOUMAYNOTATTACKTHISPLAYER
@@ -126,28 +124,5 @@ function Creature:onDrainHealth(attacker, typePrimary, damagePrimary,
 		return typePrimary, damagePrimary, typeSecondary, damageSecondary, colorPrimary, colorSecondary
 	end
 
-	-- New prey => Bonus damage
-	if (attacker:isPlayer()) then
-		if (self:isMonster() and not self:getMaster()) then
-			for slot = CONST_PREY_SLOT_FIRST, CONST_PREY_SLOT_THIRD do
-				if (attacker:getPreyCurrentMonster(slot) == self:getName()
-				and attacker:getPreyBonusType(slot) == CONST_BONUS_DAMAGE_BOOST) then
-					damagePrimary = damagePrimary + math.floor(damagePrimary * (attacker:getPreyBonusValue(slot) / 100))
-					break
-				end
-			end
-		end
-	-- New prey => Damage reduction
-	elseif (attacker:isMonster()) then
-		if (self:isPlayer()) then
-			for slot = CONST_PREY_SLOT_FIRST, CONST_PREY_SLOT_THIRD do
-				if (self:getPreyCurrentMonster(slot) == attacker:getName()
-				and self:getPreyBonusType(slot) == CONST_BONUS_DAMAGE_REDUCTION) then
-					damagePrimary = damagePrimary - math.floor(damagePrimary * (self:getPreyBonusValue(slot) / 100))
-					break
-				end
-			end
-		end
-	end
 	return typePrimary, damagePrimary, typeSecondary, damageSecondary, colorPrimary, colorSecondary
 end

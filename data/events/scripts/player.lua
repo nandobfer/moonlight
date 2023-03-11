@@ -141,14 +141,14 @@ function Player:onLook(thing, position, distance)
 			if master and table.contains({'sorcerer familiar','knight familiar','druid familiar','paladin familiar'},
 																						thing:getName():lower()) then
 				description = description..' (Master: ' .. master:getName() .. '). \z
-				It will disappear in ' .. getTimeinWords(master:getStorageValue(Storage.FamiliarSummon) - os.time())
+				It will disappear in ' .. getTimeinWords(master:getStorageValue(Global.Storage.FamiliarSummon) - os.time())
 			end
 		end
 	end
 
 	if self:getGroup():getAccess() then
 		if thing:isItem() then
-			description = string.format("%s\nItem ID: %d", description, thing:getId())
+			description = string.format("%s\nClient ID: %d", description, thing:getId())
 
 			local actionId = thing:getActionId()
 			if actionId ~= 0 then
@@ -175,11 +175,6 @@ function Player:onLook(thing, position, distance)
 				description = string.format("%s\nDecays to: %d", description, decayId)
 			end
 
-			local clientId = itemType:getId()
-			if clientId then
-				description = string.format("%s\nClient ID: %d", description, clientId)
-			end
-
 		elseif thing:isCreature() then
 			local str = "%s\nHealth: %d / %d"
 			if thing:isPlayer() and thing:getMaxMana() > 0 then
@@ -194,6 +189,11 @@ function Player:onLook(thing, position, distance)
 		)
 
 		if thing:isCreature() then
+			local speedBase = thing:getBaseSpeed()
+			local speed = thing:getSpeed()
+			description = string.format("%s\nSpeedBase: %d", description, speedBase)
+			description = string.format("%s\nSpeed: %d", description, speed)
+
 			if thing:isPlayer() then
 				description = string.format("%s\nIP: %s.", description, Game.convertIpToString(thing:getIp()))
 			end
@@ -209,7 +209,7 @@ function Player:onLookInBattleList(creature, distance)
 		local summons = {'sorcerer familiar','knight familiar','druid familiar','paladin familiar'}
 		if master and table.contains(summons, creature:getName():lower()) then
 			description = description..' (Master: ' .. master:getName() .. '). \z
-				It will disappear in ' .. getTimeinWords(master:getStorageValue(Storage.FamiliarSummon) - os.time())
+				It will disappear in ' .. getTimeinWords(master:getStorageValue(Global.Storage.FamiliarSummon) - os.time())
 		end
 	end
 	if self:getGroup():getAccess() then
@@ -291,9 +291,7 @@ local function antiPush(self, item, count, fromPosition, toPosition, fromCylinde
 end
 
 function Player:onMoveItem(item, count, fromPosition, toPosition, fromCylinder, toCylinder)
-
-	-- No move items with actionID = 100
-	if item:getActionId() == NOT_MOVEABLE_ACTION then
+	if item:getActionId() == IMMOVABLE_ACTION_ID then
 		self:sendCancelMessage(RETURNVALUE_NOTPOSSIBLE)
 		return false
 	end
@@ -321,32 +319,6 @@ function Player:onMoveItem(item, count, fromPosition, toPosition, fromCylinder, 
 			return false
 		end
 	end
-
-	-- Cults of Tibia begin
-	local frompos = Position(33023, 31904, 14) -- Checagem
-	local topos = Position(33052, 31932, 15) -- Checagem
-	if self:getPosition():isInRange(frompos, topos) and item:getId() == 23729 then
-		local tileBoss = Tile(toPosition)
-		if tileBoss and tileBoss:getTopCreature() and tileBoss:getTopCreature():isMonster() then
-			if tileBoss:getTopCreature():getName():lower() == 'the remorseless corruptor' then
-				tileBoss:getTopCreature():addHealth(-17000)
-				item:remove(1)
-				if tileBoss:getTopCreature():getHealth() <= 300 then
-					tileBoss:getTopCreature():remove()
-					local monster = Game.createMonster('the corruptor of souls', toPosition)
-					monster:registerEvent('CheckTile')
-					if Game.getStorageValue('healthSoul') > 0 then
-						monster:addHealth(-(monster:getHealth() - Game.getStorageValue('healthSoul')))
-					end
-					Game.setStorageValue('CheckTile', os.time()+30)
-				end
-			elseif tileBoss:getTopCreature():getName():lower() == 'the corruptor of souls' then
-				Game.setStorageValue('CheckTile', os.time()+30)
-				item:remove(1)
-			end
-		end
-	end
-	-- Cults of Tibia end
 
 	-- SSA exhaust
 	local exhaust = { }
@@ -408,7 +380,7 @@ function Player:onMoveItem(item, count, fromPosition, toPosition, fromCylinder, 
 		local itemType, moveItem = ItemType(item:getId())
 		if bit.band(itemType:getSlotPosition(), SLOTP_TWO_HAND) ~= 0 and toPosition.y == CONST_SLOT_LEFT then
 			moveItem = self:getSlotItem(CONST_SLOT_RIGHT)
-			if moveItem and itemType:getWeaponType() == WEAPON_DISTANCE and ItemType(moveItem:getId()):getWeaponType() == WEAPON_QUIVER then
+			if moveItem and itemType:getWeaponType() == WEAPON_DISTANCE and ItemType(moveItem:getId()):isQuiver() then
 				return true
 			end
 		elseif itemType:getWeaponType() == WEAPON_SHIELD and toPosition.y == CONST_SLOT_RIGHT then
@@ -482,19 +454,52 @@ function Player:onMoveItem(item, count, fromPosition, toPosition, fromCylinder, 
 end
 
 function Player:onItemMoved(item, count, fromPosition, toPosition, fromCylinder, toCylinder)
+	if IsRunningGlobalDatapack() then
+		-- Cults of Tibia begin
+		local frompos = Position(33023, 31904, 14) -- Checagem
+		local topos = Position(33052, 31932, 15) -- Checagem
+		local removeItem = false
+		if self:getPosition():isInRange(frompos, topos) and item:getId() == 23729 then
+			local tileBoss = Tile(toPosition)
+			if tileBoss and tileBoss:getTopCreature() and tileBoss:getTopCreature():isMonster() then
+				if tileBoss:getTopCreature():getName():lower() == 'the remorseless corruptor' then
+					tileBoss:getTopCreature():addHealth(-17000)
+					tileBoss:getTopCreature():remove()
+					local monster = Game.createMonster('The Corruptor of Souls', toPosition)
+					if not monster then
+						return false
+					end
+					removeItem = true
+					monster:registerEvent('CheckTile')
+					if Game.getStorageValue('healthSoul') > 0 then
+						monster:addHealth(-(monster:getHealth() - Game.getStorageValue('healthSoul')))
+					end
+					Game.setStorageValue('CheckTile', os.time()+30)
+				elseif tileBoss:getTopCreature():getName():lower() == 'the corruptor of souls' then
+					Game.setStorageValue('CheckTile', os.time()+30)
+					removeItem = true
+				end
+			end
+			if removeItem then
+				item:remove(1)
+			end
+		end
+		-- Cults of Tibia end
+	end
+	return true
 end
 
 function Player:onMoveCreature(creature, fromPosition, toPosition)
 	local player = creature:getPlayer()
 	if player and onExerciseTraining[player:getId()] and self:getGroup():hasFlag(PlayerFlag_CanPushAllCreatures) == false then
 		self:sendCancelMessage(RETURNVALUE_NOTPOSSIBLE)
-	return false
+		return false
 	end
 	return true
 end
 
 local function hasPendingReport(name, targetName, reportType)
-	local f = io.open(string.format("data/reports/players/%s-%s-%d.txt", name, targetName, reportType), "r")
+	local f = io.open(string.format("%s/reports/players/%s-%s-%d.txt", CORE_DIRECTORY, name, targetName, reportType), "r")
 	if f then
 		io.close(f)
 		return true
@@ -506,13 +511,13 @@ end
 function Player:onReportRuleViolation(targetName, reportType, reportReason, comment, translation)
 	local name = self:getName()
 	if hasPendingReport(name, targetName, reportType) then
-		self:sendTextMessage(MESSAGE_REPORT, "Your report is being processed.")
+		self:sendTextMessage(MESSAGE_EVENT_ADVANCE, "Your report is being processed.")
 		return
 	end
 
-	local file = io.open(string.format("data/reports/players/%s-%s-%d.txt", name, targetName, reportType), "a")
+	local file = io.open(string.format("%s/reports/players/%s-%s-%d.txt", CORE_DIRECTORY, name, targetName, reportType), "a")
 	if not file then
-		self:sendTextMessage(MESSAGE_REPORT,
+		self:sendTextMessage(MESSAGE_EVENT_ADVANCE,
 			"There was an error when processing your report, please contact a gamemaster.")
 		return
 	end
@@ -529,7 +534,7 @@ function Player:onReportRuleViolation(targetName, reportType, reportReason, comm
 	end
 	io.write("------------------------------\n")
 	io.close(file)
-	self:sendTextMessage(MESSAGE_REPORT, string.format("Thank you for reporting %s. Your report \z
+	self:sendTextMessage(MESSAGE_EVENT_ADVANCE, string.format("Thank you for reporting %s. Your report \z
 	will be processed by %s team as soon as possible.", targetName, configManager.getString(configKeys.SERVER_NAME)))
 	return
 end
@@ -540,10 +545,10 @@ function Player:onReportBug(message, position, category)
 	end
 
 	local name = self:getName()
-	local file = io.open("data/reports/bugs/" .. name .. " report.txt", "a")
+	local file = io.open(string.format("%s/reports/bugs/%s/report.txt", CORE_DIRECTORY, name), "a")
 
 	if not file then
-		self:sendTextMessage(MESSAGE_REPORT,
+		self:sendTextMessage(MESSAGE_EVENT_ADVANCE,
 			"There was an error when processing your report, please contact a gamemaster.")
 		return true
 	end
@@ -559,7 +564,7 @@ function Player:onReportBug(message, position, category)
 	io.write("Comment: " .. message .. "\n")
 	io.close(file)
 
-	self:sendTextMessage(MESSAGE_REPORT,
+	self:sendTextMessage(MESSAGE_EVENT_ADVANCE,
 		"Your report has been sent to " .. configManager.getString(configKeys.SERVER_NAME) .. ".")
 	return true
 end
@@ -576,18 +581,19 @@ function Player:onTurn(direction)
 end
 
 function Player:onTradeRequest(target, item)
-	-- No trade items with actionID = 100
-	if item:getActionId() == NOT_MOVEABLE_ACTION then
+	if item:getActionId() == IMMOVABLE_ACTION_ID then
 		return false
 	end
 
-	if isInArray(storeItemID,item.itemid) then
+	if table.contains(storeItemID,item.itemid) then
 		return false
 	end
 	return true
 end
 
 function Player:onTradeAccept(target, item, targetItem)
+	self:closeForge()
+	target:closeForge()
 	self:closeImbuementWindow()
 	target:closeImbuementWindow()
 	return true
@@ -598,12 +604,20 @@ soulCondition:setTicks(4 * 60 * 1000)
 soulCondition:setParameter(CONDITION_PARAM_SOULGAIN, 1)
 
 local function useStamina(player)
+	if not player then
+		return false
+	end
+
 	local staminaMinutes = player:getStamina()
 	if staminaMinutes == 0 then
 		return
 	end
 
 	local playerId = player:getId()
+	if not playerId then
+		return false
+	end
+
 	local currentTime = os.time()
 	local timePassed = currentTime - nextUseStaminaTime[playerId]
 	if timePassed <= 0 then
@@ -617,20 +631,30 @@ local function useStamina(player)
 			staminaMinutes = 0
 		end
 		nextUseStaminaTime[playerId] = currentTime + 120
+		player:removePreyStamina(120)
 	else
 		staminaMinutes = staminaMinutes - 1
 		nextUseStaminaTime[playerId] = currentTime + 60
+		player:removePreyStamina(60)
 	end
 	player:setStamina(staminaMinutes)
 end
 
-local function useStaminaXp(player)
+local function useStaminaXpBoost(player)
+	if not player then
+		return false
+	end
+
 	local staminaMinutes = player:getExpBoostStamina() / 60
 	if staminaMinutes == 0 then
 		return
 	end
 
 	local playerId = player:getId()
+	if not playerId then
+		return false
+	end
+
 	local currentTime = os.time()
 	local timePassed = currentTime - nextUseXpStamina[playerId]
 	if timePassed <= 0 then
@@ -651,8 +675,8 @@ local function useStaminaXp(player)
 	player:setExpBoostStamina(staminaMinutes * 60)
 end
 
-function Player:onGainExperience(source, exp, rawExp)
-	if not source or source:isPlayer() then
+function Player:onGainExperience(target, exp, rawExp)
+	if not target or target:isPlayer() then
 		return exp
 	end
 
@@ -663,30 +687,8 @@ function Player:onGainExperience(source, exp, rawExp)
 		self:addCondition(soulCondition)
 	end
 
-	-- Experience Stage Multiplier
-	local expStage = getRateFromTable(experienceStages, self:getLevel(), configManager.getNumber(configKeys.RATE_EXP))
-	exp = exp * expStage
-	baseExp = rawExp * expStage
-	if Game.getStorageValue(GlobalStorage.XpDisplayMode) > 0 then
-		displayRate = expStage
-	else
-		displayRate = 1
-	end
-
-	-- Prey Bonus
-	for slot = CONST_PREY_SLOT_FIRST, CONST_PREY_SLOT_THIRD do
-		if (self:getPreyCurrentMonster(slot) == source:getName()
-		and self:getPreyBonusType(slot) == CONST_BONUS_XP_BONUS) then
-			exp = exp + math.floor(exp * (self:getPreyBonusValue(slot) / 100))
-			break
-		end
-		if (self:getPreyTimeLeft(slot) / 60) > 0 then
-			preyTimeLeft(self, slot) -- slot consumption, outside of the mosnter check
-		end
-	end
-
 	-- Store Bonus
-	useStaminaXp(self) -- Use store boost stamina
+	useStaminaXpBoost(self) -- Use store boost stamina
 
 	local Boost = self:getExpBoostStamina()
 	local stillHasBoost = Boost > 0
@@ -694,36 +696,35 @@ function Player:onGainExperience(source, exp, rawExp)
 
 	self:setStoreXpBoost(storeXpBoostAmount)
 
-	if (storeXpBoostAmount > 0) then
-		exp = exp + (baseExp * (storeXpBoostAmount/100)) -- Exp Boost
-	end
-
 	-- Stamina Bonus
+	local staminaBoost = 1
 	if configManager.getBoolean(configKeys.STAMINA_SYSTEM) then
 		useStamina(self)
 		local staminaMinutes = self:getStamina()
-		if staminaMinutes > 2340 and self:isPremium() then
-			exp = exp * 1.5
-			self:setStaminaXpBoost(150)
-		elseif staminaMinutes <= 840 then
-			exp = exp * 0.5 --TODO destroy loot of people with 840- stamina
-			self:setStaminaXpBoost(50)
-		else
-			self:setStaminaXpBoost(100)
-		end
+			if staminaMinutes > 2340 and self:isPremium() then
+				staminaBoost = 1.5
+			elseif staminaMinutes <= 840 then
+				staminaBoost = 0.5 --TODO destroy loot of people with 840- stamina
+			end
+		self:setStaminaXpBoost(staminaBoost * 100)
 	end
 
 	-- Boosted creature
-	if source:getName():lower() == (Game.getBoostedCreature()):lower() then
+	if target:getName():lower() == (Game.getBoostedCreature()):lower() then
 		exp = exp * 2
 	end
 
-	-- Event scheduler
-	if SCHEDULE_EXP_RATE ~= 100 then
-		exp = (exp * SCHEDULE_EXP_RATE)/100
+	-- Prey system
+	if configManager.getBoolean(configKeys.PREY_ENABLED) then
+		local monsterType = target:getType()
+		if monsterType and monsterType:raceId() > 0 then
+			exp = math.ceil((exp * self:getPreyExperiencePercentage(monsterType:raceId())) / 100)
+		end
 	end
-	self:setBaseXpGain(displayRate * 100)
-	return exp
+
+	local baseRate = self:getFinalBaseRateExperience()
+
+	return (exp * baseRate + (exp * (storeXpBoostAmount/100))) * staminaBoost
 end
 
 function Player:onLoseExperience(exp)
@@ -732,7 +733,7 @@ end
 
 function Player:onGainSkillTries(skill, tries)
 	-- Dawnport skills limit
-	if isSkillGrowthLimited(self, skill) then
+	if  IsRunningGlobalDatapack() and isSkillGrowthLimited(self, skill) then
 		return 0
 	end
 	if APPLY_SKILL_MULTIPLIER == false then
@@ -740,18 +741,23 @@ function Player:onGainSkillTries(skill, tries)
 	end
 
 	-- Event scheduler skill rate
+	local STAGES_DEFAULT = skillsStages or nil
+	local SKILL_DEFAULT = self:getSkillLevel(skill)
+	local RATE_DEFAULT = configManager.getNumber(configKeys.RATE_SKILL)
+
+	if(skill == SKILL_MAGLEVEL) then -- Magic Level
+		STAGES_DEFAULT = magicLevelStages or nil
+		SKILL_DEFAULT = self:getBaseMagicLevel()
+		RATE_DEFAULT = configManager.getNumber(configKeys.RATE_MAGIC)
+	end
+
+	skillOrMagicRate = getRateFromTable(STAGES_DEFAULT, SKILL_DEFAULT, RATE_DEFAULT)
+
 	if SCHEDULE_SKILL_RATE ~= 100 then
-		tries = (tries * SCHEDULE_SKILL_RATE)/100
+		skillOrMagicRate = math.max(0, (skillOrMagicRate * SCHEDULE_SKILL_RATE) / 100)
 	end
 
-	local skillRate = configManager.getNumber(configKeys.RATE_SKILL)
-	local magicRate = configManager.getNumber(configKeys.RATE_MAGIC)
-
-	if(skill == SKILL_MAGLEVEL) then -- Magic getLevel
-		return tries * getRateFromTable(magicLevelStages, self:getBaseMagicLevel(), magicRate)
-	end
-
-	return tries * getRateFromTable(skillsStages, self:getSkillLevel(skill), skillRate)
+	return tries / 100 * (skillOrMagicRate * 100)
 end
 
 function Player:onRemoveCount(item)
@@ -776,7 +782,7 @@ function Player:onCombat(target, item, primaryDamage, primaryType, secondaryDama
 	end
 
 	if ItemType(item:getId()):getWeaponType() == WEAPON_AMMO then
-		if isInArray({ITEM_OLD_DIAMOND_ARROW, ITEM_DIAMOND_ARROW}, item:getId()) then
+		if table.contains({ITEM_OLD_DIAMOND_ARROW, ITEM_DIAMOND_ARROW}, item:getId()) then
 			return primaryDamage, primaryType, secondaryDamage, secondaryType
 		else
 			item = self:getSlotItem(CONST_SLOT_LEFT)
@@ -820,4 +826,8 @@ function Player:onChangeZone(zone)
 		end
 	end
 	return false
+end
+
+
+function Player:onInventoryUpdate(item, slot, equip)
 end

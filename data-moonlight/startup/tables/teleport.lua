@@ -1,6 +1,14 @@
 -- Look README.md for see the reserved action/unique numbers
 
 TeleportAction = {
+	-- Adventurer's guild exit
+	[4253] = {
+		itemId = 1949,
+		itemPos = {
+			{x = 32209, y = 32292, z = 6},
+			{x = 32210, y = 32292, z = 6}
+		}
+	},
 	[35001] = { -- The Cursed Crystal teleports
 		itemId = 19387,
 		itemPos = {
@@ -130,7 +138,14 @@ TeleportUnique = {
 		itemId = 10840,
 		itemPos = {x = 33498, y = 32613, z = 8}
 	},
-
+	[35021] = {
+		itemId = 1949,
+		itemPos = {x = 32615, y = 32484, z = 9}
+	},
+	[35022] = {
+		itemId = 1949,
+		itemPos = {x = 32615, y = 32484, z = 10}
+	},
 	-- Simple teleports (They are registered automatically, without just configuring the table correctly)
 	-- Path: data\scripts\movements\others\teleport.lua
 

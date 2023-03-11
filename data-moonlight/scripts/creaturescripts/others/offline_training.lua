@@ -3,17 +3,17 @@ function offlineTraining.onLogin(player)
 	local lastLogout = player:getLastLogout()
 	local offlineTime = lastLogout ~= 0 and math.min(os.time() - lastLogout, 86400 * 21) or 0
 	local offlineTrainingSkill = player:getOfflineTrainingSkill()
-	if offlineTrainingSkill == -1 then
+	if offlineTrainingSkill == SKILL_NONE then
 		player:addOfflineTrainingTime(offlineTime * 1000)
 		return true
 	end
 
-	player:setOfflineTrainingSkill(-1)
+	player:setOfflineTrainingSkill(SKILL_NONE)
 
-	-- if offlineTime < 600 then
-		-- player:sendTextMessage(MESSAGE_OFFLINE_TRAINING, "You must be logged out for more than 10 minutes to start offline training.")
-		-- return true
-	-- end
+	if offlineTime < 600 then
+		player:sendTextMessage(MESSAGE_OFFLINE_TRAINING, "You must be logged out for more than 10 minutes to start offline training.")
+		return true
+	end
 
 	local trainingTime = math.max(0, math.min(offlineTime, math.min(43200, player:getOfflineTrainingTime() / 1000)))
 	player:removeOfflineTrainingTime(trainingTime * 1000)

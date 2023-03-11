@@ -115,14 +115,17 @@ function furygates.onStartup(interval)
 	if gates[gateId].burntItems then
 		local item
 		for i = 1, #gates[gateId].burntItems do
-			item = Tile(gates[gateId].burntItems[i].position):getItemById(gates[gateId].burntItems[i].itemId)
+			local tile = Tile(gates[gateId].burntItems[i].position)
+			if tile then
+				item = tile:getItemById(gates[gateId].burntItems[i].itemId)
+			end
 			if item then
 				item:remove()
 			end
 		end
 	end
 
-	Game.loadMap('data/world/furygates/' .. gates[gateId].mapName .. '.otbm')
+	Game.loadMap(DATA_DIRECTORY.. '/world/world_changes/fury_gates/' .. gates[gateId].mapName .. '.otbm')
 
 	setGlobalStorageValue(GlobalStorage.FuryGates, gateId)
 

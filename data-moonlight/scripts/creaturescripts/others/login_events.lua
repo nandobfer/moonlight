@@ -7,10 +7,10 @@ function loginEvents.onLogin(player)
 		--Others
 		"AdvanceSave",
 		"BestiaryOnKill",
+		"BosstiaryOnKill",
 		"BossParticipation",
 		"DropLoot",
 		"PlayerDeath",
-		"PreyLootBonusKill",
 		"RookgaardAdvance",
 		"FamiliarLogin",
 		"AdvanceFamiliar",
@@ -31,6 +31,7 @@ function loginEvents.onLogin(player)
 		"DestroyedPillar",
 		"HealthPillar",
 		"YalahariHealth",
+		"EssenceOfMalice",
 		--Dangerous Depths Quest
 		"LostExileKill",
 		"SnailSlimeKill",
@@ -65,6 +66,8 @@ function loginEvents.onLogin(player)
 		--Killing In The Name Of
 		"KillingInTheNameOfKill",
 		"KillingInTheNameOfMinotaurKill",
+		"TiquandasRevengeKill",
+		"DemodrasKill",
 		--Kilmaresh
 		"BragrumolKill",
 		"MozradekKill",
@@ -82,6 +85,8 @@ function loginEvents.onLogin(player)
 		"MiddleSpikeKill",
 		--Svargrond Arena
 		"SvargrondArenaKill",
+		--The Ice Islands Quest
+		"HuskyKill",
 		--The First Dragon
 		"KillDragon",
 		"SomewhatBeatableDeath",
@@ -90,6 +95,8 @@ function loginEvents.onLogin(player)
 		"TireczKill",
 		--Thieves Guild
 		"NomadKill",
+		--Threatened Dreams - Nightmare Intruders
+		"ThreatenedDreamsNightmareMonstersKills",
 		--Wrath of the Emperor
 		"LizardMagistratusKill",
 		"LizardNobleKill",
@@ -97,7 +104,9 @@ function loginEvents.onLogin(player)
 		"BossesKill",
 		"ZalamonKill",
 		-- The Rookie Guard
-		"VascalirRatKills"
+		"VascalirRatKills",
+		-- An Uneasy Alliance
+		"RenegadeOrcKill"
 	}
 
 	for i = 1, #events do

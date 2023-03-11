@@ -1,7 +1,6 @@
 local flowerPosition = Position(32024, 32830, 4)
 
-local function decayFlower()
-	local tile = Tile(flowerPosition)
+local function decayFlower(tile)
 	local item = tile:getItemById(5658)
 	if tile and item then
 		item:transform(5687)
@@ -14,14 +13,18 @@ local function bloom()
 		return
 	end
 
-	local item = Tile(flowerPosition):getItemById(5687)
+	local tile = Tile(flowerPosition)
+	if not tile then
+		return false
+	end
+	local item = tile:getItemById(5687)
 	if item then
 		item:transform(5658)
 		flowerPosition:sendMagicEffect(CONST_ME_MAGIC_RED)
 	end
 
 	local bloomHours = math.random(2, 6)
-	addEvent(decayFlower, bloomHours * 60 * 60 * 1000)
+	addEvent(decayFlower, bloomHours * 60 * 60 * 1000, tile)
 	addEvent(bloom, bloomHours * 60 * 60 * 1000)
 end
 

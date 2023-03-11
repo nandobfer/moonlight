@@ -20,13 +20,13 @@ function arenaEnter.onStepIn(creature, item, position, fromPosition)
 	end
 
 	local occupant = SvargrondArena.getPitOccupant(pitId, player)
-	-- if occupant then
-		-- player:sendTextMessage(MESSAGE_EVENT_ADVANCE, occupant:getName() ..
-			-- " is currently in the next arena pit. Please wait until " .. (occupant:getSex() == PLAYERSEX_FEMALE
-			-- and "s" or "") .. "he is done fighting.")
-		-- player:teleportTo(fromPosition, true)
-		-- return true
-	-- end
+	if occupant then
+		player:sendTextMessage(MESSAGE_EVENT_ADVANCE, occupant:getName() ..
+			" is currently in the next arena pit. Please wait until " .. (occupant:getSex() == PLAYERSEX_FEMALE
+			and "s" or "") .. "he is done fighting.")
+		player:teleportTo(fromPosition, true)
+		return true
+	end
 	SvargrondArena.resetPit(pitId)
 	SvargrondArena.scheduleKickPlayer(player.uid, pitId)
 	Game.createMonster(ARENA[arenaId].creatures[pitId], PITS[pitId].summon, false, true)

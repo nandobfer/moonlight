@@ -146,7 +146,133 @@ ItemAction = {
 			{x = 31987, y = 32155, z = 8},
 			{x = 31988, y = 32155, z = 8}
 		}
-	}
+	},
+	-- Threatened Dreams Quest
+	[40016] = { -- Fairy 01
+		itemId = false,
+		itemPos = {
+			{x = 33576, y = 32185, z = 8}
+		}
+	},
+	[40017] = { -- Fairy 02
+		itemId = false,
+		itemPos = {
+			{x = 33621, y = 32214, z = 8}
+		}
+	},
+	[40018] = { -- Fairy 03
+		itemId = false,
+		itemPos = {
+			{x = 33559, y = 32203, z = 9}
+		}
+	},
+	[40019] = { -- Fairy 04
+		itemId = false,
+		itemPos = {
+			{x = 33505, y = 32286, z = 8}
+		}
+	},
+	[40020] = { -- Fairy 05
+		itemId = false,
+		itemPos = {
+			{x = 33440, y = 32217, z = 8}
+		}
+	},
+	-- The Royal Rescue
+	[40021] = { -- bridge
+		itemId = false,
+		itemPos = {
+			{x = 32571, y = 31508, z = 9}
+		}
+	},
+	[40022] = { -- ladder
+		itemId = false,
+		itemPos = {
+			{x = 32680, y = 31509, z = 12}
+		}
+	},
+	[40023] = { -- wagons
+		itemId = false,
+		itemPos = {
+			{x = 32578, y = 31488, z = 9}, -- start
+			{x = 32577, y = 31508, z = 9}, -- bridge stage after completion
+			{x = 32628, y = 31514, z = 9}, -- rubble stage after completion
+			{x = 32599, y = 31505, z = 13}, -- city's entrance
+			{x = 32603, y = 31339, z = 11}, -- location exit
+			{x = 32700, y = 31452, z = 13}, -- corner maze room
+			{x = 32699, y = 31492, z = 11}, -- coal wagon logic
+			{x = 32688, y = 31471, z = 13}, -- maze logic update map
+			{x = 32570, y = 31508, z = 9}, -- bridge stage
+			{x = 32615, y = 31514, z = 9}, -- rubble stage
+			{x = 32651, y = 31508, z = 10}, -- broken bridge
+			{x = 32633, y = 31508, z = 10}, -- stairs
+			{x = 32693, y = 31502, z = 11}, -- wagon station
+			{x = 32688, y = 31472, z = 13}, -- maze
+			{x = 32683, y = 31508, z = 10}, -- ladder
+			{x = 32548, y = 31408, z = 11}, -- infested tavern
+			{x = 32700, y = 31449, z = 15}, -- npc tehlim
+			{x = 32662, y = 31496, z = 13}, -- mushroom quest
+			{x = 32703, y = 31506, z = 12}, -- small tunnel with golems
+			{x = 32720, y = 31488, z = 15} -- troll tribe's hideout
+		}
+	},
+	[40024] = { -- levers
+		itemId = false,
+		itemPos = {
+			{x = 32689, y = 31470, z = 13}, -- 1
+			{x = 32685, y = 31465, z = 13}, -- 2
+			{x = 32691, y = 31464, z = 13}, -- 3
+			{x = 32696, y = 31465, z = 13}, -- 4
+			{x = 32696, y = 31462, z = 13}, -- 5
+			{x = 32693, y = 31458, z = 13}, -- 6
+			{x = 32687, y = 31457, z = 13}, -- 7
+			{x = 32683, y = 31455, z = 13}, -- 8
+			{x = 32686, y = 31452, z = 13}, -- 9
+			{x = 32691, y = 31452, z = 13}, -- 10
+			{x = 32697, y = 31454, z = 13}, -- 11
+			{x = 32691, y = 31495, z = 11}, -- stastion 1
+			{x = 32693, y = 31495, z = 11}, -- stastion 2
+			{x = 32695, y = 31495, z = 11}, -- stastion 3
+			{x = 32697, y = 31495, z = 11}	-- stastion 4
+		}
+	},
+	[40025] = { -- bellow
+		itemId = false,
+		itemPos = {
+			{x = 32699, y = 31495, z = 11}
+		}
+	},
+	[40026] = { -- crucible
+		itemId = false,
+		itemPos = {
+			{x = 32699, y = 31494, z = 11}
+		}
+	},
+	[40027] = { -- archway
+		itemId = false,
+		itemPos = {
+			{x = 32617, y = 31513, z = 9}
+		}
+	},
+	[40028] = { -- rubble
+		itemId = false,
+		itemPos = {
+			{x = 32619, y = 31514, z = 9}
+		}
+	},
+	[40029] = { -- tunnel
+		itemId = 7122,
+		itemPos = {
+			{x = 32619, y = 31514, z = 9}
+		}
+	},
+	-- An Uneasy Alliance
+	[40030] = { -- crystal ball
+		itemId = false,
+		itemPos = {
+			{x = 33155, y = 31297, z = 3}
+		}
+	},
 }
 
 ItemUnique = {
@@ -163,30 +289,6 @@ ItemUnique = {
 	[40003] = {
 		itemId = 6118,
 		itemPos = {x = 31992, y = 32847, z = 2}
-	},
-	-- Lions rock quest
-	-- data\scripts\actions\quests\lions_rock\lions_rock.lua
-	[40004] = {
-		itemId = 21390,
-		itemPos = {x = 33137, y = 32291, z = 8}
-	},
-	[40005] = {
-		itemId = 2110,
-		itemPos = {x = 33138, y = 32369, z = 8}
-	},
-	[40006] = {
-		itemId = 21391,
-		itemPos = {x = 33154, y = 32279, z = 8}
-	},
-	-- Lions Rock (holy water and translation scrool)
-	-- data\scripts\actions\quests\lions_rock\lions_rock.lua
-	[40007] = {
-		itemId = 21394,
-		itemPos = {x = 33137, y = 32351, z = 6}
-	},
-	[40008] = {
-		itemId = 21945,
-		itemPos = {x = 33119, y = 32247, z = 9}
 	},
 	-- Insectoid cell rewards
 	-- data\scripts\actions\quests\others\gooey_mass.lua
@@ -540,20 +642,5 @@ ItemUnique = {
 	[40081] = {
 		itemId = 4077,
 		itemPos = {x = 31978, y = 32184, z = 10}
-	},
-	-- The Sharttered Isles Quest
-	-- Path: data\scripts\movements\quests\the_sharttered_isles\energy_barrier.lua
-	-- Energy Barrier
-	[40082] = {
-		itemId = 6117,
-		itemPos = {x = 32091, y = 32575, z = 8}
-	},
-	[40083] = {
-		itemId = 6117,
-		itemPos = {x = 32091, y = 32576, z = 8}
-	},
-	[40084] = {
-		itemId = 6117,
-		itemPos = {x = 32091, y = 32577, z = 8}
 	}
 }

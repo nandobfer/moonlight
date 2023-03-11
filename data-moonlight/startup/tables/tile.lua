@@ -227,9 +227,8 @@ TileAction = {
 			{x = 32216, y = 31838, z = 15}
 		}
 	},
-	-- Others actions
 	-- Threatened Dreams Quest
-	[50301] = {
+	[25024] = {
 		itemId = false,
 		itemPos = {
 			{x = 33200, y = 31892, z = 7},
@@ -238,16 +237,16 @@ TileAction = {
 			{x = 33201, y = 31894, z = 7}
 		}
 	},
-	[50302] = {
+	[25025] = {
 		itemId = false,
 		itemPos = {
-			{x = 33258, y = 32402, z = 7},
-			{x = 33257, y = 32402, z = 7},
-			{x = 33257, y = 32401, z = 7},
-			{x = 33259, y = 32402, z = 7}
+			{x = 33265, y = 32422, z = 7},
+			{x = 33265, y = 32423, z = 7},
+			{x = 33266, y = 32423, z = 7},
+			{x = 33267, y = 32423, z = 7}
 		}
 	},
-	[50303] = {
+	[25026] = {
 		itemId = false,
 		itemPos = {
 			{x = 33262, y = 32378, z = 7},
@@ -259,7 +258,7 @@ TileAction = {
 			{x = 33264, y = 32379, z = 7}
 		}
 	},
-	[50304] = {
+	[25027] = {
 		itemId = false,
 		itemPos = {
 			{x = 33257, y = 32315, z = 7},
@@ -268,7 +267,7 @@ TileAction = {
 			{x = 33259, y = 32315, z = 7}
 		}
 	},
-	[50306] = {
+	[25028] = {
 		itemId = false,
 		itemPos = {
 			{x = 33249, y = 32267, z = 6},
@@ -276,6 +275,14 @@ TileAction = {
 			{x = 33250, y = 32268, z = 6}
 		}
 	},
+	[25029] = {
+		itemId = 10840,
+		itemPos = {
+			{x = 33619, y = 32304, z = 9},
+			{x = 33591, y = 32321, z = 10}
+		}
+	},
+	-- Others actions
 	-- Kilmaresh
 	-- First mission
 	[50307] = {
@@ -1053,32 +1060,22 @@ TileAction = {
 			{x = 31951, y = 32173, z = 10},
 			{x = 31951, y = 32174, z = 10}
 		}
+	},
+	-- Troll Sabotage Quest
+	[50365] = {
+		itemId = false,
+		itemPos = {
+			{x = 33234, y = 31748, z = 7},
+			{x = 33234, y = 31749, z = 7},
+			{x = 33241, y = 31772, z = 8},
+			{x = 33231, y = 31765, z = 2},
+			{x = 33231, y = 31762, z = 2},
+			{x = 33231, y = 31760, z = 2}
+		}
 	}
 }
 
 TileUnique = {
-	-- Lions rock tiles
-	-- data\scripts\movements\quests\lions_rock\lionsrock.lua
-	-- snake sign
-	[25001] = {
-		itemId = 499,
-		itemPos = {x = 33095, y = 32244, z = 9}
-	},
-	-- lizard sign
-	[25002] = {
-		itemId = 499,
-		itemPos = {x = 33128, y = 32300, z = 9}
-	},
-	-- scorpion sign
-	[25003] = {
-		itemId = 499,
-		itemPos = {x = 33109, y = 32329, z = 9}
-	},
-	-- hyena sign
-	[25004] = {
-		itemId = 499,
-		itemPos = {x = 33127, y = 32340, z = 9}
-	},
 	-- Lions rock quest (gems tile) scripts/actions/other/gems
 	[25006] = {
 		itemId = 21441,

@@ -3,7 +3,7 @@
 -- If you want to use the global datapack folder, put "data-otservbr-global"
 -- If "useAnyDatapackFolder" is set to true then you can choose any datapack folder for your server
 useAnyDatapackFolder = true
-dataPackDirectory = "data-otservbr-global"
+dataPackDirectory = "data-moonlight"
 -- Don't change this unless you know what you're doing
 coreDirectory = "data"
 

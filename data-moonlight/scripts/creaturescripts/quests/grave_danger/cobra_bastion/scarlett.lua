@@ -6,9 +6,9 @@ local rooms = {
 	[4] = {fromPos = Position(33394, 32642, 6), toPos = Position(33398, 32646, 6)},
 	[5] = {fromPos = Position(33394, 32646, 6), toPos = Position(33398, 32650, 6)},
 	[6] = {fromPos = Position(33394, 32650, 6), toPos = Position(33398, 32654, 6)},
-	[5] = {fromPos = Position(33398, 32642, 6), toPos = Position(33402, 32646, 6)},
-	[6] = {fromPos = Position(33398, 32646, 6), toPos = Position(33402, 32650, 6)},
-	[7] = {fromPos = Position(33398, 32650, 6), toPos = Position(33402, 32654, 6)}
+	[7] = {fromPos = Position(33398, 32642, 6), toPos = Position(33402, 32646, 6)},
+	[8] = {fromPos = Position(33398, 32646, 6), toPos = Position(33402, 32650, 6)},
+	[9] = {fromPos = Position(33398, 32650, 6), toPos = Position(33402, 32654, 6)}
 }
 
 local function isMirrorsCorrect(fromPosition, toPosition)
@@ -26,7 +26,8 @@ end
 
 local eventDoDamage = function(creatureid, attackerid, type)
 	local creature = Creature(creatureid)
-	if not creature then
+	local attacker = Creature(attackerid)
+	if not creature or not attacker then
 		return
 	end
 

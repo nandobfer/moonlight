@@ -1,13 +1,15 @@
 local setting = {
-	[23482] = {
+	[32415] = {
 		storage = Storage.CultsOfTibia.Humans.Decaying,
 		max = 10,
-		text = "You absorb the energetic remains of this decaying soul. Its power is very fragile and fleeting"
+		text = "You absorb the energetic remains of this decaying soul. Its power is very fragile and fleeting",
+		effect = CONST_ME_GREEN_ENERGY_SPARK
 	},
-	[23484] = {
+	[32414] = {
 		storage = Storage.CultsOfTibia.Humans.Vaporized,
 		max = 10,
-		text = "You absorb the energetic remains of this whitering soul. Its power is very fragile and fleeting."
+		text = "You absorb the energetic remains of this whitering soul. Its power is very fragile and fleeting.",
+		effect = CONST_ME_BLUE_ENERGY_SPARK
 	}
 }
 
@@ -30,16 +32,16 @@ function taskTeleport.onStepIn(creature, item, position, fromPosition)
 		local teleport = Tile(position):getItemById(index)
 		if teleport then
 			local storage = (player:getStorageValue(value.storage) < 0 and 0 or player:getStorageValue(value.storage))
-			local attribute = teleport:getSpecialAttribute("task") or ''
+			local attribute = teleport:getCustomAttribute("task") or ''
 			if attribute:find(player:getName()) or storage >= value.max then
 				player:sendTextMessage(MESSAGE_EVENT_ADVANCE,
 				"The power of these souls is now within you. You cannot absorb any more souls.")
 				return false
 			end
 			attribute = string.format("%s, %s", attribute, player:getName())
-			teleport:setSpecialAttribute("task", attribute)
+			teleport:setCustomAttribute("task", attribute)
 			player:setStorageValue(value.storage, storage + 1)
-			player:getPosition():sendMagicEffect(CONST_ME_ENERGYHIT)
+			player:getPosition():sendMagicEffect(value.effect)
 			teleport:remove()
 			player:say(value.text, TALKTYPE_MONSTER_SAY)
 		end

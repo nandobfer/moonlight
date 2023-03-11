@@ -141,8 +141,7 @@ local cutItems = {
 	[2452] = 3139,
 	[2524] = 3135,
 	[2904] = 3137,
-	[4995] = 3137,
-	[2997] = 3139,
+	[4995] = 4996,
 	[2997] = 3139,
 	[2998] = 3139,
 	[2999] = 3139,
@@ -164,7 +163,6 @@ local cutItems = {
 	[2986] = 3135,
 	[3465] = 3142,
 	[3484] = 3143,
-	[3485] = 3143,
 	[3485] = 3143,
 	[3486] = 3143,
 	[2346] = 6266,
@@ -219,8 +217,6 @@ local cutItems = {
 	[119] = 3135,
 	[404] = 3136,
 	[405] = 3136,
-	[2469] = 3135,
-	[2471] = 3136,
 	[6109] = 3139,
 	[6110] = 3139,
 	[6111] = 3139,
@@ -231,6 +227,32 @@ local cutItems = {
 	[25798] = 0,
 	[25800] = 0
 }
+
+-- Ferumbras ascendant ring reward
+local function addFerumbrasAscendantReward(player, target, toPosition)
+	local stonePos = Position(32648, 32134, 10)
+	if (toPosition == stonePos) then
+		local tile = Tile(stonePos)
+		local stone = tile:getItemById(1772)
+		if stone then
+			stone:remove(1)
+			toPosition:sendMagicEffect(CONST_ME_POFF)
+			addEvent(function()
+				Game.createItem(1772, 1, stonePos)
+			end, 20000)
+			return true
+		end
+	end
+
+	if target.itemid == 10551 and target.actionid == 53803 then
+		if player:getStorageValue(Storage.FerumbrasAscendant.Ring) >= 1 then
+			return false
+		end
+
+		player:addItem(22170, 1)
+		player:setStorageValue(Storage.FerumbrasAscendant.Ring, 1)
+	end
+end
 
 function onDestroyItem(player, item, fromPosition, target, toPosition, isHotkey)
 	if not target or target == nil or type(target) ~= "userdata" or not target:isItem() then
@@ -334,17 +356,18 @@ function onUseRope(player, item, fromPosition, target, toPosition, isHotkey)
 end
 
 function onUseShovel(player, item, fromPosition, target, toPosition, isHotkey)
+	addFerumbrasAscendantReward(player, target, toPosition)
 	--Dawnport quest (Morris amulet task)
 	local sandPosition = Position(32099, 31933, 7)
 	if (toPosition == sandPosition) then
 		local sandTile = Tile(sandPosition)
 		local amuletId = sandTile:getItemById(19401)
 		if amuletId then
-			if player:getStorageValue(Storage.Quest.Dawnport.TheLostAmulet) == 1 then
+			if player:getStorageValue(Storage.Quest.U10_55.Dawnport.TheLostAmulet) == 1 then
 				local rand = math.random(100)
 				if rand <= 10 then
 					player:addItem(21379, 1)
-					player:setStorageValue(Storage.Quest.Dawnport.TheLostAmulet, 2)
+					player:setStorageValue(Storage.Quest.U10_55.Dawnport.TheLostAmulet, 2)
 					player:sendTextMessage(MESSAGE_EVENT_ADVANCE, "You have found an ancient amulet. Strange engravings cover it. Maybe Morris can make them out.")
 				elseif rand <= 80 then
 					player:addItem(21395, 1)
@@ -364,6 +387,15 @@ function onUseShovel(player, item, fromPosition, target, toPosition, isHotkey)
 	if table.contains(holes, target.itemid) then
 		target:transform(target.itemid + 1)
 		target:decay()
+		toPosition:moveDownstairs()
+		toPosition.y = toPosition.y - 1
+		if Tile(toPosition):hasFlag(TILESTATE_PROTECTIONZONE) and player:isPzLocked() then
+			player:sendCancelMessage(RETURNVALUE_PLAYERISPZLOCKED)
+			return true
+		end
+		player:teleportTo(toPosition, false)
+	elseif target.itemid == 1822 and target:getPosition() == Position(33222, 31100, 7) then
+		player:teleportTo(Position(33223, 31100, 8))
 	elseif table.contains({231, 231}, target.itemid) then
 		local rand = math.random(100)
 		if target.actionid == 100 and rand <= 20 then
@@ -404,7 +436,10 @@ function onUseShovel(player, item, fromPosition, target, toPosition, isHotkey)
 	elseif target.actionid == 50118 then
 		local wagonItem = Tile(Position(32717, 31492, 11)):getItemById(7131)
 		if wagonItem then
-			Game.createItem(7921, 1, wagonItem:getPosition())
+			if Tile(Position(32717, 31492, 11)):getItemById(7921) then
+				return true
+			end
+			Game.createItem(7921, 1, wagonItem:getPosition()):setActionId(40023)
 			toPosition:sendMagicEffect(CONST_ME_POFF)
 		end
 	elseif target.itemid == 7921 then
@@ -412,7 +447,7 @@ function onUseShovel(player, item, fromPosition, target, toPosition, isHotkey)
 		if coalItem then
 			coalItem:remove(1)
 			toPosition:sendMagicEffect(CONST_ME_POFF)
-
+			Tile(Position(32699, 31492, 11)):getItemById(7131):setActionId(40023)
 			local crucibleItem = Tile(Position(32699, 31494, 11)):getItemById(7814)
 			if crucibleItem then
 				crucibleItem:setActionId(50119)
@@ -503,7 +538,6 @@ function onUsePick(player, item, fromPosition, target, toPosition, isHotkey)
 	if table.contains({354, 355}, target.itemid) and target.actionid == 101 then
 		target:transform(394)
 		target:decay()
-		toPosition:sendMagicEffect(CONST_ME_POFF)
 	elseif target.itemid == 10310 then
 		-- shiny stone refining
 		local chance = math.random(1, 100)
@@ -593,7 +627,7 @@ function onUsePick(player, item, fromPosition, target, toPosition, isHotkey)
 			MESSAGE_EVENT_ADVANCE,"You are still exhausted from earlier attempts. \z
 				Getting liquid silver out of the mountain needs concentration and a steady hand.")
 		end
-	elseif target.itemid == 1865 and target.actionid == 12026 then
+	elseif target.itemid == 7185 then
 		--The Ice Islands Quest, Nibelor 1: Breaking the Ice
 		local missionProgress = player:getStorageValue(Storage.TheIceIslands.Mission02)
 		local pickAmount = player:getStorageValue(Storage.TheIceIslands.PickAmount)
@@ -614,12 +648,38 @@ function onUsePick(player, item, fromPosition, target, toPosition, isHotkey)
 		local crackItem = Tile(toPosition):getItemById(7185)
 		if crackItem then
 			crackItem:transform(7186)
+			toPosition:sendMagicEffect(CONST_ME_POFF)
 			addEvent(revertItem, 60 * 1000, toPosition, 7186, 7185)
 		end
-
 		local chakoyas = {"chakoya toolshaper", "chakoya tribewarden", "chakoya windcaller"}
-		Game.createMonster(chakoyas[math.random(#chakoyas)], toPosition)
-		toPosition:sendMagicEffect(CONST_ME_TELEPORT)
+		if toPosition == Position(32399, 31051, 7) then
+			Game.createMonster(chakoyas[math.random(#chakoyas)], Position(32397, 31048, 7))
+			Position(32397, 31048, 7):sendMagicEffect(CONST_ME_TELEPORT)
+			Game.createMonster(chakoyas[math.random(#chakoyas)], Position(32399, 31048, 7))
+			Position(32399, 31048, 7):sendMagicEffect(CONST_ME_TELEPORT)
+		elseif toPosition == Position(32394, 31062, 7) then
+			Game.createMonster(chakoyas[math.random(#chakoyas)], Position(32388, 31059, 7))
+			Position(32388, 31059, 7):sendMagicEffect(CONST_ME_TELEPORT)
+			Game.createMonster(chakoyas[math.random(#chakoyas)], Position(32390, 31062, 7))
+			Position(32390, 31062, 7):sendMagicEffect(CONST_ME_TELEPORT)
+			Game.createMonster(chakoyas[math.random(#chakoyas)], Position(32389, 31062, 7))
+			Position(32389, 31062, 7):sendMagicEffect(CONST_ME_TELEPORT)
+			Game.createMonster(chakoyas[math.random(#chakoyas)], Position(32387, 31064, 7))
+			Position(32387, 31064, 7):sendMagicEffect(CONST_ME_TELEPORT)
+		elseif toPosition == Position(32393, 31072, 7) then
+			Game.createMonster(chakoyas[math.random(#chakoyas)], Position(32391, 31071, 7))
+			Position(32391, 31071, 7):sendMagicEffect(CONST_ME_TELEPORT)
+			Game.createMonster(chakoyas[math.random(#chakoyas)], Position(32390, 31069, 7))
+			Position(32390, 31069, 7):sendMagicEffect(CONST_ME_TELEPORT)
+			Game.createMonster(chakoyas[math.random(#chakoyas)], Position(32389, 31069, 7))
+			Position(32389, 31069, 7):sendMagicEffect(CONST_ME_TELEPORT)
+			Game.createMonster(chakoyas[math.random(#chakoyas)], Position(32388, 31074, 7))
+			Position(32388, 31074, 7):sendMagicEffect(CONST_ME_TELEPORT)
+			Game.createMonster(chakoyas[math.random(#chakoyas)], Position(32386, 31073, 7))
+			Position(32386, 31073, 7):sendMagicEffect(CONST_ME_TELEPORT)
+			Game.createMonster(chakoyas[math.random(#chakoyas)], Position(32387, 31072, 7))
+			Position(32387, 31072, 7):sendMagicEffect(CONST_ME_TELEPORT)
+		end
 	elseif target.itemid == 1791 then
 		-- The Pits of Inferno Quest
 		if toPosition == Position(32808, 32334, 11) then
@@ -650,7 +710,7 @@ function onUsePick(player, item, fromPosition, target, toPosition, isHotkey)
 		if player:getStorageValue(Storage.hiddenCityOfBeregar.WayToBeregar) == 1 then
 			player:teleportTo(Position(32566, 31338, 10))
 		end
-	elseif target.actionid == 50114 then
+	elseif target.actionid == 40028 then
 		if Tile(Position(32617, 31513, 9)):getItemById(1272)
 		and Tile(Position(32617, 31514, 9)):getItemById(1624) then
 			local rubbleItem = Tile(Position(32619, 31514, 9)):getItemById(5709)
@@ -827,12 +887,12 @@ function onUseCrowbar(player, item, fromPosition, target, toPosition, isHotkey)
 				addEvent(revertCask, 3 * 60 * 1000, toPosition)
 			end
 		end
-	elseif target.actionid == 12566 and player:getStorageValue(Storage.secretService.TBIMission06) == 1 then
+	elseif target.actionid == 12566 and player:getStorageValue(Storage.SecretService.TBIMission06) == 1 then
 		-- Secret service quest
 		local yellPosition = Position(32204, 31157, 8)
 		-- Amazon lookType
 		if player:getOutfit().lookType == 137 then
-			player:setStorageValue(Storage.secretService.TBIMission06, 2)
+			player:setStorageValue(Storage.SecretService.TBIMission06, 2)
 			Game.createMonster("barbarian skullhunter", yellPosition)
 			player:say("Nooooo! What have you done??", TALKTYPE_MONSTER_SAY, false, 0, yellPosition)
 			yellPosition.y = yellPosition.y - 1
@@ -852,7 +912,7 @@ function onUseSpoon(player, item, fromPosition, target, toPosition, isHotkey)
 				-- Fine sulphur
 				player:addItem(7247, 1)
 				player:setStorageValue(Storage.TheIceIslands.SulphurLava, 1)
-				toPosition:sendMagicEffect(CONST_ME_MAGIC_RED)
+				toPosition:sendMagicEffect(CONST_ME_YELLOW_RINGS)
 				player:say("You retrive a fine sulphur from a lava hole.", TALKTYPE_MONSTER_SAY)
 			end
 		end
@@ -862,7 +922,7 @@ function onUseSpoon(player, item, fromPosition, target, toPosition, isHotkey)
 			if player:getStorageValue(Storage.TheIceIslands.SporesMushroom) < 1 then
 				player:addItem(7251, 1)
 				player:setStorageValue(Storage.TheIceIslands.SporesMushroom, 1)
-				toPosition:sendMagicEffect(CONST_ME_MAGIC_RED)
+				toPosition:sendMagicEffect(CONST_ME_MAGIC_GREEN)
 				player:say("You retrive spores from a mushroom.", TALKTYPE_MONSTER_SAY)
 			end
 		end
@@ -916,7 +976,7 @@ function onUseKitchenKnife(player, item, fromPosition, target, toPosition, isHot
 			if player:getStorageValue(Storage.TheIceIslands.FrostbiteHerb) < 1 then
 				player:addItem(7248, 1)
 				player:setStorageValue(Storage.TheIceIslands.FrostbiteHerb, 1)
-				toPosition:sendMagicEffect(CONST_ME_MAGIC_BLUE)
+				toPosition:sendMagicEffect(CONST_ME_HITBYPOISON)
 				player:say("You cut a leaf from a frostbite herb.", TALKTYPE_MONSTER_SAY)
 			end
 		end

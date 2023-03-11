@@ -64,6 +64,30 @@ registerMonsterType.Bestiary = function(mtype, mask)
 		end
 	end
 end
+registerMonsterType.bosstiary = function(mtype, mask)
+	local bossClass = nil
+	if mask.bosstiary then
+		if mask.bosstiary.bossRaceId then
+			mtype:bossRaceId(mask.bosstiary.bossRaceId)
+		end
+		if mask.bosstiary.bossRace then
+			if mask.bosstiary.bossRace == RARITY_BANE then
+				bossClass = "Bane"
+			elseif mask.bosstiary.bossRace == RARITY_ARCHFOE then
+				bossClass = "Archfoe"
+			elseif mask.bosstiary.bossRace == RARITY_NEMESIS then
+				bossClass = "Nemesis"
+			end
+			if bossClass ~= nil then
+				mtype:bossRace(mask.bosstiary.bossRace, bossClass)
+			end
+			local storage = mask.bosstiary.storageCooldown
+			if storage ~= nil then
+				mtype:bossStorageCooldown(storage)
+			end
+		end
+	end
+end
 registerMonsterType.skull = function(mtype, mask)
 	if mask.skull then
 		mtype:skull(mask.skull)
@@ -190,6 +214,9 @@ registerMonsterType.flags = function(mtype, mask)
 		if mask.flags.isBlockable ~= nil then
 			mtype:isBlockable(mask.flags.isBlockable)
 		end
+		if mask.flags.isForgeCreature ~= nil then
+			mtype:isForgeCreature(mask.flags.isForgeCreature)
+		end
 	end
 end
 registerMonsterType.light = function(mtype, mask)
@@ -275,7 +302,7 @@ registerMonsterType.events = function(mtype, mask)
 	end
 end
 
-function sortLootByChance(loot)
+function SortLootByChance(loot)
 	if not configManager.getBoolean(configKeys.SORT_LOOT_BY_CHANCE) then
 		return
 	end
@@ -291,7 +318,7 @@ end
 
 registerMonsterType.loot = function(mtype, mask)
 	if type(mask.loot) == "table" then
-		sortLootByChance(mask.loot)
+		SortLootByChance(mask.loot)
 		local lootError = false
 		for _, loot in pairs(mask.loot) do
 			local parent = Loot()
@@ -353,7 +380,7 @@ registerMonsterType.loot = function(mtype, mask)
 				parent:setUnique(loot.unique)
 			end
 			if loot.child then
-				sortLootByChance(loot.child)
+				SortLootByChance(loot.child)
 				for _, children in pairs(loot.child) do
 					local child = Loot()
 					if children.name then

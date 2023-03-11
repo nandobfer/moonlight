@@ -1,36 +1,32 @@
-local config = {
-	[3167] = {
-		storage = Storage.ChildrenoftheRevolution.Questline,
-		teleportToPosition = {Position(33257, 31116, 8), Position(33356, 31126, 7)}},
-	[3168] = {
-		storage = Storage.ChildrenoftheRevolution.Questline,
-		teleportToPosition = {Position(33356, 31125, 7), Position(33356, 31125, 7)}}
+local positions = {
+	{x = 33356, y = 31124, z = 7},
+	{x = 33261, y = 31076, z = 8}
 }
 
 local teleport = MoveEvent()
 
 function teleport.onStepIn(creature, item, position, fromPosition)
 	local player = creature:getPlayer()
-	if not player then
+	if not creature or not player then
 		return true
 	end
-
-	local targetTile = config[item.uid]
-	if not targetTile then
-		return true
+	if player:getStorageValue(Storage.ChildrenoftheRevolution.teleportAccess) == 1 then
+		if player:getPosition() == Position(positions[1]) then
+			player:teleportTo(Position(33261, 31077, 8))
+			player:getPosition():sendMagicEffect(CONST_ME_TELEPORT)
+			return true
+		else
+			player:teleportTo(Position(33356, 31126, 7))
+			player:getPosition():sendMagicEffect(CONST_ME_TELEPORT)
+			return true
+		end
 	end
-
-	local hasStorageValue = player:getStorageValue(targetTile.storage) >= 19
-	player:getPosition():sendMagicEffect(CONST_ME_TELEPORT)
-	player:teleportTo(targetTile.teleportToPosition[hasStorageValue and 1 or 2])
+	player:teleportTo(fromPosition)
 	player:getPosition():sendMagicEffect(CONST_ME_TELEPORT)
 	return true
 end
 
-teleport:type("stepin")
-
-for index, value in pairs(config) do
-	teleport:uid(index)
+for index, value in pairs(positions) do
+	teleport:position(value)
 end
-
 teleport:register()
